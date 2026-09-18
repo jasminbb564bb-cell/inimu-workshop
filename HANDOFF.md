@@ -226,3 +226,43 @@ Inter
 
 昼のCodexと夜のClaude Codeが
 同じGitHubリポジトリを使って作業を引き継ぐ。
+
+---
+
+# 2026-09-18 実装進捗
+
+## 完了した実装
+
+- index.htmlのTOPページ基本構造
+- スマートフォン優先の基本CSS
+- 各セクションとFOOTERのCSS
+- PC用レスポンシブCSS
+- ハンバーガーメニューの開閉処理
+- Noto Sans JPを優先した日本語フォント設定
+
+## 動作確認済み
+
+- スマートフォン幅で横スクロールなし
+- PC幅でナビゲーションと横並びレイアウトを確認
+- ハンバーガーメニューの開閉とリンク移動を確認
+- CSS、JavaScriptのエラーなし
+
+## 次にやること
+
+- imagesフォルダへ実際の写真を追加
+- 仮の画像スペースを実画像へ差し替え
+- 公式情報の更新がないか確認
+
+## 画像ファイル名のルール
+
+実画像を追加するときは、用途が分かる英数字のファイル名を使う。
+
+- hero.jpg：HEROのメイン写真
+- concept.jpg：CONCEPTの写真
+- experience-hand.jpg：香りを選ぶ手元
+- experience-making.jpg：調香している様子
+- experience-bottle.jpg：完成した香水瓶
+- access.jpg：店舗写真
+- material-yuzu.jpg：国造ゆず
+- material-hinoki.jpg：加子母ひのき
+- material-tea.jpg：和束茶
