@@ -6,19 +6,34 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  background-color: #ffffff;
+  background-color: #f6f4f0;
   color: #1a1a1a;
   font-family: "Noto Sans JP", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   font-size: 16px;
   line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+main {
+  display: block;
 }
 
 img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+.image-placeholder {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1,
@@ -28,6 +43,36 @@ p,
 ul,
 ol {
   margin-top: 0;
+}
+
+/* ChatGPT生成の体験イメージ。実際の店舗・商品写真ではありません。 */
+.image--hero {
+  background-image: url('../images/hero-workshop.png');
+}
+
+.image--materials {
+  background-image: url('../images/materials-scent.png');
+}
+
+.materials__intro-visual {
+  min-height: 260px;
+  margin: 32px 0;
+}
+
+.image--experience {
+  background-image: url('../images/experience-workshop.png');
+}
+
+.image--hero-detail {
+  background-image: url('../images/hero-workshop.png');
+}
+
+.image--materials-detail {
+  background-image: url('../images/materials-scent.png');
+}
+
+.image--access {
+  background-image: url('../images/access-image.png');
 }
 
 h1,
@@ -66,7 +111,8 @@ section {
 
 .site-header {
   border-bottom: 1px solid #e8e8e8;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(6px);
 }
 
 .site-header__inner {
@@ -129,7 +175,10 @@ section {
   width: 100%;
   min-height: 360px;
   object-fit: cover;
-  background-color: #f1f1ed;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.04)),
+    radial-gradient(circle at 30% 30%, rgba(141, 139, 116, 0.2), transparent 30%),
+    linear-gradient(135deg, #f9f7f4 0%, #efeae1 100%);
 }
 
 .hero__content {
@@ -141,6 +190,7 @@ section {
   color: #666666;
   font-size: 0.75rem;
   letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .hero h1 {
@@ -158,12 +208,14 @@ section {
   background-color: #1a1a1a;
   color: #ffffff;
   text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .button:hover,
 .button:focus-visible {
   background-color: #ffffff;
   color: #1a1a1a;
+  transform: translateY(-1px);
 }
 
 a:focus-visible,
@@ -189,7 +241,9 @@ button:focus-visible {
 .concept__visual {
   min-height: 280px;
   margin-top: 40px;
-  background-color: #eeece6;
+  background-image:
+    radial-gradient(circle at 60% 20%, rgba(165, 167, 118, 0.25), transparent 22%),
+    linear-gradient(135deg, #efeae4 0%, #e6e0d7 100%);
 }
 
 .workshop {
@@ -239,10 +293,18 @@ button:focus-visible {
   margin-top: 48px;
 }
 
+.materials__list li {
+  border: 1px solid #e6e1d8;
+  padding: 16px 16px 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 .materials__visual {
   min-height: 220px;
   margin-bottom: 20px;
-  background-color: #ece8df;
+  background-image:
+    radial-gradient(circle at 30% 20%, rgba(94, 118, 72, 0.18), transparent 20%),
+    linear-gradient(135deg, #efeae0 0%, #e4dfd5 100%);
 }
 
 .materials__list h3 {
@@ -261,7 +323,9 @@ button:focus-visible {
 
 .experience__visual {
   min-height: 240px;
-  background-color: #e9e7e0;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.06)),
+    linear-gradient(135deg, #efeee9 0%, #dfd9d1 100%);
 }
 
 .voice {
@@ -278,6 +342,8 @@ button:focus-visible {
   margin: 0;
   border-left: 2px solid #c9c6ba;
   padding: 8px 0 8px 16px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #2a2a2a;
 }
 
 .information {
@@ -322,7 +388,9 @@ button:focus-visible {
   min-height: 280px;
   margin: 40px 0 24px;
   object-fit: cover;
-  background-color: #e6e5df;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.08)),
+    linear-gradient(135deg, #eae5df 0%, #d8d1c7 100%);
 }
 
 .access__details {
@@ -403,9 +471,22 @@ button:focus-visible {
 }
 
 @media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+
   section {
     padding-right: 48px;
     padding-left: 48px;
+  }
+
+  .site-header__inner,
+  .site-footer,
+  section,
+  .hero {
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .site-header__inner {
@@ -451,10 +532,17 @@ button:focus-visible {
 
   .hero__visual {
     min-height: 600px;
+    border-radius: 24px;
   }
 
   .hero__content {
     padding-top: 0;
+  }
+
+  .hero__content h1 {
+    max-width: 12ch;
+    font-size: clamp(2.8rem, 4vw, 4.5rem);
+    line-height: 1.1;
   }
 
   .workshop__steps {
@@ -494,4 +582,29 @@ button:focus-visible {
   .site-footer__copyright {
     grid-column: 1 / -1;
   }
+}
+
+/* ChatGPT生成の体験イメージ。実際の店舗・商品写真ではありません。 */
+.image--hero {
+  background-image: url('../images/hero-workshop.png');
+}
+
+.image--materials {
+  background-image: url('../images/materials-scent.png');
+}
+
+.image--experience {
+  background-image: url('../images/experience-workshop.png');
+}
+
+.image--hero-detail {
+  background-image: url('../images/hero-workshop.png');
+}
+
+.image--materials-detail {
+  background-image: url('../images/materials-scent.png');
+}
+
+.image--access {
+  background-image: url('../images/access-image.png');
 }
