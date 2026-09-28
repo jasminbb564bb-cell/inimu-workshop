@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="inimuの香りの商品を探す・買うためのSHOPページ。">
+  <title>SHOP | inimu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="shop-page">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="../" aria-label="inimu トップ"><img src="../images/change1.png" alt="inimu"></a>
+      <nav class="site-nav" aria-label="メインナビゲーション">
+        <button class="site-nav__toggle" type="button" aria-label="メニューを開く"><span aria-hidden="true">☰</span></button>
+        <ul class="site-nav__list">
+          <li><a href="./" aria-current="page">SHOP</a></li><li><a href="../experience/">EXPERIENCE</a></li><li><a href="../blog/">BLOG</a></li><li><a href="../login/">LOGIN</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="shop-intro" aria-labelledby="shop-title">
+      <div class="shop-intro__copy"><p class="section-label">SHOP</p><h1 id="shop-title">香りの商品を<br>探す・買う。</h1><p>香り、アイテム、ブランドから、<br>今の気分に合うものを探します。</p></div>
+      <figure class="shop-intro__image"><img src="../images/shop-intro-hero.png" alt="石と木、ガラスの静かな空間"></figure>
+    </section>
+    <section class="shop-search" aria-labelledby="search-title"><div class="shop-section-heading"><p class="section-label">SEARCH</p><h2 id="search-title">探す</h2></div><form class="shop-search__form" action="." method="get"><label for="shop-search-input">商品名・香り・ブランドから検索</label><div><input id="shop-search-input" name="q" type="search" placeholder="検索する"><button type="submit" aria-label="検索">→</button></div></form></section>
+    <section class="shop-discovery" aria-labelledby="scent-title"><div class="shop-section-heading"><p class="section-label">FIND BY SCENT</p><h2 id="scent-title">香りから探す</h2></div><div class="shop-photo-links shop-photo-links--scent">
+      <a href="?scent=citrus"><div class="shop-photo-link__image shop-photo-link__image--world"><img src="../images/experience/scents/scent-02-lemon.jpg" alt="光とガラスの静かな風景"></div><span>シトラス系</span></a><a href="?scent=tea"><div class="shop-photo-link__image shop-photo-link__image--world"><img src="../images/experience/scents/scent-07-assam-tea.jpg" alt="香りの素材"></div><span>ティー系</span></a><a href="?scent=woody"><div class="shop-photo-link__image shop-photo-link__image--world"><img src="../images/experience/scents/scent-12-sandalwood.jpg" alt="木と石の素材感"></div><span>ウッディ系</span></a><a href="?scent=floral"><div class="shop-photo-link__image shop-photo-link__image--world"><img src="../images/experience/scents/scent-09-magnolia.jpg" alt="植物の素材感"></div><span>フローラル系</span></a>
+    </div><p class="shop-data-note">香りの分類と商品との対応は、公式情報と要照合。</p></section>
+    <section class="shop-discovery" aria-labelledby="item-title"><div class="shop-section-heading"><p class="section-label">FIND BY ITEM</p><h2 id="item-title">アイテムから探す</h2></div><div class="shop-photo-links shop-photo-links--items">
+      <a href="?item=home-fragrance"><div class="shop-photo-link__image shop-photo-link__image--world"><img src="../images/shop/items/home-fragrance.png" alt="ホームフレグランスの空間"></div><span>ホームフレグランス</span></a><a href="?item=body-care"><div class="shop-photo-link__image shop-photo-link__image--world"><img src="../images/shop/items/body-care.png" alt="ボディケアの素材"></div><span>ボディケア</span></a><a href="?item=diy"><div class="shop-photo-link__image shop-photo-link__image--world"><img src="../images/shop/items/diy.png" alt="香りをつくる道具"></div><span>DIY</span></a><a href="?item=gift"><div class="shop-photo-link__image shop-photo-link__image--world"><img src="../images/shop/items/gift.png" alt="ギフトの素材感"></div><span>ギフト</span></a>
+    </div></section>
+    <section class="shop-discovery shop-brands" aria-labelledby="brand-title"><div class="shop-section-heading"><p class="section-label">FIND BY BRAND</p><h2 id="brand-title">ブランドから探す</h2></div><div class="shop-brand-track">
+      <a href="?brand=hatenko"><div class="shop-brand-track__image"><img src="../images/shop/brands/hatenko-atmosphere.png" alt="HATENKOの空気感"></div><strong>HATENKO</strong><span>香りを記憶に残す香水</span></a><a href="?brand=perfumers"><div class="shop-brand-track__image"><img src="../images/shop/brands/perfumers-atmosphere.png" alt="PERFUMERSの空気感"></div><strong>PERFUMERS</strong><span>日々に寄り添う香り</span></a><a href="?brand=wanowa"><div class="shop-brand-track__image"><img src="../images/shop/brands/wanowa-atmosphere.png" alt="WANOWAの空気感"></div><strong>WANOWA</strong><span>土地と素材から生まれる香り</span></a><a href="?brand=aroma-recolte"><div class="shop-brand-track__image"><img src="../images/shop/brands/aroma-recolte-atmosphere.png" alt="aroma recolteの空気感"></div><strong>aroma recolte</strong><span>暮らしのための香り</span></a>
+    </div></section>
+    <section class="shop-new" aria-labelledby="new-title"><div class="shop-section-heading"><p class="section-label">NEW</p><h2 id="new-title">新着商品</h2></div><div class="product-track">
+      <a href="?product=hanabi"><div class="product-track__image"><img src="../images/products/hatenko-hanabi-editorial.png" alt="HATENKO Eau De Parfum 花火"></div><strong>HATENKO Eau De Parfum 花火</strong><span>30ml　13,750円</span></a><a href="?product=isonami"><div class="product-track__image"><img src="../images/products/hatenko-isonami-editorial.png" alt="HATENKO Eau De Parfum 磯波"></div><strong>HATENKO Eau De Parfum 磯波</strong><span>30ml　13,750円</span></a><a href="?product=wanowa-hiba"><div class="product-track__image"><img src="../images/products/wanowa-noto-hiba-editorial.png" alt="WANOWA ルームスプレー 能登ひば"></div><strong>WANOWA ルームスプレー 能登ひば</strong><span>60ml　2,970円</span></a><a href="?product=fig"><div class="product-track__image"><img src="../images/products/perfumers-fig-editorial.png" alt="PERFUMERS ヘア＆ボディミスト フィグ"></div><strong>PERFUMERS ヘア＆ボディミスト フィグ</strong><span>50ml　1,760円</span></a>
+    </div><p class="shop-data-note">価格・在庫は公式サイトと要照合。</p></section>
+    <section class="shop-all" aria-labelledby="all-items-title"><div class="shop-section-heading"><p class="section-label">ALL ITEMS</p><h2 id="all-items-title">すべての商品</h2></div><div class="product-grid">
+      <a href="?product=odoodoro"><div class="product-grid__image"><img src="../images/products/hatenko-odoroodoro-editorial.png" alt="HATENKO おどろおどろ"></div><strong>HATENKO おどろおどろ</strong><span>30ml　13,750円</span></a><a href="?product=room-spray-hinoki"><div class="product-grid__image"><img src="../images/products/wanowa-hinoki-editorial.png" alt="WANOWA ルームスプレー 加子母ひのき"></div><strong>WANOWA ルームスプレー 加子母ひのき</strong><span>60ml　2,970円</span></a><a href="?product=kou"><div class="product-grid__image"><img src="../images/products/kou-kanpo-editorial.png" alt="kou 漢方生薬香"></div><strong>kou 漢方生薬香</strong><span>1,480円</span></a><a href="?product=aroma-brick"><div class="product-grid__image"><img src="../images/products/aroma-recolte-brick-editorial.png" alt="aroma recolte Aroma Brick"></div><strong>aroma recolte Aroma Brick</strong><span>4,180円</span></a><a href="?product=discovery-set"><div class="product-grid__image"><img src="../images/products/hatenko-discovery-editorial.png" alt="HATENKO Discovery Set"></div><strong>HATENKO Discovery Set</strong><span>14,300円</span></a><a href="?product=perfume-brown"><div class="product-grid__image"><img src="../images/products/perfumers-brown-diamond-editorial.png" alt="PERFUMERS EDT Brown Diamond"></div><strong>PERFUMERS EDT Brown Diamond</strong><span>4,400円</span></a>
+    </div><a class="shop-text-link" href="?view=all">すべての商品を見る　→</a></section>
+  </main>
+  <footer class="site-footer"><a class="site-footer__logo" href="../"><img src="../images/change1.png" alt="inimu"></a><p class="site-footer__copyright">© inimu</p></footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>
