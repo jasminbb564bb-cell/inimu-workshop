@@ -1,6 +1,117 @@
+const shopPage = document.querySelector('.shop-page');
+const oldScentEntry = shopPage?.querySelector('.shop-discovery[aria-labelledby="scent-title"]');
+if (shopPage) {
+  shopPage.querySelector('.shop-intro__image')?.remove();
+  const introCopy = shopPage.querySelector('.shop-intro__copy');
+  if (introCopy) introCopy.innerHTML = '<p class="section-label">SHOP</p><h1 id="shop-title">香りを探す、買う。</h1><p>香り・ブランド・ものづくりから選べます。</p>';
+}
+if (shopPage && oldScentEntry) {
+  const shopSearch = shopPage.querySelector('.shop-search');
+  if (shopSearch) {
+    shopSearch.innerHTML = '<div class="shop-section-heading"><p class="section-label">SEARCH</p><h2 id="search-title">香水・香り・ブランドを検索</h2></div><form class="shop-search__form" id="shop-keyword-search"><label for="shop-search-input">商品名・ブランド名・香りの系統から探す</label><div><input id="shop-search-input" name="q" type="search" placeholder="HATENKO / ひのき / ウッディ"><button type="submit" aria-label="検索">→</button></div><p class="shop-search__hint">例：HATENKO、WANOWA、PERFUMERS、ひのき、柑橘、香水</p></form><div class="shop-search-results" aria-live="polite"></div>';
+  }
+  const section = document.createElement('section');
+  section.className = 'shop-scent-directory';
+  section.setAttribute('aria-labelledby', 'shop-scent-title');
+  const categories = [
+    ['fruits', 'FRUITS', 'フルーツ系', '../images/experience/scents/scent-08-cassis.jpg'], ['citrus', 'CITRUS', 'シトラス系', '../images/experience/scents/scent-02-lemon.jpg'],
+    ['herbal', 'HERBAL', 'ハーバル系', '../images/experience/scents/scent-04-lavender.jpg'], ['floral', 'FLORAL', 'フローラル系', '../images/experience/scents/scent-09-magnolia.jpg'],
+    ['spice', 'SPICE', 'スパイス系', '../images/products/kou-kanpo-editorial.png'], ['tea', 'TEA', 'ティー系', '../images/experience/scents/scent-07-assam-tea.jpg'],
+    ['woody', 'WOODY', 'ウッディ系', '../images/experience/scents/scent-12-sandalwood.jpg'], ['imaginal', 'IMAGINAL', 'イマジナル系', '../images/materials-scent.png'],
+    ['animal', 'ANIMAL', 'アニマル系', '../images/experience/scents/scent-10-musk.jpg'], ['gourmand', 'GOURMAND', 'グルマン系', '../images/products/perfumers-fig-editorial.png'],
+    ['essential-oil', 'ESSENTIAL OIL', '精油', '../images/products/wanowa-noto-hiba-editorial.png']
+  ];
+  section.innerHTML = `<div class="shop-scent-directory__heading"><p class="section-label">FIND BY SCENT</p><h1 id="shop-scent-title">香りから選ぶ</h1><p>気分やシーンに合わせて、香りの世界からお選びください。</p></div><div class="shop-scent-directory__grid">${categories.map(([slug, en, ja, image]) => `<a class="scent-category-card" href="scent/${slug}/"><img src="${image}" alt="${ja}"><span><strong>${en}</strong><em>${ja}</em><b>→</b></span></a>`).join('')}</div><p class="shop-scent-directory__count">全11件のカテゴリ</p>`;
+  oldScentEntry.replaceWith(section);
+}
+
+const shopBrandTrack = document.querySelector('.shop-page .shop-brand-track');
+if (shopBrandTrack) {
+  shopBrandTrack.className = 'shop-brand-gallery';
+  shopBrandTrack.innerHTML = '<article class="shop-brand-feature shop-brand-feature--hatenko"><a class="shop-brand-feature__image" href="brand/hatenko/"><img src="../images/products/source-hatenko-hanabi.jpg" alt="HATENKO / 破天荒"></a><div class="shop-brand-feature__copy"><p class="section-label">HATENKO / 破天荒</p><h3>香りが導く、伝統と革新で型を破る未来</h3><p>日本の文化や土地の記憶を香りに重ねた、inimuを代表する香水ブランド。</p><span>代表的な香水：花火 / 磯波 / おどろおどろ</span><a class="shop-text-link" href="brand/hatenko/">HATENKOを見る →</a></div></article><article class="shop-brand-feature"><a class="shop-brand-feature__image" href="brand/wanowa/"><img src="../images/shop/brands/wanowa-atmosphere.png" alt="WANOWA"></a><div class="shop-brand-feature__copy"><p class="section-label">WANOWA</p><h3>土地と素材から生まれる香り</h3><p>地域の素材や記憶を手がかりにした香りのプロダクト。</p><span>代表商品：能登ひばルームスプレー</span><a class="shop-text-link" href="brand/wanowa/">WANOWAを見る →</a></div></article><article class="shop-brand-feature"><a class="shop-brand-feature__image" href="brand/perfumers/"><img src="../images/shop/brands/perfumers-atmosphere.png" alt="PERFUMERS"></a><div class="shop-brand-feature__copy"><p class="section-label">PERFUMERS</p><h3>日々に寄り添う、身につける香り</h3><p>オードトワレやロールオンなど、さまざまな形で楽しむ香り。</p><span>代表商品：オードトワレ / ロールオンパフューム</span><a class="shop-text-link" href="brand/perfumers/">PERFUMERSを見る →</a></div></article>';
+}
+
+const shopBrandsSection = document.querySelector('.shop-page .shop-brands');
+if (shopBrandsSection && !document.querySelector('.shop-featured-stories')) {
+  const stories = document.createElement('section');
+  stories.className = 'shop-featured-stories';
+  stories.innerHTML = '<div class="shop-section-heading"><p class="section-label">TWO SIGNATURES</p><h2>inimuをかたちづくる、二つの香り</h2></div><div class="shop-featured-stories__list"><article><a class="shop-featured-stories__image" href="story/hatenko/"><img src="../images/products/source-hatenko-hanabi.jpg" alt="HATENKO / 破天荒"></a><div><p class="section-label">01 / HATENKO</p><h3>伝統と革新で、型を破る香り。</h3><p>加賀友禅、東濃檜、浮世絵、職人技。<br>異なる領域を結びつける、破天荒のものづくり。</p><a class="shop-text-link" href="story/hatenko/">HATENKO STORY →</a></div></article><article><a class="shop-featured-stories__image" href="story/wanowa/"><img src="../images/products/wanowa-noto-hiba-editorial.png" alt="WANOWA"></a><div><p class="section-label">02 / WANOWA</p><h3>土地と素材から生まれる香り。</h3><p>国造ゆず、加子母ひのき、和束茶など、<br>日本各地の植物と背景を香りとして届ける。</p><a class="shop-text-link" href="story/wanowa/">WANOWA STORY →</a></div></article></div>';
+  shopBrandsSection.parentNode.insertBefore(stories, shopBrandsSection);
+  const itemDiscovery = document.querySelector('.shop-page .shop-discovery[aria-labelledby="item-title"]');
+  if (itemDiscovery) stories.parentNode.insertBefore(itemDiscovery, shopBrandsSection);
+}
+
+const shopMain = document.querySelector('.shop-page main');
+if (shopMain) {
+  const orderedSections = [
+    shopMain.querySelector('.shop-intro'),
+    shopMain.querySelector('.shop-featured-stories'),
+    shopMain.querySelector('.shop-scent-directory'),
+    shopMain.querySelector('.shop-discovery[aria-labelledby="item-title"]'),
+    shopMain.querySelector('.shop-brands'),
+    shopMain.querySelector('.shop-search'),
+    shopMain.querySelector('.shop-new'),
+    shopMain.querySelector('.shop-all')
+  ].filter(Boolean);
+  orderedSections.forEach((section) => shopMain.appendChild(section));
+}
+
+const signatureStories = document.querySelector('.shop-featured-stories');
+if (signatureStories && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  signatureStories.classList.add('has-reveal');
+  const storyReveal = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .01, rootMargin: '0px 0px -8% 0px' });
+  signatureStories.querySelectorAll('.shop-featured-stories__list article').forEach((article) => storyReveal.observe(article));
+}
+
+const shopKeywordForm = document.querySelector('#shop-keyword-search');
+if (shopKeywordForm) {
+  const searchableProducts = [...document.querySelectorAll('.shop-page .product-track a, .shop-page .product-grid a')];
+  searchableProducts.forEach((item) => { item.dataset.search = `${item.textContent} ${item.querySelector('img')?.alt || ''}`; });
+  const result = shopKeywordForm.parentElement.querySelector('.shop-search-results');
+  const runSearch = (value) => {
+    const keyword = value.trim().toLowerCase();
+    searchableProducts.forEach((item) => { item.hidden = Boolean(keyword) && !item.dataset.search.toLowerCase().includes(keyword); });
+    if (result) result.textContent = keyword ? `${searchableProducts.filter((item) => !item.hidden).length}件の商品が見つかりました。` : '';
+  };
+  shopKeywordForm.addEventListener('submit', (event) => { event.preventDefault(); runSearch(new FormData(shopKeywordForm).get('q') || ''); });
+}
+
 const navigation = document.querySelector('.site-nav');
+const mainScript = document.querySelector('script[src$="js/main.js"]');
+const siteRoot = mainScript ? new URL('./', new URL(mainScript.getAttribute('src'), window.location.href)).href : './';
+document.querySelectorAll('.site-footer').forEach((footer) => {
+  footer.innerHTML = `<div class="site-footer__inner"><div class="site-footer__brand"><a class="site-footer__logo" href="${siteRoot}"><img src="${siteRoot}images/change1.png" alt="inimu"></a><p>香りを買う。<br>香りをつくる。</p></div><nav class="site-footer__group" aria-label="メインナビゲーション"><p class="site-footer__label">EXPLORE</p><ul class="site-footer__nav"><li><a href="${new URL('shop/', siteRoot)}">SHOP</a></li><li><a href="${new URL('experience/', siteRoot)}">EXPERIENCE</a></li><li><a href="${new URL('blog/', siteRoot)}">BLOG</a></li><li><a href="${new URL('experience/#access', siteRoot)}">ACCESS</a></li></ul></nav><nav class="site-footer__group" aria-label="サポートナビゲーション"><p class="site-footer__label">INFORMATION</p><ul class="site-footer__nav"><li><a href="${new URL('login/', siteRoot)}">LOGIN</a></li><li><a href="${new URL('experience/#faq', siteRoot)}">FAQ</a></li><li><a href="${new URL('shopping-guide/', siteRoot)}">SHOPPING GUIDE</a></li><li><a href="${new URL('legal/', siteRoot)}">PRIVACY</a></li><li><a href="${new URL('legal/', siteRoot)}">TERMS</a></li></ul></nav><p class="site-footer__copyright">© inimu</p></div>`;
+});
+const loginRegister = null;
+if (loginRegister && !loginRegister.querySelector('.login-register__welcome')) {
+  const welcome = document.createElement('div');
+  welcome.className = 'login-register__welcome';
+  welcome.setAttribute('aria-hidden', 'true');
+  welcome.innerHTML = '<span>いらっしゃい。</span><i></i>';
+  loginRegister.insertBefore(welcome, loginRegister.querySelector('.text-link'));
+  const reveal = new IntersectionObserver((entries, observer) => {
+    if (entries.some((entry) => entry.isIntersecting)) { loginRegister.classList.add('is-visible'); observer.disconnect(); }
+  }, { threshold: .35 });
+  reveal.observe(loginRegister);
+}
 const menuToggle = document.querySelector('.site-nav__toggle');
 const navigationLinks = document.querySelectorAll('.site-nav__list a');
+
+document.querySelectorAll('.way-card').forEach((card) => {
+  card.addEventListener('click', (event) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    event.preventDefault();
+    card.classList.add('is-leaving');
+    window.setTimeout(() => { window.location.href = card.href; }, 220);
+  });
+});
 
 const blogMain = document.querySelector('.blog-main');
 if (blogMain) {
@@ -92,6 +203,18 @@ if (scentTypes && !document.querySelector('#scent-types')) {
 }
 
 const page = document.body.dataset.page;
+if (page === 'admin-members') {
+  const sample = [{ id: '001', name: '山田 花子（サンプル）', kana: 'ヤマダ ハナコ', email: 'demo@example.com', purpose: '落ち着きたい', registeredAt: '2026/09/29', demo: true }];
+  const members = [...sample, ...JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]')];
+  const body = document.querySelector('#member-table-body');
+  const keys = ['id','name','kana','email','purpose','registeredAt'];
+  if (body) body.innerHTML = members.map((member) => `<tr>${keys.map((key) => `<td>${String(member[key] || '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]))}</td>`).join('')}</tr>`).join('');
+  document.querySelector('#member-csv')?.addEventListener('click', () => {
+    const rows = [['会員ID','氏名','フリガナ','メールアドレス','香りに求めること','登録日'], ...members.map((member) => keys.map((key) => member[key] || ''))];
+    const csv = '\ufeff' + rows.map((row) => row.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(',')).join('\r\n');
+    const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); link.download = 'inimu-member-data-demo.csv'; link.click(); URL.revokeObjectURL(link.href);
+  });
+}
 const form = document.querySelector('[data-form]');
 const showError = (form, message) => { const error = form.querySelector('.form-error'); if (error) error.textContent = message; };
 if (form && page === 'login') {
@@ -116,6 +239,10 @@ if (form && page === 'register') {
     if (missing) return showError(form, '未入力の項目があります');
     if (form.elements.password.value !== form.elements.passwordConfirm.value) return showError(form, 'パスワードが一致しません');
     if (!form.elements.terms.checked) return showError(form, '利用規約・プライバシーポリシーに同意してください');
+    const demoMembers = JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]');
+    const purpose = form.querySelector('input[name="purpose"]:checked');
+    demoMembers.push({ id: String(demoMembers.length + 1).padStart(3, '0'), name: form.elements.name.value.trim(), kana: form.elements.kana.value.trim(), email: form.elements.email.value.trim(), purpose: purpose?.closest('label')?.querySelector('.purpose-option__text')?.textContent.trim() || '未回答', registeredAt: new Date().toLocaleDateString('ja-JP'), demo: true });
+    localStorage.setItem('inimuDemoMembers', JSON.stringify(demoMembers));
     location.href = '../register/confirm.html';
   });
 }
