@@ -2570,6 +2570,7 @@ body:has(.wayfinding) .site-header__logo::after { position: absolute; top: calc(
   aspect-ratio: 1.7 / 1;
   object-fit: cover;
 }
+.shop-page .shop-featured-stories__list article:first-child .shop-featured-stories__image img { object-fit: contain; object-position: center; }
 
 .shop-page .shop-featured-stories__list article > div {
   margin-top: 22px;

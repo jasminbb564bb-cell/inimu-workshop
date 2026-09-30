@@ -41,6 +41,8 @@ if (shopBrandsSection && !document.querySelector('.shop-featured-stories')) {
   if (itemDiscovery) stories.parentNode.insertBefore(itemDiscovery, shopBrandsSection);
 }
 
+document.querySelectorAll('.shop-page .shop-brand-feature--hatenko img, .shop-page .shop-featured-stories__list article:first-child img').forEach((image) => { image.src = '../images/hatenko.png'; });
+
 const shopMain = document.querySelector('.shop-page main');
 if (shopMain) {
   const orderedSections = [
@@ -51,7 +53,8 @@ if (shopMain) {
     shopMain.querySelector('.shop-brands'),
     shopMain.querySelector('.shop-search'),
     shopMain.querySelector('.shop-new'),
-    shopMain.querySelector('.shop-all')
+    shopMain.querySelector('.shop-all'),
+    shopMain.querySelector('.make-scent-bridge')
   ].filter(Boolean);
   orderedSections.forEach((section) => shopMain.appendChild(section));
   const productKey = new URLSearchParams(window.location.search).get('product');
