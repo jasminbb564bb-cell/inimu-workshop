@@ -522,7 +522,20 @@ body:has(.wayfinding) .way-card.is-leaving { opacity: 1; transform: scale(1.01);
 .wanowa-place-list p { display: flex; justify-content: space-between; gap: 24px; margin: 0; padding: 18px 0; border-bottom: 1px solid #d8d4cc; color: #66625b; }
 .wanowa-place-list b { color: #292824; font-weight: 400; }
 .story-link { display: inline-block; margin-top: 10px; color: #292824; text-decoration: none; border-bottom: 1px solid #aaa59d; padding-bottom: 8px; }
+.make-scent-bridge, .story-experience-bridge { border-top: 1px solid #d8d4cc; color: #292824; }
+.make-scent-bridge { display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1fr); gap: 56px; width: min(100% - 48px, 1140px); margin: 30px auto 0; padding: 72px 0 110px; align-items: center; }
+.make-scent-bridge img, .story-experience-bridge img { display: block; width: 100%; aspect-ratio: 1.5 / 1; object-fit: cover; }
+.make-scent-bridge__copy h2 { margin: 12px 0 18px; font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 400; letter-spacing: .08em; }
+.make-scent-bridge__copy > p:not(.section-label) { color: #68645e; line-height: 2; }
+.make-scent-bridge .shop-text-link, .story-experience-bridge .shop-text-link { display: inline-block; margin-top: 22px; color: #292824; text-decoration: none; border-bottom: 1px solid #aaa59d; padding-bottom: 8px; }
+.story-experience-bridge { display: grid; grid-template-columns: minmax(180px, .55fr) minmax(0, 1fr); gap: 42px; margin: 82px 0 42px; padding-top: 30px; align-items: center; }
+.story-experience-bridge p:not(.section-label) { margin: 12px 0 0; color: #68645e; line-height: 2; }
+.product-experience-bridge { width: min(100% - 48px, 1040px); margin: 0 auto 100px; padding: 54px 0 0; border-top: 1px solid #d8d4cc; }
+.product-experience-bridge h2 { margin: 12px 0 18px; font-size: clamp(1.35rem, 2.4vw, 2rem); font-weight: 400; line-height: 1.7; }
+.product-experience-bridge .shop-text-link { display: inline-block; color: #292824; text-decoration: none; border-bottom: 1px solid #aaa59d; padding-bottom: 8px; }
 @media (max-width: 760px) { .shop-featured-stories { width: min(100% - 36px, 1040px); margin-bottom: 72px; padding-top: 60px; } .shop-featured-stories__list article, .shop-featured-stories__list article:nth-child(even) { display: block; } .shop-featured-stories__list article:nth-child(even) > div, .shop-featured-stories__list article:nth-child(even) > a { display: block; } .shop-featured-stories__list article > div { margin-top: 26px; } .story-main { width: min(100% - 36px, 1000px); padding-top: 38px; } .story-hero { margin-top: 36px; } .story-block { margin-top: 68px; } .story-block--split { display: block; } .story-block--split img { margin-top: 28px; } }
+@media (max-width: 760px) { .make-scent-bridge, .story-experience-bridge { display: block; width: min(100% - 36px, 1040px); } .make-scent-bridge { padding: 54px 0 76px; } .make-scent-bridge__copy { margin-top: 28px; } .story-experience-bridge { margin-top: 58px; padding-top: 22px; } .story-experience-bridge div { margin-top: 22px; } }
+@media (max-width: 760px) { .product-experience-bridge { width: min(100% - 36px, 1040px); margin-bottom: 72px; padding-top: 36px; } }
 @media (max-width: 760px) { .shop-page .shop-intro { width: min(100% - 36px, 1040px); padding-top: 54px; padding-bottom: 58px; } }
 .login-support { padding: 80px 48px 110px; }
 .login-section-heading { margin-bottom: 34px; }
@@ -2099,6 +2112,17 @@ button:focus-visible {
   min-width: 200px;
 }
 
+.register-complete-member { margin: 0 0 34px; padding-top: 20px; border-top: 1px solid #d8d4cc; color: #6d6b65; font-size: .75rem; letter-spacing: .12em; }
+.register-complete-member span, .register-complete-member strong { display: block; }
+.register-complete-member strong { margin-top: 6px; color: #292824; font: 1rem Inter, sans-serif; letter-spacing: .1em; }
+.member-profile { margin: 0 0 42px; border-top: 1px solid #c9c7c0; }
+.profile-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; padding: 18px 0; border-bottom: 1px solid #ddd9d1; }
+.profile-row dt { color: #77736c; font-size: .72rem; letter-spacing: .08em; }
+.profile-row dd { margin: 0; color: #302f2b; font-size: .9rem; line-height: 1.6; }
+@media (max-width: 600px) { .profile-row { grid-template-columns: 1fr; gap: 6px; } }
+.register-complete-heading h1 { max-width: none; white-space: nowrap; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.35; letter-spacing: .04em; }
+@media (max-width: 600px) { .register-complete-heading h1 { white-space: normal; font-size: clamp(1.75rem, 8vw, 2.5rem); } }
+
 /* Quiet fragrance context for the TOP entrance */
 body:has(.wayfinding) .wayfinding__eyebrow { margin: 18px 0 0; color: #6d6e69; font-family: "Inter", sans-serif; font-size: .72rem; font-weight: 400; letter-spacing: .18em; line-height: 1.5; }
 body:has(.wayfinding) .wayfinding__eyebrow { opacity: 0; transform: translateY(12px); animation: top-fade-in .7s .58s ease both; }
@@ -2201,6 +2225,113 @@ body:has(.wayfinding) .site-header__logo::after { position: absolute; top: calc(
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+}
+
+/* TOP hero final layout: keep the intro and entrances side by side. */
+@media (min-width: 768px) {
+  .wayfinding { display: grid; grid-template-columns: minmax(280px, .72fr) minmax(0, 1.28fr); align-items: center; column-gap: clamp(40px, 5vw, 72px); width: min(100%, 1440px); max-width: none; min-height: calc(100vh - 65px); padding: 48px clamp(32px, 5vw, 72px) 56px; }
+  .wayfinding__intro { align-self: center; margin: 0; text-align: left; }
+  .wayfinding__choices { width: 100%; height: auto; margin: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 2.2vw, 32px); }
+  .way-card { display: flex; flex-direction: column; width: 100%; height: auto; min-height: 410px; overflow: hidden; padding: 0; border: 0; border-radius: 0; background: #f7f6f2; }
+  .way-card__image { position: relative; inset: auto; flex: 0 0 290px; width: 100%; height: 290px; min-height: 0; aspect-ratio: auto; background-size: cover; }
+  .way-card__overlay { position: relative; inset: auto; flex: 0 0 120px; align-items: flex-start; justify-content: center; padding: 18px 12px 16px; background: #f7f6f2; color: #252522; text-align: left; text-shadow: none; }
+  .way-card__label { color: #252522; font-size: clamp(1.2rem, 2.1vw, 1.7rem); }
+  .way-card__description { margin-top: 8px; color: #6d6b65; font-size: .78rem; line-height: 1.7; }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .wayfinding { grid-template-columns: minmax(240px, .68fr) minmax(0, 1.32fr); column-gap: 32px; padding-right: 28px; padding-left: 28px; }
+  .way-card__image { flex-basis: 250px; height: 250px; }
+  .way-card__overlay { flex-basis: 120px; }
+}
+
+/* TOP hero final layout: keep the intro and entrances side by side. */
+@media (min-width: 768px) {
+  .wayfinding {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+    align-items: center;
+    column-gap: clamp(40px, 5vw, 72px);
+    width: min(100%, 1440px);
+    max-width: none;
+    min-height: calc(100vh - 65px);
+    padding: 48px clamp(32px, 5vw, 72px) 56px;
+  }
+
+  .wayfinding__intro {
+    align-self: center;
+    margin: 0;
+    text-align: left;
+  }
+
+  .wayfinding__choices {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(24px, 2.2vw, 32px);
+  }
+
+  .way-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 410px;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: #f7f6f2;
+  }
+
+  .way-card__image {
+    position: relative;
+    inset: auto;
+    flex: 0 0 290px;
+    width: 100%;
+    height: 290px;
+    min-height: 0;
+    aspect-ratio: auto;
+    background-size: cover;
+  }
+
+  .way-card__overlay {
+    position: relative;
+    inset: auto;
+    flex: 0 0 120px;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 18px 12px 16px;
+    background: #f7f6f2;
+    color: #252522;
+    text-align: left;
+    text-shadow: none;
+  }
+
+  .way-card__label {
+    color: #252522;
+    font-size: clamp(1.2rem, 2.1vw, 1.7rem);
+  }
+
+  .way-card__description {
+    margin-top: 8px;
+    color: #6d6b65;
+    font-size: .78rem;
+    line-height: 1.7;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .wayfinding {
+    grid-template-columns: minmax(240px, .68fr) minmax(0, 1.32fr);
+    column-gap: 32px;
+    padding-right: 28px;
+    padding-left: 28px;
+  }
+
+  .way-card__image { flex-basis: 250px; height: 250px; }
+  .way-card__overlay { flex-basis: 120px; }
 }
 
 @media (max-width: 767px) {
@@ -2603,26 +2734,32 @@ body:has(.wayfinding) .site-header__logo::after { position: absolute; top: calc(
 /* TOP: make the two entrances the visual focus without losing the surrounding space. */
 @media (min-width: 768px) {
   .wayfinding {
-    max-width: 1200px;
-    padding: 34px 40px 42px;
+    display: block;
+    width: 100%;
+    max-width: 1500px;
+    min-height: 0;
+    padding: 36px 32px 48px;
   }
 
   .wayfinding__intro {
-    margin-bottom: 22px;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    text-align: center;
   }
 
   .wayfinding__choices {
-    width: min(100%, 880px);
+    width: min(100%, 1140px);
     height: auto;
     margin: 0 auto;
-    gap: 28px;
+    gap: clamp(24px, 2.2vw, 32px);
   }
 
   .way-card {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 415px;
+    height: 495px;
+    overflow: hidden;
     aspect-ratio: auto;
     padding: 0;
     border: 0;
@@ -2632,7 +2769,7 @@ body:has(.wayfinding) .site-header__logo::after { position: absolute; top: calc(
 
   .way-card__image {
     position: relative;
-    flex: 0 0 280px;
+    flex: 0 0 360px;
     width: 100%;
     height: auto;
     min-height: 0;
@@ -2660,7 +2797,7 @@ body:has(.wayfinding) .site-header__logo::after { position: absolute; top: calc(
   }
 
   .way-card__description {
-    margin-top: 10px;
+    margin-top: 8px;
     color: #6d6b65;
     font-size: .78rem;
     line-height: 1.7;

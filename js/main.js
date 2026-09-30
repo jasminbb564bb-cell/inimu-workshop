@@ -54,6 +54,13 @@ if (shopMain) {
     shopMain.querySelector('.shop-all')
   ].filter(Boolean);
   orderedSections.forEach((section) => shopMain.appendChild(section));
+  const productKey = new URLSearchParams(window.location.search).get('product');
+  if (productKey && !shopMain.querySelector('.product-experience-bridge')) {
+    const bridge = document.createElement('section');
+    bridge.className = 'product-experience-bridge';
+    bridge.innerHTML = '<p class="section-label">MAKE YOUR SCENT</p><h2>この香りが好きなら、<br>自分だけの香りをつくってみる。</h2><a class="shop-text-link" href="../experience/">EXPERIENCE →</a>';
+    shopMain.appendChild(bridge);
+  }
 }
 
 const signatureStories = document.querySelector('.shop-featured-stories');
@@ -119,6 +126,13 @@ if (blogMain) {
 }
 
 const navigationList = document.querySelector('.site-nav__list');
+const storyMain = document.querySelector('.story-page .story-main');
+if (storyMain && !storyMain.querySelector('.story-experience-bridge')) {
+  const bridge = document.createElement('section');
+  bridge.className = 'story-experience-bridge';
+  bridge.innerHTML = '<img src="../../../images/experience-workshop.png" alt="香りをつくるワークショップの様子"><div><p class="section-label">MAKE YOUR SCENT</p><p>香りを読むだけでなく、つくってみる。</p><a class="shop-text-link" href="../../../experience/">EXPERIENCE →</a></div>';
+  storyMain.appendChild(bridge);
+}
 if (navigationList) {
   const blogLinks = [...navigationList.querySelectorAll('a')].filter((link) => link.textContent.trim() === 'BLOG');
   blogLinks.slice(1).forEach((link) => link.closest('li')?.remove());
@@ -203,22 +217,31 @@ if (scentTypes && !document.querySelector('#scent-types')) {
 }
 
 const page = document.body.dataset.page;
+const latestMember = JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]').slice(-1)[0];
+document.querySelector('#registered-member-id')?.replaceChildren(document.createTextNode(latestMember?.id || '—'));
+if (page === 'mypage-profile') {
+  const member = JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]').slice(-1)[0] || {};
+  const fields = { id: '会員ID', name: '氏名', kana: 'フリガナ', email: 'メールアドレス', phone: '電話番号', postal: '郵便番号', address: '住所', purpose: '香りに求めること' };
+  const profile = document.querySelector('#member-profile');
+  if (profile) profile.innerHTML = Object.entries(fields).map(([key, label]) => `<div class="profile-row"><dt>${label}</dt><dd>${String(member[key] || '—').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]))}</dd></div>`).join('');
+}
 if (page === 'admin-members') {
+  document.querySelector('.admin-note')?.insertAdjacentText('afterbegin', '保存先はブラウザ内localStorageです。CSVでLibreOffice Calcへ書き出せます。');
   const sample = [{ id: '001', name: '山田 花子（サンプル）', kana: 'ヤマダ ハナコ', email: 'demo@example.com', purpose: '落ち着きたい', registeredAt: '2026/09/29', demo: true }];
   const members = [...sample, ...JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]')];
   const body = document.querySelector('#member-table-body');
-  const keys = ['id','name','kana','email','purpose','registeredAt'];
+  const keys = ['id','name','kana','email','phone','postal','address','purpose','registeredAt'];
   if (body) body.innerHTML = members.map((member) => `<tr>${keys.map((key) => `<td>${String(member[key] || '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]))}</td>`).join('')}</tr>`).join('');
   document.querySelector('#member-csv')?.addEventListener('click', () => {
-    const rows = [['会員ID','氏名','フリガナ','メールアドレス','香りに求めること','登録日'], ...members.map((member) => keys.map((key) => member[key] || ''))];
+    const rows = [['会員ID','氏名','フリガナ','メールアドレス','電話番号','郵便番号','住所','香りに求めること','登録日'], ...members.map((member) => keys.map((key) => member[key] || ''))];
     const csv = '\ufeff' + rows.map((row) => row.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(',')).join('\r\n');
-    const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); link.download = 'inimu-member-data-demo.csv'; link.click(); URL.revokeObjectURL(link.href);
+    const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); link.download = 'inimu_members.csv'; link.click(); URL.revokeObjectURL(link.href);
   });
 }
 const form = document.querySelector('[data-form]');
 const showError = (form, message) => { const error = form.querySelector('.form-error'); if (error) error.textContent = message; };
 if (form && page === 'login') {
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const email = form.elements.email.value.trim();
     const password = form.elements.password.value.trim();
@@ -227,23 +250,85 @@ if (form && page === 'login') {
     location.href = '../mypage/';
   });
 }
-if (form && page === 'register') {
+/* Legacy register handlers removed; one active handler follows. */
+/* if (false && form && page === 'register') {
   const preference = document.createElement('fieldset');
   preference.className = 'register-preference';
   preference.innerHTML = '<legend>あなたが香りを選ぶとき、<br>いちばん大切にしたいことは？</legend><p>あなたに合う香りや体験をご案内するためのヒントとして、よければ教えてください。</p><div class="preference-options"><label class="purpose-option"><span class="purpose-option__text">落ち着きたい</span><input type="radio" name="purpose" value="calm"><span class="purpose-option__radio" aria-hidden="true"></span></label><label class="purpose-option"><span class="purpose-option__text">気分を切り替えたい</span><input type="radio" name="purpose" value="refresh"><span class="purpose-option__radio" aria-hidden="true"></span></label><label class="purpose-option"><span class="purpose-option__text">自分らしさを感じたい</span><input type="radio" name="purpose" value="identity"><span class="purpose-option__radio" aria-hidden="true"></span></label><label class="purpose-option"><span class="purpose-option__text">記憶に残る香りがほしい</span><input type="radio" name="purpose" value="memory"><span class="purpose-option__radio" aria-hidden="true"></span></label><label class="purpose-option"><span class="purpose-option__text">贈りものにしたい</span><input type="radio" name="purpose" value="gift"><span class="purpose-option__radio" aria-hidden="true"></span></label><label class="purpose-option"><span class="purpose-option__text">まだわからない</span><input type="radio" name="purpose" value="explore"><span class="purpose-option__radio" aria-hidden="true"></span></label></div>';
   form.querySelector('.check-label').before(preference);
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('disabled-register-submit', (event) => {
     event.preventDefault();
     const required = ['name','kana','email','password','passwordConfirm','postal','address','phone'];
     const missing = required.find((name) => !form.elements[name].value.trim());
     if (missing) return showError(form, '未入力の項目があります');
     if (form.elements.password.value !== form.elements.passwordConfirm.value) return showError(form, 'パスワードが一致しません');
     if (!form.elements.terms.checked) return showError(form, '利用規約・プライバシーポリシーに同意してください');
-    const demoMembers = JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]');
     const purpose = form.querySelector('input[name="purpose"]:checked');
-    demoMembers.push({ id: String(demoMembers.length + 1).padStart(3, '0'), name: form.elements.name.value.trim(), kana: form.elements.kana.value.trim(), email: form.elements.email.value.trim(), purpose: purpose?.closest('label')?.querySelector('.purpose-option__text')?.textContent.trim() || '未回答', registeredAt: new Date().toLocaleDateString('ja-JP'), demo: true });
-    localStorage.setItem('inimuDemoMembers', JSON.stringify(demoMembers));
-    location.href = '../register/confirm.html';
+    if (!purpose) return showError(form, '香りを選ぶときに大切にしたいことを選択してください');
+    if (false) return showError(form, '登録先が未設定です。管理者にお問い合わせください。');
+    const payload = { memberId: `INIMU-${String(Date.now()).slice(-4).padStart(4, '0')}`, name: form.elements.name.value.trim(), kana: form.elements.kana.value.trim(), email: form.elements.email.value.trim(), scentPreference: purpose.closest('label')?.querySelector('.purpose-option__text')?.textContent.trim() || '', createdAt: new Date().toISOString() };
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) submitButton.disabled = true;
+    try {
+      const response = null;
+      const result = await response.json();
+      if (result.status !== 'success') throw new Error(result.message || 'Registration failed');
+      void 0;
+    } catch (error) {
+      showError(form, '登録に失敗しました。もう一度お試しください。');
+      if (submitButton) submitButton.disabled = false;
+    }
+  });
+}
+if (false && form && page === 'register') {
+  const preference = document.createElement('fieldset');
+  preference.className = 'register-preference';
+  preference.innerHTML = '<legend>あなたが香りを選ぶとき、<br>いちばん大切にしたいことは？</legend><div class="preference-options"><label class="purpose-option"><span class="purpose-option__text">落ち着きたい</span><input type="radio" name="purpose" value="calm"><span class="purpose-option__radio" aria-hidden="true"></span></label><label class="purpose-option"><span class="purpose-option__text">気分を切り替えたい</span><input type="radio" name="purpose" value="refresh"><span class="purpose-option__radio" aria-hidden="true"></span></label><label class="purpose-option"><span class="purpose-option__text">自分らしさを感じたい</span><input type="radio" name="purpose" value="identity"><span class="purpose-option__radio" aria-hidden="true"></span></label><label class="purpose-option"><span class="purpose-option__text">記憶に残る香りがほしい</span><input type="radio" name="purpose" value="memory"><span class="purpose-option__radio" aria-hidden="true"></span></label><label class="purpose-option"><span class="purpose-option__text">贈りものにしたい</span><input type="radio" name="purpose" value="gift"><span class="purpose-option__radio" aria-hidden="true"></span></label><label class="purpose-option"><span class="purpose-option__text">まだわからない</span><input type="radio" name="purpose" value="explore"><span class="purpose-option__radio" aria-hidden="true"></span></label></div>';
+  form.querySelector('.check-label').before(preference);
+  form.addEventListener('disabled-register-submit', (event) => {
+    event.preventDefault();
+    const required = ['name', 'kana', 'email', 'password', 'passwordConfirm', 'postal', 'address', 'phone'];
+    if (required.some((name) => !form.elements[name].value.trim())) return showError(form, '未入力の項目があります');
+    if (form.elements.password.value !== form.elements.passwordConfirm.value) return showError(form, 'パスワードが一致しません');
+    if (!form.elements.terms.checked) return showError(form, '利用規約・プライバシーポリシーに同意してください');
+    const purpose = form.querySelector('input[name="purpose"]:checked');
+    if (!purpose) return showError(form, '香りを選ぶときに大切にしたいことを選択してください');
+    const members = JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]');
+    const member = { id: `INIMU-${String(members.length + 1).padStart(4, '0')}`, name: form.elements.name.value.trim(), kana: form.elements.kana.value.trim(), email: form.elements.email.value.trim(), purpose: purpose.closest('label')?.querySelector('.purpose-option__text')?.textContent.trim() || '', registeredAt: new Date().toISOString(), demo: true };
+    members.push(member);
+    localStorage.setItem('inimuDemoMembers', JSON.stringify(members));
+    void 0;
+  });
+}
+if (false && form && page === 'register') {
+  form.addEventListener('disabled-register-submit', (event) => {
+    event.preventDefault();
+    const required = ['name', 'kana', 'email', 'password', 'passwordConfirm', 'postal', 'address', 'phone'];
+    if (required.some((name) => !form.elements[name].value.trim())) return showError(form, '未入力の項目があります');
+    if (form.elements.password.value !== form.elements.passwordConfirm.value) return showError(form, 'パスワードが一致しません');
+    if (!form.elements.terms.checked) return showError(form, '利用規約・プライバシーポリシーに同意してください');
+    const purpose = form.querySelector('input[name="purpose"]:checked');
+    if (!purpose) return showError(form, '香りを選ぶときに大切にしたいことを選択してください');
+    const members = JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]');
+    members.push({ id: `INIMU-${String(members.length + 1).padStart(4, '0')}`, name: form.elements.name.value.trim(), kana: form.elements.kana.value.trim(), email: form.elements.email.value.trim(), phone: form.elements.phone.value.trim(), postal: form.elements.postal.value.trim(), address: form.elements.address.value.trim(), purpose: purpose.value, registeredAt: new Date().toISOString(), demo: true });
+    localStorage.setItem('inimuDemoMembers', JSON.stringify(members));
+    void 0;
+  });
+}
+*/
+if (form && page === 'register') {
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const required = ['name', 'kana', 'email', 'password', 'passwordConfirm', 'postal', 'address', 'phone'];
+    if (required.some((name) => !form.elements[name].value.trim())) return showError(form, '未入力の項目があります');
+    if (form.elements.password.value !== form.elements.passwordConfirm.value) return showError(form, 'パスワードが一致しません');
+    if (!form.elements.terms.checked) return showError(form, '利用規約・プライバシーポリシーに同意してください');
+    const purpose = form.querySelector('input[name="purpose"]:checked');
+    if (!purpose) return showError(form, '香りを選ぶときに大切にしたいことを選択してください');
+    const members = JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]');
+    members.push({ id: `INIMU-${String(members.length + 1).padStart(4, '0')}`, name: form.elements.name.value.trim(), kana: form.elements.kana.value.trim(), email: form.elements.email.value.trim(), phone: form.elements.phone.value.trim(), postal: form.elements.postal.value.trim(), address: form.elements.address.value.trim(), purpose: purpose.value, registeredAt: new Date().toISOString(), demo: true });
+    localStorage.setItem('inimuDemoMembers', JSON.stringify(members));
+    window.location.href = '/register/complete.html';
   });
 }
 if (form && page === 'forgot') {
