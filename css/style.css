@@ -2322,6 +2322,7 @@ body:has(.wayfinding) .site-header__logo::after { position: absolute; top: calc(
     line-height: 1.7;
   }
 }
+.learning-note{max-width:1104px;margin:0 auto;padding:16px 48px 22px;border-top:1px solid #dedbd4;background:#fbfaf7;color:#55544f;font-size:.68rem;line-height:1.8;letter-spacing:.04em}.site-footer + .learning-note{margin-top:0}@media (max-width:760px){.learning-note{padding:14px 18px 18px;font-size:.64rem}}
 body:has(.wayfinding) .site-footer__inner{grid-template-columns:1fr auto;align-items:start;gap:48px;padding:58px 0 26px}body:has(.wayfinding) .site-footer__company{justify-self:end}body:has(.wayfinding) .site-footer__company a{color:#f2f1ed;font-size:.72rem;letter-spacing:.12em;text-decoration:none}body:has(.wayfinding) .site-footer__brand p{margin-top:18px}body:has(.wayfinding) .site-footer__copyright{grid-column:1 / -1}
 
 @media (min-width: 768px) and (max-width: 1100px) {
