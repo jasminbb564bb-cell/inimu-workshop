@@ -97,9 +97,10 @@ const navigation = document.querySelector('.site-nav');
 const mainScript = document.querySelector('script[src$="js/main.js"]');
 const siteRoot = mainScript ? new URL('./', new URL(mainScript.getAttribute('src'), window.location.href)).href : './';
 const isTopPage = Boolean(document.querySelector('.wayfinding'));
+if (!isTopPage) document.querySelectorAll('.site-footer').forEach((footer) => footer.remove());
 const footerBrand = isTopPage ? '<span class="site-footer__logo">inimu</span>' : `<a class="site-footer__logo" href="${siteRoot}">inimu</a>`;
 document.querySelectorAll('.site-footer').forEach((footer) => {
-  footer.innerHTML = `<div class="site-footer__inner"><div class="site-footer__brand">${footerBrand}<p>香りを買う。<br>香りをつくる。</p></div><nav class="site-footer__group" aria-label="メインナビゲーション"><p class="site-footer__label">EXPLORE</p><ul class="site-footer__nav"><li><a href="${new URL('shop/', siteRoot)}">SHOP</a></li><li><a href="${new URL('experience/', siteRoot)}">EXPERIENCE</a></li><li><a href="${new URL('blog/', siteRoot)}">BLOG</a></li><li><a href="${new URL('experience/#access', siteRoot)}">ACCESS</a></li></ul></nav><nav class="site-footer__group" aria-label="サポートナビゲーション"><p class="site-footer__label">INFORMATION</p><ul class="site-footer__nav"><li><a href="${new URL('login/', siteRoot)}">LOGIN</a></li><li><a href="${new URL('experience/#faq', siteRoot)}">FAQ</a></li><li><a href="${new URL('shopping-guide/', siteRoot)}">SHOPPING GUIDE</a></li><li><a href="${new URL('legal/', siteRoot)}">PRIVACY</a></li><li><a href="${new URL('legal/', siteRoot)}">TERMS</a></li></ul></nav><p class="site-footer__copyright">© inimu</p></div>`;
+  footer.innerHTML = `<div class="site-footer__inner"><div class="site-footer__brand"><span class="site-footer__logo">inimu</span><p>〒111-0032<br>東京都台東区浅草2丁目1-5</p></div><div class="site-footer__company"><a href="https://kyarainnovate.jp/company/" target="_blank" rel="noopener noreferrer">会社概要 ↗</a></div><p class="site-footer__copyright">© inimu</p></div>`;
 });
 const loginRegister = null;
 if (loginRegister && !loginRegister.querySelector('.login-register__welcome')) {
