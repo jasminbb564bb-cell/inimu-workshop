@@ -4,3 +4,20 @@ img[src*="products/hatenko.png"]{content:url("../images/hatenko.png")}
 .brand-strip figure:first-child{height:auto;aspect-ratio:1252 / 747;background:transparent}
 .cover-sub:before{content:"中川 恵美子";display:block;margin-bottom:6px;color:var(--ink);font-size:13px;letter-spacing:.08em}
 .kanji span small{display:block;font-size:9px;color:var(--muted);margin-top:3px}.survey-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:35px;border-block:1px solid var(--line);padding:18px 0}.survey-steps div{font-size:11px;line-height:1.7}.survey-steps b{display:block;color:var(--accent);font:600 10px Arial;letter-spacing:.12em;margin-bottom:6px}.compact{padding-top:12px}.web-block{margin-top:30px}.web-block>p{max-width:780px}.web-block .top-node{margin-top:22px}.learning-note{max-width:100%;margin:0;padding:14px 76px 18px;border-top:1px solid var(--line);background:var(--paper);color:#55544f;font-size:10px;line-height:1.8;letter-spacing:.03em}@media(max-width:760px){.learning-note{padding:12px 28px 16px;font-size:9px}}
+.web-block .branch:before{left:27.5%;width:45%}
+.web-block .branch:after{content:"";position:absolute;left:50%;top:0;width:1px;height:22px;background:var(--ink)}.web-block .branch>div:before{top:-32px;height:32px}
+
+/* Proposal preview layout corrections: PAGE 5 / PAGE 6 */
+.web-block .branch:before{left:calc(27.5% - 9px);width:calc(45% + 18px)}
+.web-block .branch:after{left:50%;top:0;width:1px;height:22px}
+.web-block .branch>div:before{left:50%;top:-32px;height:32px;transform:translateX(-50%)}
+.kanji{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:25px 0}
+.kanji span{width:100%;min-width:0;min-height:78px;height:auto;padding:8px 4px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;overflow:hidden}
+.kanji span small{display:block;min-width:0;max-width:100%;margin-top:7px;font-size:9px;line-height:1.35;white-space:normal;overflow-wrap:anywhere;word-break:break-word;text-align:center}
+
+/* Readability and alignment refinements */
+:root{--muted:#5f5e59}
+.note,.bottom-note{font-size:13px!important;color:#5f5e59}
+.hypo-list p,.verify-flow span,.schedule span,.branch small,.data-note{font-size:13px;color:#5f5e59}
+.signature-line{width:100%;}
+.data-note{margin:0 0 10px;line-height:1.6!important}
