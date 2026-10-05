@@ -21,3 +21,6 @@ img[src*="products/hatenko.png"]{content:url("../images/hatenko.png")}
 .hypo-list p,.verify-flow span,.schedule span,.branch small,.data-note{font-size:13px;color:#5f5e59}
 .signature-line{width:100%;}
 .data-note{margin:0 0 10px;line-height:1.6!important}
+
+/* PAGE 9 heading: keep the Japanese phrase intact */
+#p9 h2{font-size:clamp(26px,3.2vw,40px);white-space:nowrap;word-break:keep-all;overflow-wrap:normal}
