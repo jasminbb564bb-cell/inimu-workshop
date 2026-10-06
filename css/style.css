@@ -2807,3 +2807,59 @@ body:has(.wayfinding) .site-footer__inner{grid-template-columns:1fr auto;align-i
     line-height: 1.7;
   }
 }
+
+.shop-brand-card {
+  flex: 0 0 32%;
+}
+
+.shop-brand-card > a:first-child {
+  display: block;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.shop-brand-card__official {
+  display: inline-block;
+  margin-top: 10px;
+  color: #666;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+.shop-brand-card__official:hover {
+  color: #1a1a1a;
+}
+
+.shop-brand-card > a:first-child .shop-brand-track__image img {
+  object-fit: contain;
+}
+
+.story-page .story-hero {
+  object-fit: contain;
+  object-position: center;
+}
+
+.story-official-link {
+  display: inline-block;
+  margin-top: 16px;
+  color: #65615a;
+  font-size: .82rem;
+  line-height: 1.8;
+  text-decoration: none;
+  border-bottom: 1px solid #aaa59d;
+  padding-bottom: 4px;
+}
+
+.story-official-link:hover {
+  color: #292824;
+}
+
+/* UX refinements: quiet language and next-step links */
+.language-switch { display: flex; gap: 6px; align-items: center; margin-left: 22px; color: #8a857c; font: .68rem Inter, sans-serif; letter-spacing: .12em; white-space: nowrap; }
+.language-switch a { color: inherit; text-decoration: none; }
+.language-switch a[aria-current="true"] { color: #292824; }
+.shop-brand-card { flex: 0 0 32%; }
+.shop-brand-card > a:first-child { display: block; color: #1a1a1a; text-decoration: none; }
+.shop-brand-card__official { display: inline-block; margin-top: 10px; color: #666; font-size: .75rem; text-decoration: none; }
+.story-link--secondary { margin-left: 22px; }
+@media (max-width:760px) { .language-switch { margin-left: 12px; } .shop-brand-card { flex-basis: 32%; } .story-link--secondary { display: block; margin: 14px 0 0; } }

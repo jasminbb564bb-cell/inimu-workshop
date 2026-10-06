@@ -344,3 +344,88 @@ if (form && page === 'forgot') {
     form.innerHTML = '<p class="success-message">ÂÜçË®≠ÂÆöÁî®„É°„Éº„É´„ÇíÈÄÅ‰ø°„Åó„Åæ„Åó„ÅüÔºà„Éá„É¢Ôºâ</p><a class="text-link" href="../login/">„É≠„Ç∞„Ç§„É≥„Å∏Êàª„Çã ‚Üí</a>';
   });
 }
+
+/* Quiet JP / EN wayfinding for the primary pages. */
+(() => {
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get('lang') === 'en' ? 'en' : 'ja';
+  const switcher = document.querySelector('.language-switch');
+  if (!switcher) return;
+  switcher.querySelectorAll('[data-lang]').forEach((link) => {
+    link.setAttribute('aria-current', link.dataset.lang === lang ? 'true' : 'false');
+  });
+  if (lang !== 'en') return;
+  const body = document.body;
+  const replacements = body.classList.contains('experience-page') ? [
+    ['.experience-hero h1', 'Make your scent.\nExperience it.'],
+    ['.experience-hero__copy > p:not(.section-label)', 'Touch Japanese land and materials in Asakusa.\nChoose, blend, and make your own scent.'],
+    ['#basic-information-title', 'Before you reserve'],
+    ['#faq-title', 'FAQ before booking'],
+    ['#access-title', 'inimu Asakusa'],
+    ['#reservation-title', 'Check the experience and reserve.'],
+    ['.reservation-source', 'Reservations are handled by Jalan.net ? (online card payment)']
+  ] : body.classList.contains('shop-page') ? [
+    ['#shop-title', 'Choose your scent.'],
+    ['#scent-title', 'Choose by scent'],
+    ['#item-title', 'Choose by item'],
+    ['#brand-title', 'Choose by brand'],
+    ['#make-scent-title', 'Not only choose. Make.']
+  ] : body.classList.contains('story-page') ? [
+    ['.story-page .site-nav a:nth-child(1)', 'SHOP'],
+    ['.story-page .site-nav a:nth-child(2)', 'EXPERIENCE'],
+    ['.story-page .story-link--secondary', 'Experience this scent ?']
+  ] : [
+    ['.wayfinding__title-ja', 'Choose Japanese scents. Make your own.'],
+    ['.way-card--shop .way-card__description', 'Browse and buy scents'],
+    ['.way-card--experience .way-card__description', 'Make and experience your own scent']
+  ];
+  replacements.forEach(([selector, text]) => {
+    const node = document.querySelector(selector);
+    if (node) node.textContent = text;
+  });
+})();
+
+/* Complete primary-page language layer with persistent selection. */
+(() => {
+  const switcher = document.querySelector('.language-switch');
+  if (!switcher) return;
+  const queryLang = new URLSearchParams(location.search).get('lang');
+  const lang = queryLang === 'en' || queryLang === 'ja' ? queryLang : (localStorage.getItem('inimuLang') || 'ja');
+  localStorage.setItem('inimuLang', lang);
+  switcher.querySelectorAll('[data-lang]').forEach((link) => {
+    link.setAttribute('aria-current', link.dataset.lang === lang ? 'true' : 'false');
+    link.addEventListener('click', () => localStorage.setItem('inimuLang', link.dataset.lang));
+  });
+  if (lang !== 'en') return;
+  const maps = {
+    home: {
+      'ì˙ñ{ÇÃçÅÇËÇÅAëIÇ‘ÅBÇ¬Ç≠ÇÈÅB':'Choose Japanese scents. Make your own.', 'FRAGRANCE STORE / PERFUME WORKSHOP':'FRAGRANCE STORE / PERFUME WORKSHOP', 'çÅÇËÇÃè§ïiÇíTÇ∑ÅEîÉÇ§':'Browse and buy scents', 'çÅÇËÇÇ¬Ç≠ÇÈÅEëÃå±Ç∑ÇÈ':'Make and experience your own scent'
+    },
+    shop: {
+      'çÅÇËÇÃè§ïiÇíTÇ∑ÅEîÉÇ§':'Choose a scent.','çÅÇËÇ©ÇÁëIÇ‘':'Choose by scent','ÉAÉCÉeÉÄÇ©ÇÁíTÇ∑':'Choose by item','ÉuÉâÉìÉhÇ©ÇÁíTÇ∑':'Choose by brand','è§ïiàÍóó':'All items','êVíÖè§ïi':'New items','ëIÇ‘ÇæÇØÇ≈Ç»Ç≠ÅAÇ¬Ç≠ÇÈÅB':'Not only choose. Make.','12éÌóﬁÇ©ÇÁ4éÌóﬁÇëIÇ—ÅA':'Choose four from twelve scents,','é©ï™ÇæÇØÇÃçÅÇËÇ÷ÅB':'and make your own scent.','EXPERIENCE Å®':'EXPERIENCE Å®','HATENKOÇÃê¢äEÇå©ÇÈ ?':'See the world of HATENKO ?','çÅÇËÇãLâØÇ…écÇ∑çÅêÖ':'A fragrance to remember'
+    },
+    experience: {
+      'çÅÇËÇÇ¬Ç≠ÇÈÅE':'Make your scent.','ëÃå±Ç∑ÇÈÅB':'Experience it.','êÛëêÇ≈ÅAì˙ñ{ÇÃìyínÇ∆ëfçﬁÇ©ÇÁê∂Ç‹ÇÍÇΩçÅÇËÇ…êGÇÍÇÈÅB':'Touch scents born from Japanese land and materials in Asakusa.','çÅÇËÇëIÇ—ÅAëgÇ›çáÇÌÇπÅAé©ï™ÇæÇØÇÃçÅêÖÇÇ¬Ç≠ÇÈéûä‘ÅB':'Choose and blend scents to make your own perfume.','ó\ñÒëOÇ…ämîFÇ∑ÇÈ Å´':'Before you reserve Å´','çÅÇËÇëIÇ‘Ç∆Ç±ÇÎÇ©ÇÁÅAëÃå±ÅB':'The experience begins with choosing a scent.','èâêSé“Ç≈Ç‡ÉXÉ^ÉbÉtÇÃàƒì‡Çï∑Ç´Ç»Ç™ÇÁÅAñ≥óùÇ»Ç≠äyÇµÇﬂÇ‹Ç∑ÅB':'Beginners are welcome; staff guide you through the experience.','ó\ñÒëOÇ…ímÇ¡ÇƒÇ®Ç´ÇΩÇ¢Ç±Ç∆':'Before you reserve','óøã‡':'Price','Ç®Ç–Ç∆ÇËól 5,500â~':'JPY 5,500 per person','èäóvéûä‘':'Duration','ñÒ1éûä‘':'About 1 hour','äJç√ì˙éû':'äJç√ì˙éû','çÅÇË':'Scents','12éÌóﬁÇ©ÇÁ4éÌóﬁÇëIë':'Choose 4 from 12 scents','éùÇøãAÇË':'Take home','ÉIÅ[ÉhÉgÉèÉå10ml 1å¬':'One 10ml eau de toilette','ëIÇÒÇæçÅóø4éÌÅiäe10mlÅj':'Four selected scent materials (10ml each)','éÛït':'Check-in','äJén10ï™ëOÇ‹Ç≈Ç…1FéÛïtÇ÷':'Check in at the 1F reception 10 minutes before','éxï•ï˚ñ@':'Payment','Ç∂Ç·ÇÁÇÒnetÉIÉìÉâÉCÉìÉJÅ[Éhåàçœ':'Jalan.net online card payment','éQâ¡':'Participation','èâêSé“äΩå}ÅEàÍêléQâ¡ÇÕó\ñÒÉyÅ[ÉWÇ≈ämîF':'Beginners welcome; solo participation: confirm when booking','éùÇøï®':'What to bring','ó\ñÒÉyÅ[ÉWÇ≈ämîF':'Please confirm when booking','éqÇ«Ç‡':'Children','éQâ¡èåèÇÕó\ñÒÉyÅ[ÉWÇ≈ämîF':'Please confirm eligibility when booking','âpåÍëŒâû':'Language support','ëŒâûèÛãµÇÕó\ñÒÉyÅ[ÉWÇ≈ämîF':'Language support: Please confirm when booking','ó\ñÒëOÇÃÇÊÇ≠Ç†ÇÈéøñ‚':'FAQ before booking','ëÃå±ì‡óeÇämîFÇµÇƒó\ñÒÇ∑ÇÈÅB':'Review the experience and reserve.','ó\ñÒÇÕÇ∂Ç·ÇÁÇÒnetÇ≈éÛÇØïtÇØÇƒÇ¢Ç‹Ç∑ ?ÅiÉIÉìÉâÉCÉìÉJÅ[ÉhåàçœÅj':'Reservations are handled by Jalan.net ? (online card payment)','Ç∂Ç·ÇÁÇÒnetÇ≈ó\ñÒ ?':'Reserve on Jalan.net ?','Google MapsÇ≈å©ÇÈ ?':'View on Google Maps ?','inimuêÛëêìX':'inimu Asakusa'
+    },
+    story: {
+      'çÅÇËÇ≈ÅAécÇ∑ÅB':'Leave a memory through scent.','ì˙ñ{ÇÃìyínÇ∆êAï®':'Japanese land and plants','ìyínÇÃó¨ÇÍ':'A flow of places','è§ïiàÍóó':'Products','Ç±ÇÃçÅÇËÇÃè§ïiÇå©ÇÈ ?':'See products in this scent ?','Ç±ÇÃçÅÇËÇëÃå±Ç∑ÇÈ ?':'Experience this scent ?','îjìVçrÇ∆ÇÕ':'What HATENKO means','ïÇê¢äGÇ∆çÅÇË':'Ukiyo-e and scent','8éÌóﬁÇÃçÅÇË':'Eight scents','HATENKOÇÃê¢äEÇå©ÇÈ ?':'See the world of HATENKO ?','ì˙ñ{äeínÇÃî_éYï®Ç‚êAï®ÇäàÇ©ÇµÅAçÅÇËÇí ÇµÇƒínàÊÇÃèzä¬ÇÇ¬Ç≠ÇÈWANOWAÅBåˆéÆÉTÉCÉgÇ≈ÇÕÅAìyínÇ∆ëfçﬁÇÃëgÇ›çáÇÌÇπÇè–âÓÇµÇƒÇ¢Ç‹Ç∑ÅB':'WANOWA uses produce and plants from across Japan to create local circulation through scent. Its stories connect each place with its materials.'
+    }
+  };
+  const key = document.body.classList.contains('shop-page') ? 'shop' : document.body.classList.contains('experience-page') ? 'experience' : document.body.classList.contains('story-page') ? 'story' : 'home';
+  const map = maps[key];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes = []; let node;
+  while (node = walker.nextNode()) nodes.push(node);
+  nodes.forEach((textNode) => { const value = textNode.nodeValue.trim(); if (map[value]) textNode.nodeValue = textNode.nodeValue.replace(value, map[value]); });
+})();
+
+/* Fill the remaining high-intent EXPERIENCE content in English. */
+(() => {
+  if (localStorage.getItem('inimuLang') !== 'en' || !document.body.classList.contains('experience-page')) return;
+  const workshop = document.querySelector('.workshop-flow');
+  if (workshop) workshop.innerHTML = '<li><span>01</span><strong>Choose scents</strong><small>Choose four scents from twelve materials.</small></li><li><span>02</span><strong>Blend</strong><small>Combine the selected scents.</small></li><li><span>03</span><strong>Make your scent</strong><small>Finish your original eau de toilette.</small></li><li><span>04</span><strong>Take it home</strong><small>Take home your perfume and four scent materials.</small></li>';
+  const faq = document.querySelector('.faq-list');
+  if (faq) faq.innerHTML = '<details><summary>Can beginners join?</summary><p>Yes. Staff guide you through choosing scents and the workshop.</p></details><details><summary>How long does it take?</summary><p>About one hour. Please check in 10 minutes before the start.</p></details><details><summary>What can I take home?</summary><p>One 10ml eau de toilette and four selected scent materials.</p></details><details><summary>How do I reserve?</summary><p>Check availability and reserve through the Jalan.net booking page.</p></details><details><summary>Language support</summary><p>Language support: Please confirm when booking.</p></details>';
+  const access = document.querySelector('.access-layout__copy');
+  if (access) { const ps = access.querySelectorAll('p'); if (ps[0]) ps[0].innerHTML = '2-1-5 Asakusa, Taito-ku, Tokyo 111-0032'; if (ps[1]) ps[1].innerHTML = 'Tokyo Metro Ginza Line Asakusa Station: 2 min walk from Exit 6<br>Toei Asakusa Line: 5 min walk from Exit A5<br>Tobu Skytree Line: 2 min walk from North Gate'; if (ps[2]) ps[2].innerHTML = 'Hours 10:30?18:00<br>Closed Mondays (or the following Tuesday when Monday is a holiday)'; }
+})();
