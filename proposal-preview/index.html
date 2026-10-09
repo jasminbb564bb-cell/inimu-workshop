@@ -20,3 +20,17 @@
 
 
 
+<script>
+const concept=document.querySelector('#p2');
+concept.querySelector('header h2').textContent='企画の背景';
+concept.querySelector('header p').innerHTML='価値を減らさず、<br>見せる順番を整える。';
+const conceptCols=concept.querySelectorAll('.two-col>div');
+conceptCols[0].innerHTML='<p class="label">BACKGROUND / ISSUE</p><p>inimuには、商品、ワークショップ、素材、地域、職人、ブランドストーリーなど、伝えるべき価値が多くあります。情報が多いこと自体が問題ではありません。課題は、利用者が最初に何を見ればよいか、次にどこへ進めばよいかを判断しにくいことです。</p><p class="note">「読む」より「見て、選んで、すぐ動ける」構造へ。情報の優先順位と提示順序を整理します。</p>';
+conceptCols[1].innerHTML='<p class="label">DESIGN CONCEPT / 引き算のUX</p><p><strong>SHOP＝買う</strong><br><strong>EXPERIENCE＝つくる</strong></p><p>入口を2つに整理し、目的に合う情報から段階的に見せる。価値を減らすのではなく、見せる順番を整理することで、商品・体験・問い合わせへ自然につなげます。</p>';
+const cause=document.querySelector('#p3');
+cause.querySelector('header h2').textContent='課題定義';
+cause.querySelector('header p').innerHTML='予約を増やす前に、<br>予約を邪魔している迷いを減らす。';
+cause.querySelector('.cause-grid>div:first-child').innerHTML='<p class="label">FACT / OBSERVATION</p><p>体験の満足度やブランドの価値はある。では、なぜ最初の一歩で予約につながりにくいのか。</p><p>現在の課題は情報量ではなく、情報の優先順位と提示順序です。</p><div class="cause-flow"><span>情報が多い</span><b>↓</b><span>何を最初に見ればよいか分かりにくい</span><b>↓</b><span>選択負荷が高まる</span><b>↓</b><span>予約導線が弱くなる</span></div>';
+cause.querySelector('.quiet-box').innerHTML='<p class="label">INSIGHT / HYPOTHESIS</p><p>情報が一度に並ぶと、認知負荷が高まり、選択に必要な時間が増えます。その迷いが離脱につながり、予約への動きを弱める可能性があります。</p><p>「何が良いか」だけでなく「次に何をすればよいか」を明確にし、固有の価値を適切な順番で届ける設計が必要です。</p>';
+cause.querySelector('.bottom-note').innerHTML='<strong>課題の読み方</strong><br>情報を足すのではなく、入口と順番を整理する。引き算のUXで迷いを減らし、必要な情報が必要な人に届く状態をつくります。';
+</script>
