@@ -105,3 +105,32 @@ img[src*="products/hatenko.png"]{content:url("../images/hatenko.png")}
 .future-expansion .expansion-flow{grid-template-columns:minmax(145px,1fr) 54px minmax(235px,1.35fr) 54px minmax(235px,1.35fr) 54px minmax(165px,1fr);width:100%;max-width:100%;padding:30px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-left:0;border-right:0}.future-expansion .expansion-flow>div{min-height:145px;padding:0 22px;border:0!important}.future-expansion .expansion-flow .label{height:36px;margin-bottom:17px;white-space:nowrap;font-size:10px}.future-expansion .expansion-flow>i{font-size:0!important;color:var(--accent);border:0!important;display:flex!important;align-items:center;justify-content:center}.future-expansion .expansion-flow>i:after{content:"→";font-size:28px;line-height:1;display:block}.future-expansion .expansion-flow>i:nth-of-type(4){display:none!important}
 /* 課題定義と引き算のUXの補助表現 */
 .cause-flow{display:grid;gap:7px;margin-top:22px;padding:16px 20px;border-block:1px solid var(--line);text-align:center}.cause-flow span{font-size:12px}.cause-flow b{color:var(--accent);font-weight:400}
+.hypo-list{border-right:1px solid var(--line)}
+@media(min-width:761px){.brand-strip{grid-template-columns:1fr 1fr;grid-template-areas:"copy copy" "left right"}.brand-strip>div{grid-area:copy}.brand-strip>figure:first-child{grid-area:left}.brand-strip>figure:last-child{grid-area:right}}
+.brand-strip{display:block;align-items:initial}
+.brand-strip .signature-heading{grid-area:heading;text-align:left}
+.brand-strip .signature-heading h3{text-align:center;margin:0 0 14px}
+.brand-strip .signature-common{margin:0 0 16px;text-align:center}
+.signature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px;align-items:start}
+.signature-item{display:grid;grid-template-rows:auto auto auto;gap:10px;min-width:0;align-items:start}
+.signature-item h4{margin:0;font-size:13px;font-weight:400;letter-spacing:.08em}
+.signature-item>p{margin:0;color:var(--muted);line-height:1.8}
+.signature-item figure{width:100%;aspect-ratio:1.6;margin:0;overflow:hidden;background:#e8e5df}
+.signature-item figure img{width:100%;height:100%;object-fit:contain;object-position:center}
+@media(max-width:760px){.brand-strip .signature-heading{text-align:left}.signature-grid{grid-template-columns:1fr;gap:25px}.signature-item figure{aspect-ratio:1.6}}
+
+/* UX philosophy refinements for the proposal preview only. */
+.quiet-emphasis{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);font-size:16px!important;line-height:1.9!important;letter-spacing:.03em;color:var(--ink)}
+.cause-contrast{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin:28px 0;padding:18px 0;border-block:1px solid var(--line);text-align:center;font-size:13px!important;line-height:1.6!important}
+.cause-contrast b{color:var(--accent);font-size:20px;font-weight:400}
+.hypo-list .hypo-lead{grid-column:1 / -1;min-height:0;padding:8px 0 28px;border-bottom:1px solid var(--line)}
+.hypo-list .hypo-lead h3{font-size:20px;line-height:1.7;margin:12px 0}
+.hypo-list .hypo-lead p{max-width:680px}
+.verification-list{margin:8px 0;padding-left:20px;color:var(--muted);font-size:14px;line-height:2}
+.simulation-track{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:0}
+.simulation-track>div{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 28px}
+.simulation-track>div+div{border-left:1px solid var(--line)}
+.track-label{margin-bottom:8px;color:var(--accent);font:600 10px Arial,sans-serif;letter-spacing:.14em}
+.simulation-track b{font-size:13px;font-weight:400;text-align:center}
+.simulation-track i{color:var(--accent);font-style:normal;line-height:1}
+@media(max-width:760px){.cause-contrast{grid-template-columns:1fr;gap:8px}.cause-contrast b{transform:rotate(90deg)}.simulation-track{grid-template-columns:1fr}.simulation-track>div{padding:18px 0}.simulation-track>div+div{border-left:0;border-top:1px solid var(--line)}}

@@ -34,3 +34,48 @@ cause.querySelector('.cause-grid>div:first-child').innerHTML='<p class="label">F
 cause.querySelector('.quiet-box').innerHTML='<p class="label">INSIGHT / HYPOTHESIS</p><p>情報が一度に並ぶと、認知負荷が高まり、選択に必要な時間が増えます。その迷いが離脱につながり、予約への動きを弱める可能性があります。</p><p>「何が良いか」だけでなく「次に何をすればよいか」を明確にし、固有の価値を適切な順番で届ける設計が必要です。</p>';
 cause.querySelector('.bottom-note').innerHTML='<strong>課題の読み方</strong><br>情報を足すのではなく、入口と順番を整理する。引き算のUXで迷いを減らし、必要な情報が必要な人に届く状態をつくります。';
 </script>
+
+<script>
+(() => {
+  const strip = document.querySelector('#p2 .brand-strip');
+  if (!strip) return;
+  strip.innerHTML = '<div class="signature-heading"><span class="label">TWO SIGNATURES</span><h3>inimuをかたちづくる、2つの香り。</h3><p class="signature-common">ブランドを商品一覧の一部ではなく、最初に意味が伝わる入口として配置します。</p></div><div class="signature-grid"><div class="signature-item"><h4>01 HATENKO</h4><p>伝統と革新で、日常を揺らす香り。</p><figure><img src="../images/hatenko.png" alt="HATENKO"></figure></div><div class="signature-item"><h4>02 WANOWA</h4><p>土地と素材から生まれる、記憶に残る香り。</p><figure><img src="../images/products/wanowa-noto-hiba-editorial.png" alt="WANOWA"></figure></div></div>';
+})();
+</script>
+
+<script>
+(() => {
+  const setHTML = (selector, html) => {
+    const el = document.querySelector(selector);
+    if (el) el.innerHTML = html;
+  };
+
+  // CONCEPT: preserve the existing axis while adding the experience-design idea quietly.
+  setHTML('#p2 header p', '予約まではシンプルに。<br>体験後は深く知る。');
+  setHTML('#p2 .two-col>div:first-child', '<p class="label">BACKGROUND / ISSUE</p><p>inimuには、商品、ワークショップ、素材、地域、職人、ブランドストーリーなど、伝えるべき価値が多くあります。課題は情報量そのものではなく、必要な情報へ自然にたどり着く順番を設計することです。</p><p class="quiet-emphasis">情報を削るのではなく、顧客が自然に理解し、納得して選べる情報体験を設計する。</p>');
+  setHTML('#p2 .two-col>div:nth-child(2)', '<p class="label">APPROACH / INFORMATION EXPERIENCE</p><p><strong>SHOP＝買う</strong><br><strong>EXPERIENCE＝つくる</strong></p><p>目的に合わせて情報を段階的に見せ、商品・体験・問い合わせへ自然につなげます。</p><p class="note">情報を減らすのではなく、情報との出会い方を設計する。</p>');
+
+  // CAUSE: the issue is ordering and priority, not volume alone.
+  setHTML('#p3 .cause-grid>div:first-child', '<p class="label">FACT / OBSERVATION</p><p>体験の満足度やブランドの価値はある。では、なぜ最初の一歩で予約につながりにくいのか。</p><p>課題は情報量そのものではなく、情報の優先順位と提示順序が曖昧なことです。</p><p class="cause-contrast"><span>企業が伝えたい順番</span><b>≠</b><span>顧客が知りたくなる順番</span></p><p class="note">良い情報が多いことと、選びやすいことは同じではありません。</p>');
+  setHTML('#p3 .quiet-box', '<p class="label">INSIGHT / HYPOTHESIS</p><p>情報を一度に並べるのではなく、最初に目的を選び、次に必要な情報へ進める。順番を整えることで、選択に必要な迷いを減らします。</p><p>固有の価値を削らず、顧客が知りたくなる順番で届ける設計が必要です。</p>');
+  setHTML('#p3 .bottom-note', '<strong>課題の読み方</strong><br>情報を足す前に、入口と順番を整理する。良い情報を、選びやすい体験として届けます。');
+
+  // HYPOTHESIS: SHOP / EXPERIENCE as choice architecture.
+  setHTML('#p4 .hypo-list', '<div class="hypo-lead"><b>CHOICE ARCHITECTURE</b><h3>無駄な迷いは減らす。でも、自分で選ぶための一瞬は残す。</h3><p>自動的に振り分けるのではなく、ユーザー自身が目的に合う入口を選びます。</p></div><div><b>SHOP</b><h3>香りを選ぶ・買う</h3><p>選択肢を絞ることで認知負荷を軽減し、香り・商品・ブランドの情報へ進みます。</p></div><div><b>EXPERIENCE</b><h3>香りをつくる・体験する</h3><p>体験の概要から予約へ。自分で選ぶ余地を残し、納得して進めます。</p></div><div><b>DISCOVERY</b><h3>もう一方にも気づける</h3><p>選ばなかった入口の存在にも自然に気づける構造にします。</p></div>');
+  setHTML('#p4 .bottom-note', '選択肢を絞りながら、選ぶ主体はユーザーに残す。効果は今後のユーザーテストとアクセスデータで検証します。');
+
+  // IDEA / Web structure.
+  setHTML('#p5 .web-block>p:last-of-type', '自動的に振り分けない。どちらを選ぶかはユーザー自身が決める。情報を減らすのではなく、必要な情報と出会う順番を設計します。');
+  setHTML('#p5 .signature-line', '<b>MAKE YOUR SCENT</b><span>選ぶだけでなく、つくる。　SHOP → EXPERIENCE</span>');
+
+  // VERIFICATION: keep this as a testable hypothesis, not a guaranteed outcome.
+  setHTML('#p7 .verify-flow', '<div><b>SHOP / EXPERIENCE</b><span>選択構造</span></div><i>→</i><div><b>Web上の行動</b><span>選択率・遷移</span></div><i>→</i><div><b>ブランドとの関係</b><span>認知・再訪・予約</span></div>');
+  setHTML('#p7 .two-col>div:first-child', '<p>この選択構造がブランド認知・再訪意向・予約行動に与える影響は、今後ユーザーテストやアクセス解析で検証します。</p><p class="note">二択が必ず成果を高めるとは断定せず、選択のしやすさとその後の行動を確認します。</p>');
+  setHTML('#p7 .two-col>div:nth-child(2)', '<p class="label">検証項目</p><ul class="verification-list"><li>SHOP / EXPERIENCE の選択率</li><li>EXPERIENCE → 予約ページ遷移率</li><li>予約完了率</li><li>体験後アンケート・再訪意向</li><li>選ばなかったサービスの認知</li></ul>');
+  setHTML('#p7 .bottom-note', '既存の口コミ・アンケート・Web上の行動を組み合わせ、仮説を段階的に確かめます。');
+
+  // SIMULATION: make the information-order change visible.
+  setHTML('#p9 .data-flow', '<div class="simulation-track"><div><span class="track-label">BEFORE</span><b>複数の情報</b><i>↓</i><b>読む</b><i>↓</i><b>探す</b><i>↓</i><b>比較する</b><i>↓</i><b>予約</b></div><div><span class="track-label">AFTER</span><b>TOP</b><i>↓</i><b>SHOP / EXPERIENCE</b><i>↓</i><b>自分で選ぶ</b><i>↓</i><b>必要な情報だけを見る</b><i>↓</i><b>予約 / 購入</b></div></div>');
+  setHTML('#p9 .final', '企業が伝えたい順番ではなく、顧客が知りたくなる順番で情報を設計する。');
+})();
+</script>
