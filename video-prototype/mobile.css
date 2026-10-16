@@ -1,0 +1,11 @@
+/* Mobile (portrait phones) — Scene 01: frame shifted left so the dark wall beside the noren holds the sign, as on PC.
+   Portrait phones only. PC and Scene 03 / 04 are untouched.
+   --pan (0 = frame's left edge, .5 = centre) is driven by mobile.js from the video time. */
+@media (orientation:portrait) and (max-width:600px){
+  .scene--01{--pan:.12}
+  .scene--01 video{object-position:calc(var(--pan) * 100%) 50%}
+  /* Move the text stage exactly as object-position moves the picture, so the PC tracking stays aligned */
+  .scene--01 .stage--video{left:calc((100vw - max(100vw, 100svh * 1916 / 1080)) * var(--pan));transform:translateY(-50%)}
+  .scene--01 .shop-title{font-size:3.1cqh;letter-spacing:.78em}
+  .scene--01 .shop-brand{font-size:1.7cqh}
+}

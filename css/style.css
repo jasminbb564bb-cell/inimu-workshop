@@ -2903,3 +2903,6 @@ body:has(.wayfinding) .site-footer__inner{grid-template-columns:1fr auto;align-i
   .purchase-page .purchase-description { margin-top: 38px; }
   .purchase-page .purchase-actions { margin-top: 38px; }
 }
+
+/* Login (mobile): keep the opened header menu above the hero copy (hero children use z-index:1) */
+@media (max-width: 767px) { .login-page .site-header { position: relative; z-index: 3; } }

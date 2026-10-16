@@ -1,0 +1,13 @@
+/* Top credit preview — "unofficial portfolio" line, shown only on the settled Scene 04 after the choices.
+   Pure CSS: follows .choice.is-shown (normal playback and SKIP INTRO alike). Nothing else is restyled. */
+.credit{position:absolute;z-index:2;left:50%;bottom:max(4.4svh,env(safe-area-inset-bottom));transform:translateX(-50%);margin:0;
+  font-family:var(--mincho);font-weight:300;font-size:11px;letter-spacing:.26em;line-height:1;white-space:nowrap;
+  color:rgba(239,232,220,.56);text-shadow:0 0 8px rgba(0,0,0,.55);pointer-events:none;
+  opacity:0;transition:opacity 2s cubic-bezier(.4,0,.2,1)}
+.choice.is-shown~.credit{opacity:1;transition-delay:2.6s}
+
+/* Phone portrait: in the quiet margin under the steps */
+@media (orientation:portrait) and (max-width:600px){
+  .credit{bottom:max(2.4svh,env(safe-area-inset-bottom));font-size:10px;letter-spacing:.18em}
+}
+@media (prefers-reduced-motion:reduce){.credit{transition-duration:.01s}.choice.is-shown~.credit{transition-delay:0s}}

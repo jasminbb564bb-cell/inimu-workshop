@@ -1,0 +1,29 @@
+/* Mobile (portrait phones) — Scene 03 / 04 copy, readability-first layout.
+   PC and Scene 01 are untouched. Phrase line breaks are inserted by mobile-scene03-04.js on phones only.
+   Inside the stage, 50cqw - 50vw is the phone's left edge; cqh equals svh in portrait. */
+@media (orientation:portrait) and (max-width:600px){
+  .scene--03 .title--03,.scene--03 .lead--03,.scene--04 .title--04,.scene--04 .lead--04{left:auto;transform:none}
+  .scene--03 .body--03 p,.scene--04 .body--04 p,.scene--04 .steps li{margin-block-end:.6em}
+  .scene--03 .body--03 p:last-child,.scene--04 .notes p:last-child,.scene--04 .steps li:last-child{margin-block-end:0}
+
+  /* Scene 03 */
+  .scene--03 .title--03{right:calc(50cqw - 50vw + 6vw);top:13svh;font-size:4.4svh;letter-spacing:.2em}
+  .scene--03 .lead--03{right:calc(50cqw - 50vw + 6vw + 4.4svh + 3.6vw);top:15.6svh;font-size:1.85svh;letter-spacing:.32em}
+  .scene--03 .body--03{right:calc(50cqw - 50vw + 7vw);top:70.5svh;font-size:1.75svh;line-height:1.85;letter-spacing:.07em;color:var(--ink)}
+  /* Minimal shade under the body only; fades in with the body (same delay/duration as PC) */
+  .scene--03 .stage::before{content:"";position:absolute;left:calc(50cqw - 50vw);top:0;width:100vw;height:100svh;pointer-events:none;
+    background:linear-gradient(to top,rgba(8,6,4,.56) 0,rgba(8,6,4,.34) 22%,rgba(8,6,4,0) 36%);
+    opacity:0;transition:opacity 1.8s cubic-bezier(.4,0,.2,1)}
+  .scene--03.is-visible .stage::before{opacity:1;transition-delay:1.6s}
+
+  /* Scene 04 */
+  .scene--04 .title--04{right:calc(50cqw - 50vw + 6vw);top:7svh;font-size:4.5svh;letter-spacing:.14em}
+  .scene--04 .lead--04{right:calc(50cqw - 50vw + 6vw + 4.5svh + 3.6vw);top:8svh;font-size:1.85svh;letter-spacing:.3em}
+  .scene--04 .body--04{top:70svh;font-size:1.8svh;letter-spacing:.08em;line-height:1.8;color:var(--ink)}
+  .scene--04 .steps{right:calc(50cqw - 50vw + 7vw)}
+  .scene--04 .notes{right:calc(50cqw - 50vw + 7vw + 4 * 1.8svh * 1.8 + 3 * .6 * 1.8svh + 7vw)}
+  /* PC veil re-aimed at the phone frame, lighter: a whisper behind the title, a low shade under the steps */
+  .scene--04 .stage::before{inset:auto;left:calc(50cqw - 50vw);top:0;width:100vw;height:100svh;
+    background:radial-gradient(52vw 40svh at 86vw 20svh,rgba(9,6,3,.34),rgba(9,6,3,0) 100%),
+               linear-gradient(to top,rgba(9,6,3,.6) 0,rgba(9,6,3,.36) 24%,rgba(9,6,3,0) 38%)}
+}

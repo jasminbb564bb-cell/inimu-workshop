@@ -1,18 +1,75 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="inimu — 浅草・記憶の調香"><title>inimu — 浅草・記憶の調香</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/inimu-prototype.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="inimu — 浅草・記憶の調香">
+  <title>inimu — 浅草・記憶の調香</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300&display=swap">
+  <link rel="stylesheet" href="video-prototype/prototype.css">
+  <link rel="stylesheet" href="video-prototype/typography.css">
+  <link rel="stylesheet" href="video-prototype/mobile.css">
+  <link rel="stylesheet" href="video-prototype/mobile-scene03-04.css">
+  <link rel="stylesheet" href="video-prototype/top-choice.css">
+  <link rel="stylesheet" href="video-prototype/top-credit.css">
 </head>
-<body class="prototype is-intro"><main class="threshold" id="top">
-  <div class="architecture" aria-hidden="true"><div class="architecture__ceiling"></div><div class="architecture__beam beam--one"></div><div class="architecture__beam beam--two"></div><div class="architecture__wall wall--left"></div><div class="architecture__wall wall--right"></div><div class="architecture__floor"></div><div class="architecture__light"></div><div class="architecture__room"></div><div class="architecture__screen screen--left"></div><div class="architecture__screen screen--right"></div><div class="architecture__table"></div><div class="architecture__bottle"><span></span></div><div class="architecture__ritual"><i></i><b></b><em></em></div></div>
-  <div class="curtain curtain--left"><span></span></div><div class="curtain curtain--right"><span></span></div>
-  <header class="masthead"><a class="wordmark" href="#top" aria-label="inimu home">inimu</a><p class="masthead__meta">浅草・記憶の調香</p><button class="sound-toggle" type="button" aria-label="音を切り替える" aria-pressed="false"><span></span> sound</button></header>
-  <section class="opening" aria-label="inimu introduction"><p class="opening__eyebrow">A scent remembers a place.</p><h1>記憶の入口</h1><p class="opening__instruction">静かに、くぐる。</p><button class="enter-button" type="button"><span>enter</span><i></i></button></section>
-  <p class="scene-caption scene-caption--enter">the threshold</p><p class="scene-caption scene-caption--bottle">a scent, waiting</p><p class="scene-caption scene-caption--room">the room beyond</p>
-  <section class="choice" aria-label="行き先を選ぶ"><div class="choice__intro"><p>inimu</p><span>選ぶのは、香りか。体験か。</span></div><a class="choice-card choice-card--experience" href="experience/"><span class="choice-card__number">01</span><span class="choice-card__title">Experience</span><span class="choice-card__jp">香りをつくる</span><span class="choice-card__arrow">↗</span></a><a class="choice-card choice-card--shop" href="shop/"><span class="choice-card__number">02</span><span class="choice-card__title">Shop</span><span class="choice-card__jp">香りを選ぶ</span><span class="choice-card__arrow">↗</span></a></section>
-  <button class="skip-button" type="button">skip intro <span>→</span></button><p class="progress" aria-hidden="true"><span></span></p>
-</main><script src="js/inimu-prototype.js"></script></body></html>
+<body>
+  <button class="skip-intro" type="button" aria-label="イントロを飛ばして、行き先の選択へ">SKIP INTRO <span aria-hidden="true">↗</span></button>
+  <main class="sequence" aria-label="inimu introduction">
+    <section class="scene scene--01 is-active">
+      <video id="scene01" autoplay muted playsinline preload="auto"><source src="video-prototype/video/scene-01-02-continuous.mp4" type="video/mp4"></video>
+      <div class="stage stage--video" aria-hidden="true">
+        <div class="track" id="scene01Track">
+          <div class="type type--shop">
+            <p class="shop-title">香りの店</p>
+            <p class="shop-brand">inimu</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="transition-black" aria-hidden="true"></div>
+    <section class="scene scene--03" aria-hidden="true">
+      <img id="scene03" src="video-prototype/images/scene-03-perfume-room-final.png" alt="">
+      <div class="stage stage--image">
+        <h2 class="title title--03">香りを纏う</h2>
+        <p class="lead lead--03">記憶にふれる香り。</p>
+        <div class="body body--03">
+          <p>inimuでは、香りをただ選ぶのではなく、</p>
+          <p>日本の素材や風土に宿る静かな気配に耳を澄ませ、</p>
+          <p>自分の記憶や感情と向き合いながら、</p>
+          <p>その人だけの一本へと導いていきます。</p>
+          <p>浅草の一角で、香りと記憶がそっと重なる時間を。</p>
+        </div>
+      </div>
+    </section>
+    <section class="scene scene--04" aria-hidden="true">
+      <img id="scene04" src="video-prototype/images/scene-04-atelier-final.png" alt="">
+      <div class="stage stage--image">
+        <h2 class="title title--04">香りを重ねる</h2>
+        <p class="lead lead--04">香りを選び、重ね、整える。</p>
+        <ol class="body body--04 steps">
+          <li>一、香りの印象を選ぶ</li>
+          <li>二、好みの素材を重ねる</li>
+          <li>三、調香師とともに整える</li>
+          <li>四、名をつけて完成。</li>
+        </ol>
+        <div class="body body--04 notes">
+          <p>所要時間は約六十分。</p>
+          <p>初心者の方でも、静かに香りと向き合えます</p>
+        </div>
+      </div>
+      <nav class="choice" aria-label="行き先を選ぶ" inert>
+        <a class="choice__item" href="shop/"><span class="choice__label">01 / SHOP</span><span class="choice__jp">買う</span><span class="choice__rule" aria-hidden="true"></span></a>
+        <a class="choice__item" href="experience/"><span class="choice__label">02 / EXPERIENCE</span><span class="choice__jp">つくる</span><span class="choice__rule" aria-hidden="true"></span></a>
+      </nav>
+      <p class="credit">職業訓練校制作課題｜非公式ポートフォリオ</p>
+    </section>
+  </main>
+  <script src="video-prototype/prototype.js"></script>
+  <script src="video-prototype/mobile.js"></script>
+  <script src="video-prototype/mobile-scene03-04.js"></script>
+  <script src="video-prototype/top-choice.js"></script>
+</body>
+</html>

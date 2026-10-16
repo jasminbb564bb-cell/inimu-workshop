@@ -1,0 +1,74 @@
+/* Top choice preview — SHOP / EXPERIENCE rising over the settled Scene 04.
+   Scene 01–04 rules are untouched; this only adds the choice layer and its own faint shade. */
+.choice{--rule:rgba(239,232,220,.34);--rule-strong:rgba(239,232,220,.72);
+  position:absolute;z-index:2;left:50%;bottom:7.5svh;transform:translateX(-50%);
+  width:min(760px,58vw);display:grid;grid-template-columns:1fr 1fr;
+  font-family:var(--mincho);font-weight:300;color:var(--ink);
+  text-shadow:0 0 10px rgba(0,0,0,.55),0 0 3px rgba(0,0,0,.35);
+  pointer-events:none}
+.choice.is-shown{pointer-events:auto}
+/* Hairline that draws itself across the band */
+.choice::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--rule);transform:scaleX(0);transform-origin:50% 50%;transition:transform 2.6s cubic-bezier(.4,0,.2,1)}
+.choice.is-shown::before{transform:scaleX(1)}
+
+.choice__item{position:relative;display:flex;flex-direction:column;gap:1.1em;padding:2.4svh 3.2vw 1.2svh;color:inherit;text-decoration:none;
+  opacity:0;transform:translateY(6px);transition:opacity 2.4s cubic-bezier(.4,0,.2,1),transform 2.4s cubic-bezier(.4,0,.2,1)}
+.choice__item+.choice__item{border-left:1px solid transparent;transition:opacity 2.4s cubic-bezier(.4,0,.2,1) .5s,transform 2.4s cubic-bezier(.4,0,.2,1) .5s,border-color 2.4s ease .9s}
+.choice.is-shown .choice__item{opacity:1;transform:none}
+.choice.is-shown .choice__item+.choice__item{border-left-color:var(--rule)}
+.choice__label{font-size:11px;letter-spacing:.34em;color:var(--ink-soft);opacity:.78}
+.choice__jp{font-size:clamp(20px,1.75vw,28px);letter-spacing:.42em;line-height:1}
+/* Quiet response: a short line extends under the word, the label brightens */
+.choice__rule{display:block;width:3.2em;height:1px;background:var(--rule-strong);transform:scaleX(.28);transform-origin:0 50%;opacity:.55;transition:transform .9s cubic-bezier(.4,0,.2,1),opacity .9s ease}
+.choice__label{transition:opacity .9s ease}
+.choice__item:hover .choice__rule,.choice__item:focus-visible .choice__rule{transform:scaleX(1);opacity:1}
+.choice__item:hover .choice__label,.choice__item:focus-visible .choice__label{opacity:1}
+.choice__item:focus-visible{outline:1px solid var(--rule);outline-offset:4px}
+.choice__item:active .choice__jp{opacity:.8}
+
+/* Faint shade under the band so the copy reads over the rug; fades in with the choices, never a blackout */
+.scene--04::after{content:"";position:absolute;inset:auto 0 0 0;height:34svh;z-index:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(8,6,4,.46),rgba(8,6,4,.22) 45%,rgba(8,6,4,0));
+  opacity:0;transition:opacity 2.4s cubic-bezier(.4,0,.2,1)}
+.scene--04.has-choice::after{opacity:1}
+
+/* Phone portrait: the steps own the bottom, so the choices stand in the quiet upper-left wall, stacked for reading */
+@media (orientation:portrait) and (max-width:600px){
+  .choice{left:7vw;top:7svh;bottom:auto;transform:none;width:48vw;grid-template-columns:1fr}
+  .choice::before{transform-origin:0 50%}
+  .choice__item{padding:2.1svh 0 1.6svh;gap:.9em;border-bottom:1px solid transparent;transition:opacity 2.4s cubic-bezier(.4,0,.2,1),transform 2.4s cubic-bezier(.4,0,.2,1),border-color 2.4s ease .6s}
+  .choice__item+.choice__item{border-left:0;transition:opacity 2.4s cubic-bezier(.4,0,.2,1) .5s,transform 2.4s cubic-bezier(.4,0,.2,1) .5s,border-color 2.4s ease 1.1s}
+  .choice.is-shown .choice__item{border-bottom-color:var(--rule)}
+  .choice.is-shown .choice__item+.choice__item{border-left-color:transparent}
+  .choice__label{font-size:10px;letter-spacing:.3em}
+  .choice__jp{font-size:20px;letter-spacing:.4em}
+  .scene--04::after{inset:0 auto auto 0;width:100vw;height:44svh;
+    background:radial-gradient(70vw 34svh at 18vw 16svh,rgba(8,6,4,.5),rgba(8,6,4,.24) 55%,rgba(8,6,4,0) 100%)}
+}
+@media (prefers-reduced-motion:reduce){.choice__item,.choice::before{transition-duration:.01s}}
+
+/* SKIP INTRO — a quiet wayfinding mark in the top-right corner; no fill, no frame. Above the blackout (z 3). */
+.skip-intro{position:fixed;z-index:5;top:max(12px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));
+  min-height:44px;padding:12px 10px;margin:0;background:none;border:0;border-radius:0;cursor:pointer;
+  font-family:var(--mincho);font-weight:300;font-size:11px;letter-spacing:.3em;line-height:1;color:rgba(239,232,220,.64);
+  text-shadow:0 0 8px rgba(0,0,0,.5);-webkit-tap-highlight-color:transparent;
+  transition:color .8s ease,opacity .8s ease,visibility 0s linear 0s}
+.skip-intro span{display:inline-block;margin-left:.1em;letter-spacing:0}
+.skip-intro::after{content:"";position:absolute;left:10px;right:calc(10px + .3em);bottom:10px;height:1px;background:rgba(239,232,220,.6);transform:scaleX(0);transform-origin:0 50%;transition:transform .8s cubic-bezier(.4,0,.2,1)}
+.skip-intro:hover,.skip-intro:focus-visible{color:rgba(243,237,227,.95)}
+.skip-intro:hover::after,.skip-intro:focus-visible::after{transform:scaleX(1)}
+.skip-intro:focus-visible{outline:1px solid rgba(239,232,220,.4);outline-offset:2px}
+.skip-intro.is-hidden{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .8s ease,visibility 0s linear .8s}
+@media (orientation:portrait) and (max-width:600px){.skip-intro{font-size:10px;padding:14px 10px}.skip-intro::after{bottom:12px}}
+
+/* PC refinement (everything except portrait phones): one centred group, lifted off the bottom edge,
+   larger and brighter words, quieter rules, and a soft shade only behind the group */
+@media (orientation:landscape),(min-width:601px){
+  .choice{--rule:rgba(239,232,220,.2);bottom:15svh;width:min(640px,42vw);color:#f3ede3}
+  .choice__item{align-items:center;text-align:center;padding:2.6svh 1.5vw 1.4svh}
+  .choice__label{color:rgba(239,232,220,.88);opacity:.9}
+  .choice__jp{font-size:clamp(26px,2.15vw,34px);letter-spacing:.38em;padding-left:.38em}
+  .choice__rule{transform-origin:50% 50%}
+  .scene--04::after{inset:0;height:auto;
+    background:radial-gradient(40vw 22svh at 50% 77svh,rgba(8,6,4,.42),rgba(8,6,4,.2) 55%,rgba(8,6,4,0) 100%)}
+}

@@ -223,18 +223,23 @@ if (scentTypes && !document.querySelector('#scent-types')) {
 }
 
 const page = document.body.dataset.page;
-const latestMember = JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]').slice(-1)[0];
+/* Demo registration keeps no personal data: only id / purpose / registeredAt / demo, for this tab (sessionStorage).
+   Earlier versions stored full profiles in localStorage under this key; remove that key only. */
+try { localStorage.removeItem('inimuDemoMembers'); } catch (error) { /* storage unavailable */ }
+const readDemoMembers = () => { try { return JSON.parse(sessionStorage.getItem('inimuDemoMembers') || '[]'); } catch (error) { return []; } };
+const latestMember = readDemoMembers().slice(-1)[0];
 document.querySelector('#registered-member-id')?.replaceChildren(document.createTextNode(latestMember?.id || '—'));
 if (page === 'mypage-profile') {
-  const member = JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]').slice(-1)[0] || {};
+  const member = readDemoMembers().slice(-1)[0] || {};
+  const notStored = ['name', 'kana', 'email', 'phone', 'postal', 'address'];
   const fields = { id: '会員ID', name: '氏名', kana: 'フリガナ', email: 'メールアドレス', phone: '電話番号', postal: '郵便番号', address: '住所', purpose: '香りに求めること' };
   const profile = document.querySelector('#member-profile');
-  if (profile) profile.innerHTML = Object.entries(fields).map(([key, label]) => `<div class="profile-row"><dt>${label}</dt><dd>${String(member[key] || '—').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]))}</dd></div>`).join('');
+  if (profile) profile.innerHTML = Object.entries(fields).map(([key, label]) => `<div class="profile-row"><dt>${label}</dt><dd>${String(notStored.includes(key) ? 'デモのため保存していません' : (member[key] || '—')).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]))}</dd></div>`).join('');
 }
 if (page === 'admin-members') {
-  document.querySelector('.admin-note')?.insertAdjacentText('afterbegin', '保存先はブラウザ内localStorageです。CSVでLibreOffice Calcへ書き出せます。');
+  document.querySelector('.admin-note')?.insertAdjacentText('afterbegin', '保存先はこのタブのsessionStorageです（会員ID・選択項目・登録日時のみ）。CSVでLibreOffice Calcへ書き出せます。');
   const sample = [{ id: '001', name: '山田 花子（サンプル）', kana: 'ヤマダ ハナコ', email: 'demo@example.com', purpose: '落ち着きたい', registeredAt: '2026/09/29', demo: true }];
-  const members = [...sample, ...JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]')];
+  const members = [...sample, ...readDemoMembers()];
   const body = document.querySelector('#member-table-body');
   const keys = ['id','name','kana','email','phone','postal','address','purpose','registeredAt'];
   if (body) body.innerHTML = members.map((member) => `<tr>${keys.map((key) => `<td>${String(member[key] || '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]))}</td>`).join('')}</tr>`).join('');
@@ -331,10 +336,10 @@ if (form && page === 'register') {
     if (!form.elements.terms.checked) return showError(form, '利用規約・プライバシーポリシーに同意してください');
     const purpose = form.querySelector('input[name="purpose"]:checked');
     if (!purpose) return showError(form, '香りを選ぶときに大切にしたいことを選択してください');
-    const members = JSON.parse(localStorage.getItem('inimuDemoMembers') || '[]');
-    members.push({ id: `INIMU-${String(members.length + 1).padStart(4, '0')}`, name: form.elements.name.value.trim(), kana: form.elements.kana.value.trim(), email: form.elements.email.value.trim(), phone: form.elements.phone.value.trim(), postal: form.elements.postal.value.trim(), address: form.elements.address.value.trim(), purpose: purpose.value, registeredAt: new Date().toISOString(), demo: true });
-    localStorage.setItem('inimuDemoMembers', JSON.stringify(members));
-    window.location.href = '/register/complete.html';
+    const members = readDemoMembers();
+    members.push({ id: `INIMU-${String(members.length + 1).padStart(4, '0')}`, purpose: purpose.value, registeredAt: new Date().toISOString(), demo: true });
+    try { sessionStorage.setItem('inimuDemoMembers', JSON.stringify(members)); } catch (error) { /* storage unavailable: the demo continues without saving */ }
+    window.location.href = 'complete.html';
   });
 }
 if (form && page === 'forgot') {
@@ -344,6 +349,9 @@ if (form && page === 'forgot') {
     form.innerHTML = '<p class="success-message">再設定用メールを送信しました（デモ）</p><a class="text-link" href="../login/">ログインへ戻る →</a>';
   });
 }
+
+/* Demo forms ship with a disabled submit button, so nothing can be sent if this script never runs. */
+document.querySelectorAll('form[data-form] button[type="submit"][disabled]').forEach((button) => { button.disabled = false; });
 
 /* Quiet JP / EN wayfinding for the primary pages. */
 (() => {

@@ -1,0 +1,47 @@
+/* inimu typography layer (vertical Mincho over Scene 01 / 03 / 04). Loaded after prototype.css; does not touch video/img rules. */
+:root{--ink:rgba(239,232,220,.93);--ink-soft:rgba(233,225,211,.86);--mincho:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho","YuMincho",serif}
+
+/* Stage = the exact rectangle the cover-fitted media occupies, so text sits on the same spot of the picture at any window size. */
+.stage{position:absolute;left:50%;top:50%;width:max(100vw,calc(100svh * var(--ar)));height:max(100svh,calc(100vw / var(--ar)));transform:translate(-50%,-50%);container-type:size;pointer-events:none;z-index:1}
+.stage--video{--ar:1916/1080}
+.stage--image{--ar:1672/941}
+.stage p,.stage h2,.stage ol,.stage li{margin:0;padding:0;font-weight:inherit}
+.stage ol{list-style:none}
+
+.stage{font-family:var(--mincho);font-weight:300;color:var(--ink);text-shadow:0 0 .9cqh rgba(0,0,0,.55),0 0 .25cqh rgba(0,0,0,.35);font-kerning:normal;-webkit-font-smoothing:antialiased}
+.title,.lead,.body,.shop-title{position:absolute;writing-mode:vertical-rl;text-orientation:mixed;line-height:1;white-space:nowrap}
+
+/* Scene 01 — 香りの店 (tracks the camera; opacity driven by JS) */
+.track{position:absolute;inset:0;transform-origin:0 0;will-change:transform,opacity;opacity:0}
+.type--shop{position:absolute;left:21cqw;top:33cqh;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.shop-title{position:static;font-size:3.7cqh;letter-spacing:.78em;font-weight:300}
+.shop-brand{font-size:2cqh;letter-spacing:.38em;margin-right:-.38em;line-height:1;font-weight:300;color:var(--ink-soft)}
+
+/* Scene 03 — 香りを纏う */
+.title--03{left:89.6cqw;top:13cqh;transform:translateX(-50%);font-size:5.44cqh;letter-spacing:.2em;font-weight:300}
+.lead--03{left:84.6cqw;top:16.1cqh;transform:translateX(-50%);font-size:2.15cqh;letter-spacing:.37em;color:var(--ink-soft)}
+.body--03{right:58.5cqw;top:21.5cqh;font-size:1.92cqh;line-height:3.56;letter-spacing:.17em;color:var(--ink-soft)}
+
+/* Scene 04 — 香りを重ねる */
+.title--04{left:91.3cqw;top:6.6cqh;transform:translateX(-50%);font-size:5.61cqh;letter-spacing:.14em;font-weight:300}
+.lead--04{left:85.6cqw;top:7.4cqh;transform:translateX(-50%);font-size:2.2cqh;letter-spacing:.36em;color:var(--ink-soft)}
+.body--04{top:14.6cqh;font-size:2.05cqh;letter-spacing:.22em;color:var(--ink-soft)}
+.steps{right:55.1cqw;line-height:3.58}
+.notes{right:72.7cqw;line-height:2.95}
+
+/* Quiet reveal for Scene 03 / 04 */
+.scene--03 .stage>*,.scene--04 .stage>*{opacity:0;filter:blur(3px);transition:opacity 1.8s cubic-bezier(.4,0,.2,1),filter 1.8s cubic-bezier(.4,0,.2,1)}
+.scene--03.is-visible .stage>*,.scene--04.is-visible .stage>*{opacity:1;filter:blur(0)}
+.scene--03.is-visible .title--03{transition-delay:.5s}
+.scene--03.is-visible .lead--03{transition-delay:1s}
+.scene--03.is-visible .body--03{transition-delay:1.6s}
+/* Scene 04 text waits until the dolly reaches the reference framing (~scale 1.3) */
+.scene--04.is-visible .title--04{transition-delay:3s}
+.scene--04.is-visible .lead--04{transition-delay:3.5s}
+.scene--04.is-visible .steps{transition-delay:4.1s}
+.scene--04.is-visible .notes{transition-delay:4.7s}
+/* Scene 04's picture is brighter than the reference behind the copy (window, blossoms): a soft veil of shade, overlay only */
+.scene--04 .stage::before{content:"";position:absolute;inset:0;background:radial-gradient(34cqw 52cqh at 33cqw 30cqh,rgba(9,6,3,.66),rgba(9,6,3,.42) 50%,rgba(9,6,3,0) 100%),radial-gradient(14cqw 52cqh at 89cqw 28cqh,rgba(9,6,3,.42),rgba(9,6,3,0) 100%);opacity:0;transition:opacity 2.4s cubic-bezier(.4,0,.2,1)}
+.scene--04.is-visible .stage::before{opacity:1;transition-delay:2.6s}
+
+@media(prefers-reduced-motion:reduce){.scene--03 .stage>*,.scene--04 .stage>*{filter:none}}
