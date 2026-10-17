@@ -81,8 +81,6 @@ ol {
 
 @media (max-width: 767px) {
   .scent-types__lead { font-size: .9rem; }
-  .scent-card-grid { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 12px; }
-  .scent-card { flex: 0 0 82vw; }
   .scent-types__limited { margin-top: 64px; }
 }
 
@@ -1076,6 +1074,16 @@ body:has(.wayfinding) .way-card.is-leaving { opacity: 1; transform: scale(1.01);
 
 @media (max-width: 1100px) and (min-width: 768px) {
   .scent-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Phone: two columns (the grid above otherwise stays at four). In a half-width card the number and arrow share the
+   top row and the name, reading and tags use the full width, so nothing is squeezed into a narrow column. */
+@media (max-width: 767px) {
+  .scent-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; }
+  .scent-card__body { grid-template-columns: minmax(0, 1fr) auto; gap: 10px 8px; min-height: 0; padding: 14px 12px; }
+  .scent-card__body > div { grid-column: 1 / -1; grid-row: 2; }
+  .scent-card__number { justify-self: start; }
+  .scent-card__arrow { grid-column: 2; grid-row: 1; align-self: center; }
 }
 
 .faq-list {

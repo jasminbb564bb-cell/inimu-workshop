@@ -1,0 +1,31 @@
+/* EXPERIENCE → SHOP: a quiet way on to the scents and the two exhibition rooms, after the reservation.
+   The section itself uses the page's own .experience-section / heading / .text-link styles (css/style.css);
+   this file only sets the short lead and the row of three text links. */
+.experience-discovery__lead {
+  max-width: 34em;
+  margin-top: 24px;
+  color: #555;
+  line-height: 2;
+}
+
+.experience-discovery__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.experience-discovery__links .text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+@media (max-width: 767px) {
+  .experience-discovery__links {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
