@@ -1,0 +1,109 @@
+/* HATENKO exhibition room — generated from the approved previews shop-preview/hatenko-plaster-pc.css and
+   shop-preview/hatenko-plaster-sp.css. Every rule is unchanged except: scoped to .ex-pc / .ex-sp, preview-only rules removed,
+   the PC stage cover-fits its .ex-pc window (cqw/cqh) instead of the viewport, image paths point to images/shop/exhibition/.
+   Layout switch (same in css/exhibition.css): the PC room needs a 16:10 or wider window, at least 768×600; tablets, phone
+   landscape and narrower windows get the phone room, whose plinth continuation now spans the full plate width. */
+@media (min-width:768px) and (min-height:600px) and (min-aspect-ratio:8/5){
+/* SHOP — HATENKO on matte plaster, PC preview (comparison only).
+   Every position is expressed in pixels of the 1672×941 layout image (--p), so the composition scales with the viewport.
+   Product: pixel-identical cutout of the official photo; nothing is drawn over it. */
+.ex-pc{--mincho:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;--ink:rgba(255,255,255,.92);--ink-soft:rgba(255,255,255,.84);--rule:rgba(255,255,255,.55)}
+.ex-pc{font-family:var(--mincho);font-weight:300;color:var(--ink);-webkit-font-smoothing:antialiased}
+.ex-pc a{color:inherit;text-decoration:none}
+.ex-pc p,.ex-pc h1,.ex-pc figure{margin:0;font-weight:300}
+/* Stage: the exact rectangle the cover-fitted layout image occupies */
+.ex-pc .stage{position:absolute;left:50%;top:50%;width:max(100cqw,calc(100cqh * 1672 / 941));height:max(100cqh,calc(100cqw * 941 / 1672));transform:translate(-50%,-50%);container-type:size;--p:calc(100cqh / 941)}
+.ex-pc .plate{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ex-pc .stage > *:not(.plate){position:absolute}
+.ex-pc .logo{left:calc(56 * var(--p));top:calc(42 * var(--p));font-size:calc(23 * var(--p));letter-spacing:.30em;line-height:1}
+.ex-pc .nav{left:calc(1250 * var(--p));top:calc(48 * var(--p));display:flex;align-items:center;font-size:calc(14 * var(--p));letter-spacing:.2em;line-height:1}
+.ex-pc .nav a{margin-right:calc(40 * var(--p))}
+.ex-pc .nav a:nth-child(3){margin-right:calc(58 * var(--p))}
+.ex-pc .nav__menu{display:inline-flex;flex-direction:column;align-items:flex-end;gap:calc(5 * var(--p));width:calc(33 * var(--p));margin-right:0!important;padding:calc(4 * var(--p)) 0}
+.ex-pc .nav__menu span{display:block;width:100%;height:1px;background:var(--ink)}
+.ex-pc .nav__menu span:nth-child(3){width:70%}
+.ex-pc .copy{left:calc(107 * var(--p));top:0}
+.ex-pc .copy > *{position:absolute;left:0;white-space:nowrap;line-height:1}
+.ex-pc .copy__label{top:calc(217 * var(--p));font-size:calc(21 * var(--p));letter-spacing:.32em}
+.ex-pc .copy__rule{top:calc(257 * var(--p));width:calc(50 * var(--p));height:1px;background:var(--rule)}
+.ex-pc .copy__title{top:calc(281 * var(--p));font-size:calc(16.5 * var(--p));letter-spacing:.28em;color:var(--ink-soft)}
+.ex-pc .copy__no{top:calc(361.5 * var(--p));font-size:calc(27 * var(--p));letter-spacing:.06em}
+.ex-pc .copy__brand{top:calc(411 * var(--p));font-size:calc(48.5 * var(--p));letter-spacing:.40em}
+.ex-pc .copy__kanji{top:calc(484 * var(--p));font-size:calc(17 * var(--p));letter-spacing:3.44em}
+.ex-pc .copy__lead{top:calc(548 * var(--p));font-size:calc(17.5 * var(--p));letter-spacing:.385em;line-height:calc(34 * var(--p))}
+/* Real product standing on the plinth, at the layout's centre of mass */
+.ex-pc .object{left:calc(742 * var(--p));top:calc(418 * var(--p));width:calc(196 * var(--p));z-index:1}
+.ex-pc .object img{position:relative;z-index:1;display:block;width:100%;height:auto}
+.ex-pc .object__shadow{position:absolute;z-index:0;left:2%;right:-14%;bottom:calc(-4 * var(--p));height:calc(16 * var(--p));border-radius:50%;
+  background:radial-gradient(closest-side,rgba(40,32,26,.55),rgba(40,32,26,.22) 60%,rgba(40,32,26,0));filter:blur(calc(2 * var(--p)))}
+.ex-pc .info{left:calc(106 * var(--p));top:0}
+.ex-pc .info > *{position:absolute;left:0;white-space:nowrap;line-height:1}
+.ex-pc .info__rule{top:calc(757 * var(--p));width:calc(640 * var(--p));height:1px;background:rgba(255,255,255,.42)}
+.ex-pc .info__name{top:calc(781 * var(--p));font-size:calc(14.5 * var(--p));letter-spacing:.2em}
+.ex-pc .info__price{top:calc(809 * var(--p));font-size:calc(14.5 * var(--p));letter-spacing:.16em}
+.ex-pc .info__link{top:calc(862 * var(--p));display:inline-flex;align-items:center;gap:calc(12 * var(--p));font-size:calc(14.5 * var(--p));letter-spacing:.2em}
+.ex-pc .info__link span{position:relative;display:block;width:calc(34 * var(--p));height:1px;background:var(--ink)}
+.ex-pc .info__link span::before,.ex-pc .info__link span::after{content:"";position:absolute;right:0;top:0;width:calc(8 * var(--p));height:1px;background:var(--ink);transform-origin:100% 50%}
+.ex-pc .info__link span::before{transform:rotate(28deg)}
+.ex-pc .info__link span::after{transform:rotate(-28deg)}
+.ex-pc .info__link--primary{left:0}
+.ex-pc .info__link em{font-style:normal}
+.ex-pc .info__link--primary em{border-bottom:1px solid var(--ink-soft);padding-bottom:calc(4 * var(--p))}
+.ex-pc .info__link--story{left:calc(177 * var(--p))}
+.ex-pc .info__link--brand{left:calc(443 * var(--p))}
+.ex-pc .info__link:hover span,.ex-pc .info__link:focus-visible span{width:calc(42 * var(--p))}
+.ex-pc .info__link span{transition:width .6s ease}
+}
+@media (max-width:767px), (max-height:599px), not all and (min-aspect-ratio:8/5){
+/* SHOP — HATENKO on matte plaster, phone preview (comparison only).
+   The plate is the same image as the PC preview, scaled to the screen height (~0.9×) and centred on the product
+   (x = 840 in plate pixels), so the product keeps the PC scale. Positions are in plate pixels (--p). */
+.ex-sp{--p:calc(max(100svh, 780px) / 941);--mincho:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;--ink:rgba(255,255,255,.92);--ink-soft:rgba(255,255,255,.84);--plaster:#6e6257}
+.ex-sp{font-family:var(--mincho);font-weight:300;color:var(--ink);-webkit-font-smoothing:antialiased}
+.ex-sp a{color:inherit;text-decoration:none}
+.ex-sp p,.ex-sp h1,.ex-sp figure{margin:0;font-weight:300}
+.ex-sp .hero{position:relative;width:100%;height:100svh;min-height:780px;overflow:hidden}
+.ex-sp .plate{position:absolute;top:0;height:100%;width:auto;max-width:none;left:calc(50% - 840 * var(--p))}
+.ex-sp .bar{position:absolute;left:24px;right:24px;top:calc(20px + env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between}
+.ex-sp .logo{font-size:19px;letter-spacing:.3em;line-height:44px}
+.ex-sp .menu{display:inline-flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;width:44px;height:44px}
+.ex-sp .menu span{display:block;width:28px;height:1px;background:var(--ink)}
+.ex-sp .menu span:nth-child(3){width:20px}
+/* Same order and rhythm as the PC column, set for a narrow screen */
+.ex-sp .copy{position:absolute;left:24px;top:calc(84px + env(safe-area-inset-top))}
+.ex-sp .copy > *{display:block;white-space:nowrap;line-height:1}
+.ex-sp .copy__label{font-size:14px;letter-spacing:.34em}
+.ex-sp .copy__rule{width:36px;height:1px;margin-top:13px;background:rgba(255,255,255,.55)}
+.ex-sp .copy__title{margin-top:13px;font-size:12.5px;letter-spacing:.3em;color:var(--ink-soft)}
+.ex-sp .copy__no{margin-top:36px;font-size:19px;letter-spacing:.06em}
+.ex-sp .copy__brand{margin-top:12px;font-size:30px;letter-spacing:.4em}
+.ex-sp .copy__kanji{margin-top:16px;font-size:12.5px;letter-spacing:2.6em;color:var(--ink-soft)}
+.ex-sp .copy__lead{margin-top:28px;font-size:13px;letter-spacing:.3em;line-height:2.1;white-space:normal}
+/* Product on the plinth, same plate coordinates as the PC preview */
+.ex-sp .object{position:absolute;left:calc(50% + (742 - 840) * var(--p));top:calc(418 * var(--p));width:calc(196 * var(--p))}
+.ex-sp .object img{position:relative;z-index:1;display:block;width:100%;height:auto}
+.ex-sp .object__shadow{position:absolute;z-index:0;left:2%;right:-14%;bottom:calc(-4 * var(--p));height:calc(16 * var(--p));border-radius:50%;
+  background:radial-gradient(closest-side,rgba(40,32,26,.55),rgba(40,32,26,.22) 60%,rgba(40,32,26,0));filter:blur(2px)}
+/* Name and price on the plinth face, as on PC */
+.ex-sp .price{position:absolute;left:24px;right:24px;top:calc(757 * var(--p))}
+.ex-sp .price__rule{display:block;width:72%;height:1px;background:rgba(255,255,255,.42)}
+.ex-sp .price__name{margin-top:18px;font-size:13px;letter-spacing:.2em;line-height:1}
+.ex-sp .price__value{margin-top:12px;font-size:13px;letter-spacing:.16em;line-height:1}
+/* Links: natural scroll below the first screen, one per row, comfortable tap height.
+   .ground rises over the bottom of the hero (--lift) so the links follow the price closely; below the hero the
+   plinth face continues (plaster-floor-sp.png: the plate's own face grain, joined to its last rows). */
+.ex-sp .ground{--lift:calc(184 * var(--p) - 108px);position:relative;z-index:1;margin-top:calc(-1 * var(--lift));overflow:hidden}
+.ex-sp .ground::before{content:"";position:absolute;z-index:-1;top:var(--lift);bottom:0;left:calc(50% - 840 * var(--p));width:calc(1672 * var(--p));
+  background:url(../images/shop/exhibition/plaster-floor-wide.jpg) 0 0 / 100% auto no-repeat}
+.ex-sp .links{display:flex;flex-direction:column;padding:12px 24px 40px}
+.ex-sp .links__item{display:flex;align-items:center;justify-content:space-between;min-height:56px;font-size:13.5px;letter-spacing:.2em;border-bottom:1px solid rgba(255,255,255,.22)}
+.ex-sp .links__item em{font-style:normal}
+.ex-sp .links__item--primary em{border-bottom:1px solid var(--ink-soft);padding-bottom:4px}
+.ex-sp .links__item span{position:relative;display:block;width:34px;height:1px;background:var(--ink);transition:width .6s ease}
+.ex-sp .links__item span::before,.ex-sp .links__item span::after{content:"";position:absolute;right:0;top:0;width:8px;height:1px;background:var(--ink);transform-origin:100% 50%}
+.ex-sp .links__item span::before{transform:rotate(28deg)}
+.ex-sp .links__item span::after{transform:rotate(-28deg)}
+.ex-sp .links__item:hover span,.ex-sp .links__item:focus-visible span{width:42px}
+@media (max-height:740px){.ex-sp .copy__no{margin-top:26px}
+.ex-sp .copy__lead{margin-top:20px}}
+}

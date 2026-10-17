@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300&display=swap">
+  <link rel="stylesheet" href="../css/shop-signatures.css">
 </head>
 <body class="shop-page">
   <header class="site-header">
@@ -25,6 +27,20 @@
       <div class="shop-intro__copy"><p class="section-label">SHOP</p><h1 id="shop-title">香りの商品を<br>探す・買う。</h1><p>香り、アイテム、ブランドから、<br>今の気分に合うものを探します。</p></div>
       <figure class="shop-intro__image"><img src="../images/shop-intro-hero.png" alt="石と木、ガラスの静かな空間"></figure>
     </section>
+    <!-- TWO SIGNATURES: entrances to the plaster exhibition rooms. Written here so main.js keeps it (2nd) instead of building its own -->
+    <section class="shop-featured-stories signatures" aria-labelledby="signatures-title">
+      <div class="signatures__head"><p class="section-label">TWO SIGNATURES</p><h2 id="signatures-title" data-en="Two scents that shape inimu">inimuをかたちづくる、二つの香り</h2></div>
+      <div class="signatures__rooms">
+        <a class="room" href="exhibition/hatenko/" aria-label="HATENKO の展示を見る" data-en-aria="View the HATENKO exhibition">
+          <span class="room__view"><picture><source media="(max-width: 767px)" srcset="../images/shop/signatures/entrance-hatenko-sp.jpg" width="600" height="750"><img src="../images/shop/signatures/entrance-hatenko-pc.jpg" width="1200" height="800" alt="HATENKO の展示室。漆喰の展示台に HATENKO 花火の化粧箱とボトル" data-en-alt="The HATENKO room: the Hanabi box and bottle on a plaster plinth"></picture></span>
+          <span class="room__caption"><span class="room__no">01</span><span class="room__name">HATENKO</span><span class="room__line" data-en-html="&lt;span&gt;Tradition and innovation,&lt;/span&gt; &lt;span&gt;breaking the mould.&lt;/span&gt;"><span>伝統と革新で、</span><span>型を破る香り。</span></span><span class="room__enter" data-en-html="View the exhibition&lt;i aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;">展示を見る<i aria-hidden="true"></i></span></span>
+        </a>
+        <a class="room" href="exhibition/wanowa/" aria-label="WANOWA の展示を見る" data-en-aria="View the WANOWA exhibition">
+          <span class="room__view"><picture><source media="(max-width: 767px)" srcset="../images/shop/signatures/entrance-wanowa-sp.jpg" width="600" height="750"><img src="../images/shop/signatures/entrance-wanowa-pc.jpg" width="1200" height="800" alt="WANOWA の展示室。漆喰の展示台に WANOWA ルームスプレー 能登ひば" data-en-alt="The WANOWA room: the Noto Hiba room spray on a plaster plinth"></picture></span>
+          <span class="room__caption"><span class="room__no">02</span><span class="room__name">WANOWA</span><span class="room__line" data-en-html="&lt;span&gt;Scents born from&lt;/span&gt; &lt;span&gt;land and materials.&lt;/span&gt;"><span>土地と素材から</span><span>生まれる香り。</span></span><span class="room__enter" data-en-html="View the exhibition&lt;i aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;">展示を見る<i aria-hidden="true"></i></span></span>
+        </a>
+      </div>
+    </section>
     <section class="shop-search" aria-labelledby="search-title"><div class="shop-section-heading"><p class="section-label">SEARCH</p><h2 id="search-title">探す</h2></div><form class="shop-search__form" action="." method="get"><label for="shop-search-input">商品名・香り・ブランドから検索</label><div><input id="shop-search-input" name="q" type="search" placeholder="検索する"><button type="submit" aria-label="検索">→</button></div></form></section>
     <section class="shop-discovery" aria-labelledby="scent-title"><div class="shop-section-heading"><p class="section-label">FIND BY SCENT</p><h2 id="scent-title">香りから選ぶ</h2></div><div class="shop-photo-links shop-photo-links--scent">
       <a href="scent/"><div class="shop-photo-link__image shop-photo-link__image--world"><img src="../images/experience/scents/scent-02-lemon.jpg" alt="香りから選ぶ"></div><span>11種類の香りカテゴリを見る →</span></a>
@@ -36,7 +52,7 @@
       <div class="shop-brand-card"><a href="?brand=hatenko"><div class="shop-brand-track__image"><img src="../images/shop/brands/hatenko-atmosphere.png" alt="HATENKOの空気感"></div><strong>HATENKO</strong><span>香りを記憶に残す香水</span></a><a class="shop-text-link shop-brand-card__official" href="https://www.hatenko.jp/" target="_blank" rel="noopener noreferrer">HATENKOの世界を見る ↗</a></div><a href="?brand=perfumers"><div class="shop-brand-track__image"><img src="../images/shop/brands/perfumers-atmosphere.png" alt="PERFUMERSの空気感"></div><strong>PERFUMERS</strong><span>日々に寄り添う香り</span></a><a href="?brand=wanowa"><div class="shop-brand-track__image"><img src="../images/shop/brands/wanowa-atmosphere.png" alt="WANOWAの空気感"></div><strong>WANOWA</strong><span>土地と素材から生まれる香り</span></a><a href="?brand=aroma-recolte"><div class="shop-brand-track__image"><img src="../images/shop/brands/aroma-recolte-atmosphere.png" alt="aroma recolteの空気感"></div><strong>aroma recolte</strong><span>暮らしのための香り</span></a>
     </div></section>
     <section class="shop-new" aria-labelledby="new-title"><div class="shop-section-heading"><p class="section-label">NEW</p><h2 id="new-title">新着商品</h2></div><div class="product-track">
-      <a href="?product=hanabi"><div class="product-track__image"><img src="../images/products/hatenko-hanabi-editorial.png" alt="HATENKO Eau De Parfum 花火"></div><strong>HATENKO Eau De Parfum 花火</strong><span>30ml　13,750円</span></a><a href="?product=isonami"><div class="product-track__image"><img src="../images/products/hatenko-isonami-editorial.png" alt="HATENKO Eau De Parfum 磯波"></div><strong>HATENKO Eau De Parfum 磯波</strong><span>30ml　13,750円</span></a><a href="?product=wanowa-hiba"><div class="product-track__image"><img src="../images/products/wanowa-noto-hiba-editorial.png" alt="WANOWA ルームスプレー 能登ひば"></div><strong>WANOWA ルームスプレー 能登ひば</strong><span>60ml　2,970円</span></a><a href="?product=fig"><div class="product-track__image"><img src="../images/products/perfumers-fig-editorial.png" alt="PERFUMERS ヘア＆ボディミスト フィグ"></div><strong>PERFUMERS ヘア＆ボディミスト フィグ</strong><span>50ml　1,760円</span></a>
+      <a href="?product=hanabi"><div class="product-track__image"><img src="../images/products/hatenko-hanabi-editorial.png" alt="HATENKO Eau De Parfum 花火"></div><strong>HATENKO Eau De Parfum 花火</strong><!-- 価格・容量は公式情報で確認できるまで非表示 --></a><a href="?product=isonami"><div class="product-track__image"><img src="../images/products/hatenko-isonami-editorial.png" alt="HATENKO Eau De Parfum 磯波"></div><strong>HATENKO Eau De Parfum 磯波</strong><span>30ml　13,750円</span></a><a href="?product=wanowa-hiba"><div class="product-track__image"><img src="../images/products/wanowa-noto-hiba-editorial.png" alt="WANOWA ルームスプレー 能登ひば"></div><strong>WANOWA ルームスプレー 能登ひば</strong><span>60ml　2,970円</span></a><a href="?product=fig"><div class="product-track__image"><img src="../images/products/perfumers-fig-editorial.png" alt="PERFUMERS ヘア＆ボディミスト フィグ"></div><strong>PERFUMERS ヘア＆ボディミスト フィグ</strong><span>50ml　1,760円</span></a>
     </div><p class="shop-data-note">価格・在庫は公式サイトと要照合。</p></section>
     <section class="shop-all" aria-labelledby="all-items-title"><div class="shop-section-heading"><p class="section-label">ALL ITEMS</p><h2 id="all-items-title">すべての商品</h2></div><div class="product-grid">
       <a href="?product=odoodoro"><div class="product-grid__image"><img src="../images/products/hatenko-odoroodoro-editorial.png" alt="HATENKO おどろおどろ"></div><strong>HATENKO おどろおどろ</strong><span>30ml　13,750円</span></a><a href="?product=room-spray-hinoki"><div class="product-grid__image"><img src="../images/products/wanowa-hinoki-editorial.png" alt="WANOWA ルームスプレー 加子母ひのき"></div><strong>WANOWA ルームスプレー 加子母ひのき</strong><span>60ml　2,970円</span></a><a href="?product=kou"><div class="product-grid__image"><img src="../images/products/kou-kanpo-editorial.png" alt="kou 漢方生薬香"></div><strong>kou 漢方生薬香</strong><span>1,480円</span></a><a href="?product=aroma-brick"><div class="product-grid__image"><img src="../images/products/aroma-recolte-brick-editorial.png" alt="aroma recolte Aroma Brick"></div><strong>aroma recolte Aroma Brick</strong><span>4,180円</span></a><a href="?product=discovery-set"><div class="product-grid__image"><img src="../images/products/hatenko-discovery-editorial.png" alt="HATENKO Discovery Set"></div><strong>HATENKO Discovery Set</strong><span>14,300円</span></a><a href="?product=perfume-brown"><div class="product-grid__image"><img src="../images/products/perfumers-brown-diamond-editorial.png" alt="PERFUMERS EDT Brown Diamond"></div><strong>PERFUMERS EDT Brown Diamond</strong><span>4,400円</span></a>
@@ -70,11 +86,19 @@
 })();
 </script><script>
 (() => { if (localStorage.getItem('inimuLang') !== 'en') return; const map={'検索':'Search','検索する':'Search','香りから選ぶ':'Choose by scent','アイテムから探す':'Choose by item','ブランドから探す':'Choose by brand','新着商品':'New items','すべての商品':'All items','すべての商品を見る　→':'View all items →','香りの商品を探す・買う':'Browse and buy scents','香りを買う。':'Choose a scent.','探す・買う。':'Browse and buy.','今の気分に合うものを探します。':'Find something for your mood.','自分だけの香りへ。':'Make your own scent.','選ぶだけでなく、つくる。':'Not only choose. Make.','12種類から4種類を選び、':'Choose four from twelve scents,','香りをつくる。':'Make your scent.','香りの分類と商品との対応は、公式情報と要照合。':'Please verify scent categories against official information.','価格・在庫は公式サイトと要照合。':'Please verify prices and availability on the official site.','商品名・香り・ブランドから検索':'Search by product, scent, or brand','HATENKOの世界を見る ↗':'See the world of HATENKO ↗','香りを記憶に残す香水':'A fragrance to remember','土地と素材から生まれる香り':'Scents born from land and materials','日々に寄り添う香り':'Scents for everyday life','暮らしのための香り':'Scents for daily life','ホームフレグランス':'Home fragrance','ボディケア':'Body care','ギフト':'Gift','価格・在庫は公式サイトと要照合。':'Please verify prices and availability on the official site.','香りをつくるワークショップの様子':'A scent-making workshop','自分だけの香りへ。':'Make your own scent.','EXPERIENCE →':'EXPERIENCE →'};const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);const a=[];let n;while(n=w.nextNode())a.push(n);a.forEach(t=>{const v=t.nodeValue.trim();if(map[v])t.nodeValue=t.nodeValue.replace(v,map[v]);});})();
-</script></body>
+</script>
+<script>document.addEventListener('touchstart', () => {}, { passive: true });   // lets iOS Safari show the TWO SIGNATURES :active feedback</script>
+<script>/* TWO SIGNATURES in English (same preference as the rest of SHOP: localStorage 'inimuLang', set by main.js from ?lang=) */
+(() => { let en = false; try { en = localStorage.getItem('inimuLang') === 'en'; } catch (error) {} if (!en) return;
+  document.querySelectorAll('.signatures [data-en]').forEach((e) => { e.textContent = e.dataset.en; });
+  document.querySelectorAll('.signatures [data-en-html]').forEach((e) => { e.innerHTML = e.dataset.enHtml; });
+  document.querySelectorAll('.signatures [data-en-aria]').forEach((e) => { e.setAttribute('aria-label', e.dataset.enAria); });
+  document.querySelectorAll('.signatures [data-en-alt]').forEach((e) => { e.setAttribute('alt', e.dataset.enAlt); });
+})();</script></body>
 </html>
 
 
 
 
 
-<script>document.querySelectorAll('.shop-page .product-track a').forEach((link)=>{if(link.querySelector('img[alt="HATENKO Eau De Parfum 花火"]')){link.href='../purchase/hatenko-hanabi/';const price=link.querySelector('span');if(price)price.textContent='30ml　19,800円';}});</script>
+<script>document.querySelectorAll('.shop-page .product-track a').forEach((link)=>{if(link.querySelector('img[alt="HATENKO Eau De Parfum 花火"]')){link.href='../purchase/hatenko-hanabi/';/* 花火の価格・容量は公式情報で確認できるまで表示しない */}});</script>

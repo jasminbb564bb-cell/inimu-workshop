@@ -1,0 +1,106 @@
+/* SHOP exhibition rooms (shop/exhibition/hatenko/, shop/exhibition/wanowa/).
+   Each page holds the approved plaster screen twice — PC (.ex-pc) and phone (.ex-sp) — styled by
+   css/exhibition-<brand>.css, which is the approved preview CSS scoped to those two wrappers. This file only adds what
+   the previews did not have: the view switch, a working header menu, the short white continuation and the note.
+   These pages do not load main.js (it rewrites headers/footers); the menu uses js/exhibition-menu.js. */
+*{box-sizing:border-box}
+html{background:#fff}
+body{margin:0;overflow-x:hidden;background:#fff;color:#292824;font-family:"Noto Sans JP","Yu Gothic",YuGothic,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;-webkit-font-smoothing:antialiased}
+
+/* View switch. The PC room is a viewport-high window; the stage inside cover-fits it (container units, see brand CSS). */
+.ex-pc,.ex-sp{display:none}
+/* The PC room is a cover-fitted 16:9 plate: it keeps its text and header in view only on 16:10 or wider windows
+   (1600×900, 1440×900, 1280×800 …). Tablets, phone landscape and narrower windows get the phone room instead. */
+@media (min-width:768px) and (min-height:600px) and (min-aspect-ratio:8/5){.ex-pc{display:block;position:relative;height:100vh;overflow:hidden;background:#7d746b;container-type:size}}
+/* Cover-fit crop: on windows narrower than 16:9 (e.g. 1440×900, 1280×800) the plate's sides fall outside the window, and
+   on windows wider than 16:9 its top and bottom do. The header (logo, nav, menu button) and the info row are moved in by
+   exactly the cropped amount so they stay on screen and usable. At 16:9 (1600×900, 1920×1080) the crop is 0: unchanged. */
+/* (crops under 1px — rounding at 16:9 — are ignored so 16:9 stays pixel-identical to the approved screen) */
+.ex-pc .stage{--crop-x:max(0px, calc((1672 * var(--p) - 100vw) / 2 - 1px));--crop-y:max(0px, calc((941 * var(--p) - 100vh) / 2 - 1px))}
+.ex-pc .stage .logo{left:calc(56 * var(--p) + var(--crop-x));top:calc(42 * var(--p) + var(--crop-y))}
+.ex-pc .stage .nav{left:calc(1250 * var(--p) - var(--crop-x));top:calc(48 * var(--p) + var(--crop-y))}
+.ex-pc .stage .info{top:calc(0px - var(--crop-y))}
+/* PC info links: in Japanese HATENKO keeps the approved absolute positions (the wrapper is transparent). When a label is longer —
+   WANOWA's external link, or English — the three links flow in one row instead, so they never overlap. */
+.ex-pc .stage .info__links{display:contents}
+.ex-pc .stage .info__links > .info__link{position:absolute;white-space:nowrap;line-height:1}
+.ex-pc .stage .info__links--flow,html[lang="en"] .ex-pc .stage .info__links{display:flex;align-items:center;position:absolute;left:0;top:calc(862 * var(--p));white-space:nowrap;line-height:1}
+.ex-pc .stage .info__links--flow > .info__link,html[lang="en"] .ex-pc .stage .info__links > .info__link{position:static;margin-right:calc(48 * var(--p))}
+@media (max-width:767px), (max-height:599px), not all and (min-aspect-ratio:8/5){.ex-sp{display:block;overflow-x:clip}}
+
+/* Header menu: the approved three-line icon, now a real button that opens the site menu (same items as the white header) */
+.ex-menu-toggle{appearance:none;-webkit-appearance:none;margin:0;padding:0;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ex-menu-toggle:focus-visible{outline:1px solid rgba(255,255,255,.8);outline-offset:4px}
+.ex-menu{position:absolute;z-index:10;top:calc(100% + 12px);right:0;min-width:220px;padding:4px 22px;background:rgba(94,84,75,.96);
+  font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;font-weight:300;line-height:1;letter-spacing:0;text-align:left}
+.ex-menu[hidden]{display:none}
+.ex-menu ul{margin:0;padding:0;list-style:none}
+.ex-pc .nav .ex-menu a,.ex-sp .ex-menu a{display:flex;align-items:center;min-height:48px;margin:0;font-size:13px;letter-spacing:.24em;color:rgba(255,255,255,.92);
+  text-decoration:none;border-bottom:1px solid rgba(255,255,255,.22)}
+.ex-pc .nav .ex-menu li:last-child a,.ex-sp .ex-menu li:last-child a{border-bottom:0}
+.ex-sp .ex-menu{top:calc(100% + 4px)}
+
+/* Phone menu while open (approved improvement): the room is dimmed quietly and the menu becomes a solid, darker plaster band
+   across the top that covers the large brand name; the inimu logo and a close mark stay on top of it.
+   Nothing here applies while the menu is closed. html.ex-menu-open is only set for the phone menu (js/exhibition-menu.js). */
+.ex-scrim{position:fixed;inset:0;z-index:29;background:rgba(30,25,21,.56)}
+.ex-scrim[hidden]{display:none}
+.ex-sp .ex-menu{position:fixed;z-index:30;top:0;left:0;right:0;min-width:0;padding:calc(84px + env(safe-area-inset-top)) 24px 44px;background:#463d36}
+/* short screens (phone landscape): keep a strip of the dimmed room below the band to tap, and let the band scroll if needed */
+@media (max-height:480px){.ex-sp .ex-menu{padding-bottom:16px;max-height:calc(100svh - 36px);overflow-y:auto}}
+.ex-sp .ex-menu ul{border-top:1px solid rgba(255,255,255,.18)}
+.ex-sp .ex-menu a{min-height:56px;font-size:15px;letter-spacing:.26em;color:rgba(255,255,255,.95);border-bottom-color:rgba(255,255,255,.18)}
+.ex-sp .ex-menu li:last-child a{border-bottom:1px solid rgba(255,255,255,.18)}
+.ex-sp .ex-menu a:focus-visible,.ex-pc .nav .ex-menu a:focus-visible{outline:1px solid rgba(255,255,255,.9);outline-offset:2px}
+html.ex-menu-open .ex-sp .bar{z-index:31}
+html.ex-menu-open .ex-sp .bar .logo,html.ex-menu-open .ex-sp .bar .menu{position:relative;z-index:31}   /* above the band, which lives inside the header */
+html.ex-menu-open .ex-sp .menu span{transition:transform .25s ease,opacity .2s ease}
+html.ex-menu-open .ex-sp .menu span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+html.ex-menu-open .ex-sp .menu span:nth-child(2){opacity:0}
+html.ex-menu-open .ex-sp .menu span:nth-child(3){width:28px;transform:translateY(-6px) rotate(-45deg)}
+html.ex-menu-open,html.ex-menu-open body{overflow:hidden}
+/* JP / EN in the menu (both views): small, quiet, same tone as the items */
+.ex-menu li.ex-menu__lang{display:flex;align-items:center;gap:10px;min-height:48px}
+.ex-pc .nav .ex-menu li.ex-menu__lang a,.ex-sp .ex-menu li.ex-menu__lang a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:32px;border-bottom:0;
+  font-size:12px;letter-spacing:.16em;color:rgba(255,255,255,.62)}
+.ex-pc .nav .ex-menu li.ex-menu__lang a[aria-current="true"],.ex-sp .ex-menu li.ex-menu__lang a[aria-current="true"]{color:rgba(255,255,255,.95)}
+.ex-menu li.ex-menu__lang span{color:rgba(255,255,255,.4);font-size:12px}
+
+/* White continuation: the other room, the way back to SHOP, and (trial, not approved) EXPERIENCE */
+.ex-after{--ink:#292824;--sub:#6f6b65;--rule:#d8d4cc;--serif:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
+  width:min(100% - 48px,1040px);margin:0 auto;padding:56px 0 88px;color:var(--ink)}
+.ex-after__label{margin:0;font-family:"Inter","Noto Sans JP",sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.16em;color:var(--sub)}
+.ex-after__list{margin-top:18px;border-top:1px solid var(--rule)}
+.ex-next{display:grid;grid-template-columns:auto auto 1fr auto;align-items:baseline;column-gap:18px;padding:22px 0;border-bottom:1px solid var(--rule);
+  color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.ex-next__no{font-family:var(--serif);font-weight:300;font-size:.95rem;letter-spacing:.06em;color:var(--sub)}
+/* the way back to SHOP has no room number: its name takes the number's place */
+.ex-next--back .ex-next__name{grid-column:1 / 3}
+.ex-next__name{font-family:var(--serif);font-weight:300;font-size:1.15rem;letter-spacing:.3em}
+.ex-next__line{font-size:.78rem;letter-spacing:.08em;color:var(--sub)}
+.ex-next__enter{display:inline-flex;align-items:center;gap:12px;font-size:.78rem;letter-spacing:.16em;white-space:nowrap}
+.ex-next__enter i{position:relative;display:block;width:34px;height:1px;background:var(--ink);transition:width .6s ease}
+.ex-next__enter i::before,.ex-next__enter i::after{content:"";position:absolute;right:0;top:0;width:8px;height:1px;background:var(--ink);transform-origin:100% 50%}
+.ex-next__enter i::before{transform:rotate(28deg)}
+.ex-next__enter i::after{transform:rotate(-28deg)}
+.ex-next:hover .ex-next__enter i,.ex-next:focus-visible .ex-next__enter i,.ex-next:active .ex-next__enter i{width:42px}
+.ex-next:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+/* trial: existing wording from js/main.js (MAKE YOUR SCENT); wording and position not approved yet */
+.ex-experience{margin-top:56px}
+.ex-experience p{margin:0}
+.ex-experience__copy{margin-top:12px !important;font-size:1.05rem;line-height:1.9;letter-spacing:.06em}
+.ex-experience a{display:inline-block;margin-top:18px;padding-bottom:8px;border-bottom:1px solid #aaa59d;color:var(--ink);text-decoration:none;font-size:.82rem;letter-spacing:.1em}
+
+/* Same note as every other page (copied from css/style.css .learning-note) */
+.learning-note{max-width:1104px;margin:0 auto;padding:16px 48px 22px;border-top:1px solid #dedbd4;background:#fbfaf7;color:#55544f;font-size:.68rem;line-height:1.8;letter-spacing:.04em}
+
+@media (max-width:767px){
+  .ex-after{width:min(100% - 36px,1040px);padding:44px 0 64px}
+  .ex-next{grid-template-columns:auto 1fr;row-gap:6px;column-gap:10px;padding:18px 0}
+  .ex-next__line{grid-column:1 / 3}
+  .ex-next__enter{grid-column:1 / 3;padding:6px 0 2px}
+  .ex-next__name{font-size:1.05rem;letter-spacing:.2em}
+  .ex-experience{margin-top:44px}
+}
+@media (max-width:760px){.learning-note{padding:14px 18px 18px;font-size:.64rem}}
+@media (prefers-reduced-motion:reduce){.ex-next__enter i,html.ex-menu-open .ex-sp .menu span{transition:none}}
