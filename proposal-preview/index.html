@@ -29,35 +29,51 @@
 
 <!-- 04 HYPOTHESIS -->
 <section class="frame" id="p4"><span class="page-label">02 HYPOTHESIS</span>
-<header><h2>仮説</h2><p>目的に合わせて入口を分ける。<br>しかし、その先の可能性は閉じない。</p></header>
+<header><h2>仮説</h2><p>強烈な第一印象で、inimuの世界へ引き込む。<br>その後の行動変化は、公開後に確かめる。</p></header>
 <div class="rule"></div>
 <div class="hypo-list">
-<div><b>A</b><h3>入口は、目的で分ける</h3><p>「買う」と「つくる」の2つの入口。自動で振り分けず、どちらに進むかは本人が選ぶ。</p></div>
-<div><b>B</b><h3>もう一方に、自然に気づける</h3><p>目的を果たした場所のすぐ先に、もう一方への入口を置く。</p></div>
+<div><b>A</b><h3>最初に、世界へ引き込む</h3><p>制作途中の初期案では、最初にSHOP / EXPERIENCEを選ぶ2つのドアを検討した。最終案ではそれを廃止し、イントロダクションで強烈な第一印象とブランド体験をつくる。</p></div>
+<div><b>B</b><h3>イントロ後に、2つへ分岐する</h3><p>イントロダクションの後にSHOP / EXPERIENCEを提示する。世界観を先に見ることで選びやすくなるかは、公開後に検証する仮説として扱う。</p></div>
 <div><b>C</b><h3>押しつけない</h3><p>ポップアップや強制的な誘導はしない。静かな一行で示し、選ぶのは顧客。</p></div>
 <div><b>D</b><h3>知りたくなった人が、深く進める</h3><p>展示 → STORY → 公式サイトへ、興味が深まった順に進める。</p></div>
 </div>
-<p class="bottom-note">いずれも仮説です<span class="st st--hypo">仮説</span>　効果は、公開後のアクセスデータと体験後アンケートで確かめます。</p>
+<p class="bottom-note">初期案からの変更は<span class="st st--done">Design Iteration</span>。イントロダクションの印象・没入感はユーザーテスト等の定性調査で確認し、SHOP / EXPERIENCEへの到達や相互回遊などの行動変化はGA4等で検証します。体験後アンケートは、ワークショップの改善に活用します。</p>
 </section>
 
 <!-- 05 IDEA: the key page -->
 <section class="frame" id="p5"><span class="page-label">03 IDEA</span>
-<header><h2>見つけて、<br>さらに出会う。</h2><p>同じ人、同じ目的。<br>違うのは、見つけたあとに何が起きるか。</p></header>
+<header><h2>世界観に引き込む。<br>その先の発見へ。</h2><p>初期の2ドア案を見直し、イントロダクションで第一印象をつくる。<br>その後、SHOP / EXPERIENCEへ分岐する。</p></header>
 <div class="discovery">
-<div class="discovery__side discovery__side--before"><p class="label">BEFORE</p><h3>目的を果たして、終わる</h3>
+<div class="discovery__side discovery__side--before"><p class="label">BEFORE / 旧サイト分析</p><h3>旧サイトで確認した導線と、そこから想定した行動</h3><p class="diagram-note">旧サイトの画面・導線から確認した事実と、分析上の顧客行動を分けて整理。</p>
 <ol class="journeys">
 <li class="journey journey--head" aria-hidden="true"><span>目的</span><span></span><span>目的を果たす</span><span></span><span>その後</span></li>
-<li class="journey"><span class="node node--who">香水を買いたい</span><span class="ln" aria-hidden="true"></span><span class="node">見つけた</span><span class="ln" aria-hidden="true"></span><span class="node node--end">終わり</span></li>
-<li class="journey"><span class="node node--who">体験を探している</span><span class="ln" aria-hidden="true"></span><span class="node">予約した</span><span class="ln" aria-hidden="true"></span><span class="node node--end">終わり</span></li>
-<li class="journey"><span class="node node--who">観光・デート・贈り物</span><span class="ln" aria-hidden="true"></span><span class="node">見つけた</span><span class="ln" aria-hidden="true"></span><span class="node node--end">終わり</span></li>
+<li class="journey"><span class="node node--who">香水を買いたい</span><span class="ln" aria-hidden="true"></span><span class="node journey__result">見つけた</span><span class="ln" aria-hidden="true"></span><span class="node node--end journey__end">終わり</span></li>
+<li class="journey"><span class="node node--who">体験を探している</span><span class="ln" aria-hidden="true"></span><span class="node journey__result">予約した</span><span class="ln" aria-hidden="true"></span><span class="node node--end journey__end">終わり</span></li>
+<li class="journey"><span class="node node--who">観光・デート・贈り物</span><span class="ln" aria-hidden="true"></span><span class="node journey__result">見つけた</span><span class="ln" aria-hidden="true"></span><span class="node node--end journey__end">終わり</span></li>
 </ol></div>
-<div class="discovery__side discovery__side--after"><p class="label">THIS PROPOSAL</p><h3>目的を果たした先で、もう一つに気づく</h3>
-<ol class="journeys">
-<li class="journey journey--head" aria-hidden="true"><span>目的</span><span></span><span>入口</span><span></span><span>目的を果たす</span><span></span><span>その先で、気づく</span></li>
-<li class="journey"><span class="node node--who">香水を買いたい</span><span class="ln" aria-hidden="true"></span><span class="node node--door">SHOP</span><span class="ln" aria-hidden="true"></span><span class="node">見つけた</span><span class="ln ln--meet" aria-hidden="true"></span><span class="node node--meet"><span class="meet__to"><i class="badge">1</i><span class="node--door node--to">EXPERIENCE</span></span>自分でつくる楽しみ</span></li>
-<li class="journey"><span class="node node--who">体験を探している</span><span class="ln" aria-hidden="true"></span><span class="node node--door">EXPERIENCE</span><span class="ln" aria-hidden="true"></span><span class="node">予約した</span><span class="ln ln--meet" aria-hidden="true"></span><span class="node node--meet"><span class="meet__to"><i class="badge">2</i><span class="node--door node--to">SHOP</span></span>HATENKO・WANOWAの香り</span></li>
-<li class="journey"><span class="node node--who">観光・デート・贈り物</span><span class="ln ln--next" aria-hidden="true"></span><span class="node node--door node--next">目的別の入口</span><span class="ln ln--next" aria-hidden="true"></span><span class="node">見つけた</span><span class="ln ln--next" aria-hidden="true"></span><span class="node node--meet node--meet-next">香りという楽しみ方</span></li>
-</ol></div>
+<div class="discovery__side discovery__side--after"><p class="label">THIS PROPOSAL / DESIGN ITERATION</p><h3>2ドア案を廃止し、イントロダクションの後で発見する</h3>
+<div class="intro-branch">
+<p class="intro-branch__note">強い第一印象・世界観への没入</p>
+<svg class="intro-branch__map" viewBox="0 0 360 250" role="img" aria-label="INTRODUCTIONからSHOPとEXPERIENCEへ分岐し、相互回遊する導線">
+<g class="intro-branch__paths" fill="none" stroke="#c9c8c2" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter">
+<path d="M180 44V100M180 100H80V130M180 100H280V130"/>
+</g>
+<g class="intro-branch__nodes" fill="#faf9f6" stroke="#292927" stroke-width="1">
+<rect x="110" y="10" width="140" height="34"/>
+<rect x="30" y="130" width="100" height="40"/>
+<rect x="230" y="130" width="100" height="40"/>
+</g>
+<g class="intro-branch__labels" fill="#292927" text-anchor="middle" font-family="Arial, Yu Gothic, sans-serif">
+<text x="180" y="32" font-size="13" letter-spacing="1">INTRODUCTION</text>
+<text x="80" y="154" font-size="13" letter-spacing="1">SHOP</text>
+<text x="280" y="154" font-size="13" letter-spacing="1">EXPERIENCE</text>
+<text x="80" y="190" font-size="11" fill="#686761">香りを選ぶ</text>
+<text x="280" y="190" font-size="11" fill="#686761">香りをつくる</text>
+</g>
+</svg>
+<div class="intro-branch__loop" aria-label="相互回遊・新しい発見"><span class="loop-arrow">↔</span><span>相互回遊・新しい発見</span></div>
+<div class="intro-branch__future"><span class="node node--door node--next">目的別の入口</span><span class="ln ln--next" aria-hidden="true"></span><span class="node node--meet node--meet-next">香りという楽しみ方</span></div>
+</div></div>
 </div>
 <p class="legend"><span><i></i>実装済み</span><span><i class="meet"></i><i class="badge">1</i><i class="badge">2</i>目的を果たした先の出会い（実装済み・p6）</span><span><i class="dash"></i>今後</span></p>
 </section>
@@ -66,13 +82,13 @@
 <section class="frame" id="p6"><span class="page-label">04 BUILT</span>
 <header><h2>完成したサイト</h2><p>思想を、画面の位置と<br>静かな一行で実装する。<span class="st st--done">実装済み</span><small class="built-sub">掲載はすべて公開中のサイトの画面。番号はp5の図と対応。</small></p></header>
 <div class="built">
-<figure><img src="images/site-top-choice.jpg" alt="トップの映像の後に表示される、買う／つくるの選択画面"><figcaption><b>TOP</b>目的で選ぶ、2つの入口<br><span>映像のあと、「買う」「つくる」を本人が選ぶ。</span></figcaption></figure>
+<figure><img src="images/site-top-choice.jpg" alt="イントロダクションの後に表示されるSHOPとEXPERIENCEの選択画面"><figcaption><b>TOP</b>イントロダクションから、2つの行き先へ<br><span>映像・情景・テキストで世界観を提示した後、SHOP / EXPERIENCEを表示する。</span></figcaption></figure>
 <figure><img src="images/site-shop-signatures.jpg" alt="SHOPトップのTWO SIGNATURES。HATENKOとWANOWAの展示室への入口"><figcaption><b>SHOP</b>TWO SIGNATURES<br><span>ブランドを選ばない人は、そのまま香りを探せる。</span></figcaption></figure>
 <figure><img src="images/site-exhibition-hatenko.jpg" alt="HATENKOの漆喰の展示室"><figcaption><b>EXHIBITION</b>見て、知りたくなる<br><span>展示から、商品・STORY・ブランドへ。</span></figcaption></figure>
 <figure class="is-meet"><span class="pin" aria-hidden="true">1</span><img src="images/site-shop-to-experience-2x.jpg" alt="HATENKOの展示の下に並ぶ、もう一方の展示、SHOP、EXPERIENCEへの導線"><figcaption><b><i class="badge">1</i>SHOP → EXPERIENCE</b>見つけたあとに、つくるへ<br><span>「この香りが好きなら、自分だけの香りをつくってみる。」</span></figcaption></figure>
 <figure class="is-meet"><span class="pin" aria-hidden="true">2</span><img src="images/site-experience-to-shop-2x.jpg" alt="EXPERIENCEの予約の後に置いた、SHOPと二つの展示への導線"><figcaption><b><i class="badge">2</i>EXPERIENCE → SHOP</b>つくったあとに、出会うへ<br><span>「香りをつくる。その先に、香りと出会う。」予約の流れは遮らない。</span></figcaption></figure>
 </div>
-<p class="note built-note">PC・スマートフォン・タブレット、日本語・英語に対応。公開サイト：jasminbb564bb-cell.github.io/inimu-workshop/</p>
+<p class="note built-note">PC・スマートフォン・タブレット、日本語・英語に対応。イントロダクションと分岐の実装を確認済み。演出が行動や理解に与える効果は未検証。公開サイト：jasminbb564bb-cell.github.io/inimu-workshop/</p>
 </section>
 
 <!-- 07 BRAND: from brand-first to customer-first -->
@@ -95,7 +111,7 @@
 <section class="frame" id="p9"><span class="page-label">07 VERIFICATION</span>
 <header><h2>期待効果と検証</h2><p>成果はまだ測っていない。<br>だから、確かめる方法を先に決めておく。</p></header>
 <div class="effects">
-<div><p class="label">EXPECTED<span class="st st--hypo">仮説</span></p><h3>商品と体験の相互発見</h3><p>買いに来た人が体験に、体験を探す人が商品に気づく。</p></div>
+<div><p class="label">DESIGN INTENT<span class="st st--done">設計意図</span></p><h3>強烈な第一印象をつくる</h3><p>イントロダクションでinimuの世界観に引き込み、最初の接点をブランド体験として演出する。</p></div>
 <div><p class="label">EXPECTED<span class="st st--hypo">仮説</span></p><h3>もう一方のページも見る人が増える</h3><p>一度の訪問で、SHOPとEXPERIENCEの両方を見る人が増える。</p></div>
 <div><p class="label">EXPECTED<span class="st st--hypo">仮説</span></p><h3>来た目的と、新しい気づきが分かる</h3><p>何を目的に来て、何を新しく知ったかを、顧客の言葉で確かめられる。</p></div>
 </div>
@@ -103,6 +119,8 @@
 <tr><td><i class="badge">1</i>SHOPから来た人が、体験に気づくか</td><td>SHOPから入った訪問のEXPERIENCE到達率<br>展示下・SHOP末尾のEXPERIENCEリンクのクリック</td><td class="status"><span class="st st--done">導線 実装済み</span><span class="st st--next">計測 今後</span></td></tr>
 <tr><td><i class="badge">2</i>体験を探す人が、商品に気づくか</td><td>EXPERIENCEから入った訪問のSHOP・展示到達率<br>EXPERIENCE末尾のリンクのクリック</td><td class="status"><span class="st st--done">導線 実装済み</span><span class="st st--next">計測 今後</span></td></tr>
 <tr><td>両方に触れたか</td><td>1回の訪問でSHOPとEXPERIENCEの両方を見た割合</td><td class="status"><span class="st st--next">計測 今後</span></td></tr>
+<tr><td>イントロダクションを見たか</td><td>イントロダクション完了率／スキップ率</td><td class="status"><span class="st st--next">計測 今後</span></td></tr>
+<tr><td>イントロ後に何が起きたか</td><td>完了・スキップ別のSHOP / EXPERIENCE到達率、相互回遊率</td><td class="status"><span class="st st--next">計測 今後</span></td></tr>
 <tr><td>何がきっかけか</td><td>アンケート「来た目的」「新しく知ったもの」</td><td class="status"><span class="st st--next">アンケート 今後</span></td></tr>
 <tr><td>押しつけになっていないか</td><td>リンク先からすぐ戻る割合<br>アンケートの自由記述</td><td class="status"><span class="st st--next">計測 今後</span></td></tr>
 </tbody></table>
