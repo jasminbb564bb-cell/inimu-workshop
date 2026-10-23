@@ -250,7 +250,7 @@ if (page === 'admin-members') {
   });
 }
 const form = document.querySelector('[data-form]');
-const showError = (form, message) => { const error = form.querySelector('.form-error'); if (error) error.textContent = message; };
+const showError = (form, message) => { const error = form.querySelector('.form-error'); if (!error) return; let output = message; try { if (localStorage.getItem('inimuLang') === 'en') output = ({ 'メールアドレスを入力してください':'Please enter your email address.', 'パスワードを入力してください':'Please enter your password.', '未入力の項目があります':'Please complete all required fields.', 'パスワードが一致しません':'Passwords do not match.', '利用規約・プライバシーポリシーに同意してください':'Please agree to the Terms of Use and Privacy Policy.' }[message] || message); } catch (error) {} error.textContent = output; };
 if (form && page === 'login') {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -261,6 +261,124 @@ if (form && page === 'login') {
     location.href = '../mypage/';
   });
 }
+
+/* Shared JP / EN switch.
+   Page-specific English copy can use data-en, data-en-html, data-en-aria and
+   data-en-alt. The selected language is kept while moving between pages. */
+(() => {
+  const root = document.documentElement;
+  const readLanguage = () => {
+    const queryLanguage = new URLSearchParams(window.location.search).get('lang');
+    if (queryLanguage === 'ja' || queryLanguage === 'en') return queryLanguage;
+    try { return localStorage.getItem('inimuLang') || 'ja'; } catch (error) { return 'ja'; }
+  };
+  const language = readLanguage();
+  try { localStorage.setItem('inimuLang', language); } catch (error) { /* storage unavailable */ }
+  root.lang = language;
+
+  const header = document.querySelector('.site-header__inner');
+  if (header && !header.querySelector('.language-switch')) {
+    const switcher = document.createElement('div');
+    switcher.className = 'language-switch';
+    switcher.setAttribute('aria-label', 'Language');
+    switcher.innerHTML = '<a href="?lang=ja" data-lang="ja">JP</a><span aria-hidden="true">/</span><a href="?lang=en" data-lang="en">EN</a>';
+    header.appendChild(switcher);
+  }
+
+  document.querySelectorAll('.language-switch a[data-lang]').forEach((link) => {
+    const next = new URL(window.location.href);
+    next.searchParams.set('lang', link.dataset.lang);
+    link.href = next.pathname + next.search + next.hash;
+    link.setAttribute('aria-current', link.dataset.lang === language ? 'true' : 'false');
+    link.addEventListener('click', () => {
+      try { localStorage.setItem('inimuLang', link.dataset.lang); } catch (error) { /* storage unavailable */ }
+    });
+  });
+
+  if (language === 'en') {
+    document.querySelectorAll('a[href]').forEach((link) => {
+      const target = new URL(link.href, window.location.href);
+      if (target.origin !== window.location.origin || target.hash || link.closest('.language-switch')) return;
+      target.searchParams.set('lang', 'en');
+      link.href = target.pathname + target.search;
+    });
+  }
+
+  if (language !== 'en') return;
+  document.querySelectorAll('[data-en-html]').forEach((element) => { element.innerHTML = element.dataset.enHtml; });
+  document.querySelectorAll('[data-en]').forEach((element) => { element.textContent = element.dataset.en; });
+  document.querySelectorAll('[data-en-aria]').forEach((element) => { element.setAttribute('aria-label', element.dataset.enAria); });
+  document.querySelectorAll('[data-en-alt]').forEach((element) => { element.alt = element.dataset.enAlt; });
+  document.querySelectorAll('[data-en-title]').forEach((element) => { element.title = element.dataset.enTitle; });
+  const ariaLabels = { 'メインナビゲーション': 'Main navigation', 'メニューを開く': 'Open menu', 'メニューを閉じる': 'Close menu', 'inimu トップ': 'inimu home' };
+  document.querySelectorAll('[aria-label]').forEach((element) => {
+    const translated = ariaLabels[element.getAttribute('aria-label')];
+    if (translated) element.setAttribute('aria-label', translated);
+  });
+})();
+
+/* Final page-specific pass. Some pages build sections after main.js starts;
+   run once after the page scripts so generated SHOP / EXPERIENCE copy is also
+   translated. */
+(() => {
+  const language = new URLSearchParams(location.search).get('lang') || (() => { try { return localStorage.getItem('inimuLang') || 'ja'; } catch (error) { return 'ja'; } })();
+  if (language !== 'en') return;
+  const run = () => {
+    const text = (selector, value) => { const el = document.querySelector(selector); if (el) el.textContent = value; };
+    const html = (selector, value) => { const el = document.querySelector(selector); if (el) el.innerHTML = value; };
+    const replace = (selector, map) => document.querySelectorAll(selector).forEach((el) => { const key = el.textContent.trim(); if (map[key]) el.textContent = map[key]; });
+
+    if (document.body.classList.contains('experience-page')) {
+      html('.experience-workshop .experience-section__heading', '<p class="section-label">WORKSHOP</p><h2 id="workshop-title">The experience begins with choosing a scent.</h2><p>Beginners are welcome. Our staff will guide you through each step.</p>');
+      html('.workshop-flow', '<li><span>01</span><strong>Choose scents</strong><small>Choose four scents from twelve materials.</small></li><li><span>02</span><strong>Blend</strong><small>Combine the selected scents.</small></li><li><span>03</span><strong>Make your scent</strong><small>Finish your original eau de toilette.</small></li><li><span>04</span><strong>Take it home</strong><small>Take home your perfume and four selected scent materials.</small></li>');
+      html('.basic-information .experience-section__heading', '<p class="section-label">BASIC INFORMATION</p><h2 id="basic-information-title">Before you reserve</h2>');
+      html('.experience-info-grid', '<div><dt>Price</dt><dd>¥5,500 per person</dd></div><div><dt>Duration</dt><dd>Approx. 1 hour</dd></div><div><dt>Schedule</dt><dd>Weekends and holidays<br>11:00 / 13:00 / 15:00</dd></div><div><dt>Scents</dt><dd>Choose 4 from 12 scents</dd></div><div><dt>Take home</dt><dd>One 10ml eau de toilette<br>Four selected scent materials (10ml each)</dd></div><div><dt>Check-in</dt><dd>Arrive at the 1F reception 10 minutes before the start</dd></div><div><dt>Payment</dt><dd>Jalan.net online card payment</dd></div><div><dt>Participation</dt><dd>Beginners welcome. Please confirm solo participation when booking.</dd></div><div><dt>What to bring</dt><dd>Please confirm when booking.</dd></div><div><dt>Children</dt><dd>Please confirm participation conditions when booking.</dd></div><div><dt>Language support</dt><dd>Please confirm language support when booking.</dd></div><div><dt>Same-day participation</dt><dd>Availability varies. Please contact the store to confirm.</dd></div>');
+      text('.basic-information .data-note', '* Please check the booking page for the latest price and availability.');
+      html('.faq-section .experience-section__heading', '<p class="section-label">FAQ</p><h2 id="faq-title">FAQ before booking</h2>');
+      html('.faq-section .faq-list', '<details><summary>Can beginners join?</summary><p>Yes. Staff guide you through choosing scents and the workshop.</p></details><details><summary>How long does it take?</summary><p>Approx. one hour. Please arrive 10 minutes before the start.</p></details><details><summary>What can I take home?</summary><p>One 10ml eau de toilette and four selected scent materials (10ml each).</p></details><details><summary>How many scents are available?</summary><p>The standard plan offers 12 scent materials, from which you choose 4.</p></details><details><summary>How do I change or cancel a reservation?</summary><p>Please check the cancellation terms on the Jalan.net booking page.</p></details><details><summary>Where do I reserve?</summary><p>Check availability and reserve through the Jalan.net booking page.</p></details>');
+      html('.scent-types .experience-section__heading', '<p class="section-label">SCENT TYPES</p><h2>Scent types</h2><p class="scent-types__lead">Choose four scents from this selection to create your blend.<br><small>※Available scents may change on the day.</small></p>');
+      replace('.scent-card em', { 'ベルガモット':'Bergamot','レモン':'Lemon','グレープフルーツ':'Grapefruit','ラベンダー':'Lavender','ミュゲ':'Muguet','ダマスクローズ':'Damask rose','アッサムティー':'Assam tea','カシス':'Cassis','マグノリア':'Magnolia','ムスク':'Musk','アンバー':'Amber','サンダルウッド':'Sandalwood','スカッシュ':'Squash','シーブルー':'Sea blue','ハイビスカス':'Hibiscus','ココナッツラム':'Coconut rum' });
+      replace('.scent-card p', { '# さっぱり　# 大人っぽい':'# fresh  # sophisticated','# スッキリ　# ナチュラル':'# crisp  # natural','# ジューシー　# 深い':'# juicy  # deep','# さわやか　# ハーバル':'# fresh  # herbal','# 透明感　# 深い':'# sheer  # deep','# ひと息':'# relaxing','# やわらかい　# 花':'# soft  # floral','# やさしい':'# gentle','# あたたかい　# 深い':'# warm  # deep','# ウッディ　# 静か':'# woody  # quiet','# 甘い　# クリーミー':'# sweet  # creamy' });
+      text('.experience-reservation h2', 'Review the experience and reserve.');
+      replace('.reservation-summary span', { '料金':'Price','時間':'Duration','香り':'Scents','持ち帰り':'Take home' });
+      replace('.reservation-summary strong', { '5,500円':'¥5,500','約1時間':'Approx. 1 hour','12種から4種':'Choose 4 of 12 scents','香水＋香料4種':'Eau de toilette + 4 scent materials' });
+      text('.experience-reservation .reservation-source', 'Reservations are handled through Jalan.net ↗ (online card payment)');
+      text('.experience-reservation .reservation-cta', 'Reserve on Jalan.net ↗');
+      text('.experience-reservation .reservation-external-note', '※This link opens an external booking site, Jalan.net. It is the actual store’s booking page and a separate service from this site.');
+    }
+
+    if (document.body.classList.contains('shop-page')) {
+      text('#shop-title', 'Browse and buy scents.');
+      replace('.shop-intro__copy p:not(.section-label)', { '香り、アイテム、ブランドから、':'Explore by scent, item or brand.','今の気分に合うものを探します。':'Find what suits your mood.' });
+      replace('.shop-scent-directory__heading h1', { '香りから選ぶ':'Choose by scent' });
+      replace('.shop-scent-directory__heading p:not(.section-label)', { '気分やシーンに合わせて、香りの世界からお選びください。':'Choose from a world of scents to suit your mood and the moment.' });
+      replace('.scent-category-card em', { 'フルーツ系':'Fruity','シトラス系':'Citrus','ハーバル系':'Herbal','フローラル系':'Floral','スパイス系':'Spicy','ティー系':'Tea','ウッディ系':'Woody','イマジナル系':'Imaginal','アニマル系':'Animal','グルマン系':'Gourmand','精油':'Essential oils' });
+      replace('.shop-scent-directory__count', { '全11件のカテゴリ':'11 scent categories' });
+      replace('.shop-text-link', { 'HATENKOを見る →':'View HATENKO →','WANOWAを見る →':'View WANOWA →','PERFUMERSを見る →':'View PERFUMERS →' });
+      text('.shop-search__hint', 'Examples: HATENKO, WANOWA, PERFUMERS, hinoki, citrus, perfume');
+      text('.shop-search__form label', 'Search by product, brand or scent family');
+      const input=document.querySelector('#shop-search-input'); if(input) input.placeholder='HATENKO / hinoki / woody';
+      const brandCopy = [
+        ['A fragrance that carries memory, shaped by tradition and innovation.', 'A fragrance that carries memory, shaped by tradition and innovation.', 'Signature scents: Hanabi / Isonami / Odoodoro', 'View HATENKO →'],
+        ['Scents born from land and materials.', 'Products that draw on the character and memories of each place.', 'Signature product: Noto Hiba room spray', 'View WANOWA →'],
+        ['Scents to wear and enjoy every day.', 'Eau de toilette and roll-on perfumes in forms made for everyday life.', 'Signature products: eau de toilette / roll-on perfume', 'View PERFUMERS →']
+      ];
+      document.querySelectorAll('.shop-brand-feature__copy').forEach((copy, index) => {
+        const values = brandCopy[index]; if (!values) return;
+        const heading = copy.querySelector('h3'); const body = copy.querySelector('p:not(.section-label)'); const note = copy.querySelector('span'); const link = copy.querySelector('.shop-text-link');
+        if (heading) heading.textContent = values[0]; if (body) body.textContent = values[1]; if (note) note.textContent = values[2]; if (link) link.textContent = values[3];
+      });
+      const products = {
+        'HATENKO Eau De Parfum 花火':'HATENKO Eau De Parfum Hanabi','HATENKO Eau De Parfum 磯波':'HATENKO Eau De Parfum Isonami','WANOWA ルームスプレー 能登ひば':'WANOWA Room Spray Noto Hiba','PERFUMERS ヘア＆ボディミスト フィグ':'PERFUMERS Hair & Body Mist Fig','HATENKO おどろおどろ':'HATENKO Odoodoro','WANOWA ルームスプレー 加子母ひのき':'WANOWA Room Spray Kashimo Hinoki','kou 漢方生薬香':'kou Kampo Herbal Fragrance'
+      };
+      document.querySelectorAll('.product-track strong, .product-grid strong').forEach((el) => { if (products[el.textContent.trim()]) el.textContent = products[el.textContent.trim()]; });
+      document.querySelectorAll('.product-track img, .product-grid img').forEach((img) => { if (products[img.alt]) img.alt = products[img.alt]; });
+      document.querySelectorAll('.product-track span, .product-grid span').forEach((el) => { el.textContent = el.textContent.replace('ml　', ' ml · ').replace('円', ' JPY'); });
+    }
+    document.querySelectorAll('.learning-note').forEach((note) => { note.lang='en'; note.textContent='This is an unofficial portfolio project created as a vocational-school assignment, inspired by inimu and related brands. It is not an official brand website. Some spatial images and videos are AI-generated. Purchases, bookings and enquiries cannot be made on this site. External booking links lead to the actual store’s service.'; });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(run, 0)); else setTimeout(run, 0);
+})();
 /* Legacy register handlers removed; one active handler follows. */
 /* if (false && form && page === 'register') {
   const preference = document.createElement('fieldset');
@@ -356,7 +474,8 @@ document.querySelectorAll('form[data-form] button[type="submit"][disabled]').for
 /* Quiet JP / EN wayfinding for the primary pages. */
 (() => {
   const params = new URLSearchParams(window.location.search);
-  const lang = params.get('lang') === 'en' ? 'en' : 'ja';
+  const requested = params.get('lang');
+  const lang = requested === 'en' || requested === 'ja' ? requested : (localStorage.getItem('inimuLang') || 'ja');
   const switcher = document.querySelector('.language-switch');
   if (!switcher) return;
   switcher.querySelectorAll('[data-lang]').forEach((link) => {
@@ -439,4 +558,36 @@ document.querySelectorAll('form[data-form] button[type="submit"][disabled]').for
   if (faq) faq.innerHTML = '<details><summary>Can beginners join?</summary><p>Yes. Staff guide you through choosing scents and the workshop.</p></details><details><summary>How long does it take?</summary><p>About one hour. Please check in 10 minutes before the start.</p></details><details><summary>What can I take home?</summary><p>One 10ml eau de toilette and four selected scent materials.</p></details><details><summary>How do I reserve?</summary><p>Check availability and reserve through the Jalan.net booking page.</p></details><details><summary>Language support</summary><p>Language support: Please confirm when booking.</p></details>';
   const access = document.querySelector('.access-layout__copy');
   if (access) { const ps = access.querySelectorAll('p'); if (ps[0]) ps[0].innerHTML = '2-1-5 Asakusa, Taito-ku, Tokyo 111-0032'; if (ps[1]) ps[1].innerHTML = 'Tokyo Metro Ginza Line Asakusa Station: 2 min walk from Exit 6<br>Toei Asakusa Line: 5 min walk from Exit A5<br>Tobu Skytree Line: 2 min walk from North Gate'; if (ps[2]) ps[2].innerHTML = 'Hours 10:30?18:00<br>Closed Mondays (or the following Tuesday when Monday is a holiday)'; }
+})();
+
+/* Shared copy for the secondary pages. Keep the Japanese source in HTML and
+   translate exact text nodes only when English is selected. */
+(() => {
+  let lang = 'ja';
+  try { lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('inimuLang') || 'ja'; } catch (error) {}
+  if (lang !== 'en') return;
+  const copy = {
+    'メインナビゲーション':'Main navigation','メニューを開く':'Open menu','メニューを閉じる':'Close menu','inimu トップ':'inimu home',
+    '香りから選ぶ':'Choose by scent','香りの種類':'Scent types','フルーツ系':'Fruity','シトラス系':'Citrus','ハーバル系':'Herbal','フローラル系':'Floral','スパイス系':'Spicy','ティー系':'Tea','ウッディ系':'Woody','イマジナル系':'Imaginal','アニマル系':'Animal','グルマン系':'Gourmand','精油':'Essential oils',
+    '香りの印象から商品を見つけるためのカテゴリページです。商品の詳細は、今後このページからご覧いただけるよう整えていきます。':'Browse products by their scent profile. Product details will be added to this page in the future.','果実の明るさや甘さを感じる香りの商品。':'Products with bright, sweet fruit notes.','掲載内容・在庫・価格は公式サイトでご確認ください。':'Please check the official site for current details, stock and prices.','← 香りから選ぶへ戻る':'← Back to scent categories','← SHOPへ戻る':'← Back to SHOP',
+    '香りの商品を探す・買う。':'Browse and buy scents.','香り、アイテム、ブランドから、':'Explore by scent, item or brand.','今の気分に合うものを探します。':'Find what suits your mood.','アイテムから探す':'Choose by item','ブランドから探す':'Choose by brand','すべての商品':'All products','新着商品':'New arrivals','商品一覧':'All products','公式ストアで商品を見る ↗':'View products in the official store ↗','公式商品ページ ↗':'Official product page ↗',
+    '会員ページへ':'Member account','会員情報やお買い物に関する手続きを、inimuのサイト内で確認できます。':'Review your account and shopping information on the inimu site.','会員の方':'Existing members','本ページは職業訓練校の制作課題として作成したデモです。実際の個人情報や普段使用しているパスワードは入力しないでください。':'This is a demo website created as part of a vocational training project. Please do not enter real personal information or passwords you use for other accounts.','まだ会員ではない方':'New members','初めてご利用の方はこちらから、会員登録のデモを体験できます。':'If you are new here, try the account-registration demo.','新規会員登録 ↗':'Create an account ↗','マイページ':'My account','登録情報や注文履歴など、会員向けの項目をまとめています。':'Your account details, order history, and other member information are organized here.','マイページを見る →':'View my account →','購入について':'Shopping support','カートや購入情報は、サイト内の案内から確認できます。':'Find guidance on your cart and purchase information here.','SHOPを見る':'View SHOP','ショッピングガイド':'Shopping guide','配送・送料について':'Shipping and delivery','返品について':'Returns','お支払い方法について':'Payment methods','ログイン':'Log in','パスワードを忘れた方':'Forgot your password','メールアドレス':'Email address','パスワード':'Password','登録内容を確認する':'Review registration','ログアウト':'Log out',
+    '新規会員登録':'Create an account','inimuを楽しむための会員情報を入力してください。':'Enter your details to enjoy inimu.','氏名':'Name','フリガナ':'Name in kana','電話番号':'Phone number','パスワード確認':'Confirm password','郵便番号':'Postal code','住所':'Address','あなたが香りを選ぶとき、':'When choosing a scent,','いちばん大切にしたいことは？':'what matters most to you?','落ち着きたい':'I want to feel calm','気分を切り替えたい':'I want a change of mood','自分らしさを感じたい':'I want to feel like myself','記憶に残る香りがほしい':'I want a memorable scent','贈りものにしたい':'I want it as a gift','まだわからない':'I am not sure yet','利用規約・プライバシーポリシーに同意する':'I agree to the Terms of Use and Privacy Policy',
+    '予約方法':'How to book','体験内容を確認してから、じゃらんnetで予約します。':'Review the experience, then book through Jalan.net.','Experienceページで体験内容を確認':'Review the experience on the EXPERIENCE page','「予約する」を選択':'Select “Reserve”','じゃらんnetへ移動':'Continue to Jalan.net','希望日時・人数を選択':'Choose your date, time and party size','オンラインカード決済':'Pay online by card','予約完了':'Booking complete','当日の受付':'On the day','予約完了画面を提示し、開始10分前までに1F受付へお越しください。':'Show your booking confirmation and arrive at the 1F reception 10 minutes before the start.','じゃらんnetで予約する ↗':'Book on Jalan.net ↗',
+    '買い物の流れ':'How to shop','香りを選び、必要な情報を確認して、ゆっくりお買い物を。':'Take your time choosing a scent and reviewing the details.','商品を探す':'Find a product','カートに入れる':'Add to cart','購入手続き':'Checkout','支払い・配送':'Payment and delivery','会員登録・ログイン':'Account and login','購入についてへ戻る':'Back to shopping support','支払い方法 →':'Payment methods →','配送・送料 →':'Shipping and delivery →','LOGINへ →':'Go to LOGIN →','特定商取引法に基づく表記 →':'Legal information →',
+    '本サイトは、実在するinimuおよび関連ブランドを題材に、職業訓練校の制作課題として制作した非公式のポートフォリオ作品です。各ブランドの公式サイトではありません。掲載している空間画像・映像の一部はAI生成によるイメージです。本サイト内で実際の商品購入・予約・お問い合わせはできません。外部予約サイトへのリンクは、実在店舗のサービスへの案内です。':'This is an unofficial portfolio project created as a vocational-school assignment, inspired by inimu and related brands. It is not an official brand website. Some spatial images and videos are AI-generated. Purchases, bookings and enquiries cannot be made on this site. External booking links lead to the actual store’s service.'
+  };
+  const translate = (text) => {
+    const trimmed = text.trim();
+    if (!copy[trimmed]) return;
+    const translated = copy[trimmed];
+    const start = text.indexOf(trimmed);
+    return text.slice(0, start) + translated + text.slice(start + trimmed.length);
+  };
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes=[]; let node; while (node=walker.nextNode()) nodes.push(node);
+  nodes.forEach((textNode) => { const translated=translate(textNode.nodeValue); if (translated) textNode.nodeValue=translated; });
+  document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach((el) => { const translated=translate(el.placeholder); if (translated) el.placeholder=translated; });
+  document.querySelectorAll('[aria-label]').forEach((el) => { const translated=copy[el.getAttribute('aria-label')]; if (translated) el.setAttribute('aria-label', translated); });
+  document.title = copy[document.title] || document.title;
 })();

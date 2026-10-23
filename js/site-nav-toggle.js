@@ -19,3 +19,13 @@ if (navigation && menuToggle) {
   }));
 }
 })();
+
+/* Secondary pages share the same language layer as primary pages. */
+if (!document.querySelector('script[src$="js/main.js"],script[src$="/main.js"]')) {
+  const source = document.currentScript;
+  if (source) {
+    const script = document.createElement('script');
+    script.src = new URL('main.js', source.src).href;
+    document.head.appendChild(script);
+  }
+}
