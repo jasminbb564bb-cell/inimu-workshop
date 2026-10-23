@@ -4,10 +4,13 @@
 (()=>{
   // The opening page has no shared header, so provide the same quiet language
   // control here without changing the intro timing or artwork.
-  const selected = new URLSearchParams(location.search).get('lang') || localStorage.getItem('inimuLang') || 'ja';
-  localStorage.setItem('inimuLang', selected);
+  let stored = 'ja';
+  try { stored = localStorage.getItem('inimuLang') || 'ja'; } catch (error) { /* storage unavailable */ }
+  const selected = new URLSearchParams(location.search).get('lang') || stored;
+  try { localStorage.setItem('inimuLang', selected); } catch (error) { /* storage unavailable */ }
   const control = document.createElement('nav');
   control.className = 'top-language-switch';
+  control.style.cssText = 'position:fixed;top:58px;right:max(14px,env(safe-area-inset-right));z-index:100;display:block;visibility:visible;opacity:1;font:12px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;color:rgba(255,255,255,.9);pointer-events:auto;';
   control.setAttribute('aria-label', 'Language');
   ['ja','en'].forEach((language,index)=>{
     if(index) control.append(' / ');
@@ -20,13 +23,30 @@
   document.body.append(control);
   if(selected==='en'){
     document.documentElement.lang='en';
+    document.documentElement.classList.add('lang-en');
+    document.title='inimu — Scent and memory in Asakusa';
+    document.querySelector('.skip-intro')?.setAttribute('aria-label','Skip intro and choose a destination');
+    document.querySelector('.choice')?.setAttribute('aria-label','Choose a destination');
     const text={
-      'SKIP INTRO':'SKIP INTRO','香りの店':'A scent atelier','香りを纏う':'Wear the scent','記憶にふれる香り。':'Scent that touches memory.','香りを重ねる':'Layer the scent','香りを選び、重ね、整える。':'Choose, layer and refine your scent.','inimuでは、香りをただ選ぶのではなく、':'At inimu, scent is more than something you simply choose.','日本の素材や風土に宿る静かな気配に耳を澄ませ、':'Listen for the quiet presence held in Japan’s materials and landscapes,','自分の記憶や感情と向き合いながら、':'as you reflect on your own memories and feelings,','その人だけの一本へと導いていきます。':'until they guide you towards a scent of your own.','浅草の一角で、香りと記憶がそっと重なる時間を。':'In a quiet corner of Asakusa, scent and memory gently meet.','一、香りの印象を選ぶ':'01. Choose the impression','二、好みの素材を重ねる':'02. Layer the materials you like','三、調香師とともに整える':'03. Refine it with the perfumer','四、名をつけて完成。':'04. Name it and make it yours.','所要時間は約六十分。':'The experience takes about 60 minutes.','初心者の方でも、静かに香りと向き合えます':'Beginners are welcome to take their time with scent.','買う':'SHOP','つくる':'MAKE','職業訓練校制作課題｜非公式ポートフォリオ':'Unofficial portfolio project'
+      'SKIP INTRO':'SKIP INTRO','香りの店':'A scent atelier','香りを纏う':'Wear the scent','記憶にふれる香り。':'Scent that touches memory.','香りを重ねる':'Layer the scent','香りを選び、重ね、整える。':'Choose, layer and refine.','inimuでは、香りをただ選ぶのではなく、':'At inimu, scent is more than a choice.','日本の素材や風土に宿る静かな気配に耳を澄ませ、':'Listen to Japan’s land and materials.','自分の記憶や感情と向き合いながら、':'Meet your memories and feelings.','その人だけの一本へと導いていきます。':'Find a scent that is yours.','浅草の一角で、香りと記憶がそっと重なる時間を。':'In Asakusa, scent and memory meet.','一、香りの印象を選ぶ':'01. Choose a mood','二、好みの素材を重ねる':'02. Layer materials','三、調香師とともに整える':'03. Refine with the perfumer','四、名をつけて完成。':'04. Name your scent.','所要時間は約六十分。':'About 60 minutes.','初心者の方でも、静かに香りと向き合えます':'A quiet scent experience for beginners.','買う':'SHOP','つくる':'MAKE','職業訓練校制作課題｜非公式ポートフォリオ':'Unofficial portfolio project'
     };
-    const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT); const nodes=[]; let node;
-    while(node=walker.nextNode())nodes.push(node);
-    nodes.forEach(n=>{const key=n.nodeValue.trim();if(text[key])n.nodeValue=n.nodeValue.replace(key,text[key]);});
+    const applyEnglish = (root=document) => {
+      root.querySelectorAll?.('[data-en]').forEach((element) => { if (element.textContent !== element.dataset.en) element.textContent = element.dataset.en; });
+      const walker=document.createTreeWalker(root.body || root,NodeFilter.SHOW_TEXT); const nodes=[]; let node;
+      while(node=walker.nextNode())nodes.push(node);
+      nodes.forEach(n=>{const key=n.nodeValue.trim();if(text[key])n.nodeValue=n.nodeValue.replace(key,text[key]);});
+    };
+    applyEnglish(document);
+    new MutationObserver((records)=>{
+      if(records.some((record)=>record.addedNodes.length)) applyEnglish(document);
+    }).observe(document.body,{childList:true,subtree:true});
     document.querySelectorAll('.choice a').forEach(a=>{const u=new URL(a.href);u.searchParams.set('lang','en');a.href=u.pathname+u.search;});
+  } else {
+    document.documentElement.lang='ja';
+    document.documentElement.classList.remove('lang-en');
+    document.title='inimu — 浅草・記憶の調香';
+    document.querySelector('.skip-intro')?.setAttribute('aria-label','イントロを飛ばして、行き先の選択へ');
+    document.querySelector('.choice')?.setAttribute('aria-label','行き先を選ぶ');
   }
   const layer=document.querySelector('.scene--04');
   const img=layer?.querySelector('img');

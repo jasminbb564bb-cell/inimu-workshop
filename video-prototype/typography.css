@@ -45,3 +45,27 @@
 .scene--04.is-visible .stage::before{opacity:1;transition-delay:2.6s}
 
 @media(prefers-reduced-motion:reduce){.scene--03 .stage>*,.scene--04 .stage>*{filter:none}}
+
+/* English keeps the original vertical composition. Shorter copy and a
+   slightly smaller scale keep every column inside the image frame. */
+html.lang-en .title,html.lang-en .lead,html.lang-en .body,html.lang-en .shop-title{
+  writing-mode:vertical-rl;text-orientation:mixed;white-space:nowrap;line-height:1}
+html.lang-en .scene--03 .title--03{font-size:clamp(22px,4.7cqh,42px);letter-spacing:.12em}
+html.lang-en .scene--03 .lead--03{font-size:clamp(12px,1.8cqh,18px);letter-spacing:.22em}
+html.lang-en .scene--03 .body--03{font-size:clamp(11px,1.48cqh,16px);line-height:2.75;letter-spacing:.1em}
+html.lang-en .scene--04 .title--04{font-size:clamp(22px,4.8cqh,44px);letter-spacing:.1em}
+html.lang-en .scene--04 .lead--04{font-size:clamp(12px,1.8cqh,18px);letter-spacing:.2em}
+html.lang-en .scene--04 .body--04{font-size:clamp(11px,1.55cqh,16px);letter-spacing:.12em}
+html.lang-en .scene--04 .steps{line-height:2.8}
+html.lang-en .scene--04 .notes{line-height:2.4}
+
+@media (orientation:portrait) and (max-width:600px){
+  html.lang-en .scene--03 .title--03{font-size:3.8svh;letter-spacing:.08em}
+  html.lang-en .scene--03 .lead--03{font-size:1.55svh;letter-spacing:.16em}
+  html.lang-en .scene--03 .body--03{font-size:1.35svh;line-height:2.15;letter-spacing:.05em}
+  html.lang-en .scene--04 .title--04{font-size:3.9svh;letter-spacing:.08em}
+  html.lang-en .scene--04 .lead--04{font-size:1.55svh;letter-spacing:.15em}
+  html.lang-en .scene--04 .body--04{font-size:1.4svh;letter-spacing:.06em}
+  html.lang-en .scene--04 .steps{line-height:2.15}
+  html.lang-en .scene--04 .notes{line-height:1.9}
+}
