@@ -447,3 +447,96 @@ img[src*="products/hatenko.png"]{content:url("../images/hatenko.png")}
 }
 /* print: p6 keeps the header spacing it has on a 900px-high screen, so the larger crossings still fit one sheet */
 @media print{#p6 header{margin-top:81px;margin-bottom:54px}}
+
+/* JP / EN switch (proposal-lang.js). Quiet like the page pager; hidden in print. */
+.proposal-lang{position:fixed;z-index:4;top:14px;right:18px;display:flex;align-items:center;gap:2px;padding:0 8px;border:1px solid #aaa9a3;border-radius:16px;background:#faf9f6e6;color:#8a8984;font:600 10px/1 Arial,sans-serif;letter-spacing:.14em}
+.proposal-lang a{padding:8px 4px;color:inherit;text-decoration:none}
+.proposal-lang a[aria-current="true"]{color:var(--ink)}
+.proposal-lang a:focus-visible{outline:1px solid var(--accent);outline-offset:-2px}
+@media(max-width:760px){.proposal-lang{top:10px;right:10px}}
+@media print{.proposal-lang{display:none}}
+
+/* English: the Japanese-only no-wrap heading on p9, and the phone labels of the p5 journeys */
+html[lang="en"] #p9 h2{white-space:normal}
+@media(max-width:768px){
+  html[lang="en"] #p5 .discovery__side--before .journey .journey__result::before{content:"Purpose met: "}
+  html[lang="en"] #p5 .discovery__side--before .journey .journey__end::before{content:"Then: "}
+}
+
+/* Phone: the p5 "planned" row stacks like the rest of the phone diagram; four survey characters go 2 × 2 below 380px */
+@media(max-width:760px){
+  #p5 .intro-branch__future{flex-direction:column;gap:8px}
+  #p5 .intro-branch__future .ln{margin:0}
+}
+@media(max-width:379px){.survey-page .survey-choices{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:34px}}
+
+/* Print: the sheet is wider than the screen frame, so the p5 diagram grew past one sheet and p6 ran 4px over */
+@media print{
+  #p5 .intro-branch__map{max-height:430px}
+  #p6 header{margin-bottom:40px}
+  #p6 .built-note{margin-top:16px!important}
+}
+/* Hyphenated English words and the site URL break only between whole parts */
+.nb{white-space:nowrap}
+/* Phone: the switch sits in the cover's label row instead of floating over the text */
+@media(max-width:760px){.proposal-lang{position:absolute;top:22px;right:20px}}
+/* Print, English only: the four-line p5 heading and two-line p6 note would push both pages past one sheet */
+@media print{
+  html[lang="en"] #p5 header{margin-top:81px}
+  html[lang="en"] #p5 .intro-branch__map{max-height:390px}
+  html[lang="en"] #p6 header{margin-top:60px}
+}
+/* Phone: the p5 lead keeps whole phrases on PC but needs ordinary Japanese line breaking at phone width */
+@media(max-width:760px){#p5 header p{word-break:normal}}
+/* Tablet: the p5 box is narrower than on PC */
+html[lang="en"] #p5 .intro-branch__future .node--door{white-space:normal}
+
+/* Final adjustments */
+/* p2 English heading on phones: room under the title, English tracking, two clean lines down to 320px */
+@media(max-width:760px){html[lang="en"] #p2 .lead-statement{margin-top:18px;letter-spacing:.01em}}
+@media(max-width:359px){html[lang="en"] #p2 .lead-statement{font-size:22px}}
+
+/* p5: ①② of the legend mark the mutual-discovery row of the diagram */
+#p5 .loop-badges{display:inline-flex;gap:4px}
+#p5 .intro-branch__loop .badge{width:16px;height:16px;font-size:9.5px}
+
+/* p5 on phones: the SVG shrinks its labels to 7–9px, so the same diagram is drawn in HTML at reading size */
+#p5 .intro-branch__phone{display:none}
+@media(max-width:760px){
+  #p5 .intro-branch__map{display:none}
+  #p5 .intro-branch__phone{display:grid;justify-items:center;margin-top:14px}
+  #p5 .ib-node{display:inline-block;padding:9px 10px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);font:400 13px/1.2 Arial,"Yu Gothic",sans-serif;letter-spacing:.04em}
+  #p5 .ib-split{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;margin-top:40px}
+  #p5 .ib-split:before{content:"";position:absolute;top:-40px;left:50%;height:20px;border-left:1px solid var(--line)}
+  #p5 .ib-split:after{content:"";position:absolute;top:-20px;left:25%;right:25%;border-top:1px solid var(--line)}
+  #p5 .ib-split>div{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0;padding:0 4px;text-align:center}
+  #p5 .ib-split>div:before{content:"";position:absolute;top:-20px;left:50%;height:20px;border-left:1px solid var(--line)}
+  #p5 .ib-split small{color:var(--muted);font-size:13px;line-height:1.5}
+  #p5 .intro-branch__loop{flex-wrap:wrap;gap:8px 10px}
+}
+
+/* Tablet 761–1099px: the two p5 columns are too narrow for the journey rows, so they stack as on phones (screen only: print is laid out at a narrower width) */
+@media screen and (min-width:761px) and (max-width:1099px){
+  #p5 .discovery{grid-template-columns:minmax(0,1fr)}
+  #p5 .discovery__side--before{padding-right:0;padding-bottom:28px}
+  #p5 .discovery__side--after{padding-left:0;padding-top:28px;border-left:0;border-top:1px solid var(--line)}
+}
+/* Phone: the cover line breaks after its comma, not before the last 「へ。」 (Japanese only; PC is outside this query) */
+@media(max-width:760px){html[lang="ja"] #p1 .cover-note{word-break:keep-all}}
+
+/* First view: unnumbered, before the cover. One screen, pure white,
+   a two-line question low and to the left; no rule, frame, shadow, gradient or motion.
+   z-index keeps the cover's shadow from tinting its bottom edge on phones, where the gap is only 11px. */
+.v2 .frame.first-view{z-index:1;display:grid;align-content:end;width:auto;height:100vh;height:100dvh;min-height:0;margin:0;padding:0 0 26dvh clamp(48px,12vw,220px);background:#fff;box-shadow:none;overflow:hidden}
+.v2 .frame.first-view .first-view__question{margin:0;color:#1a1a1a;font-family:'Yu Gothic','游ゴシック','YuGothic',sans-serif;font-size:clamp(20px,calc(1.1vw + 8px),26px);font-weight:300;line-height:2.1;letter-spacing:.12em}
+.first-view__question span{display:block;white-space:nowrap}
+@media(max-width:600px){
+  .v2 .frame.first-view{padding:0 28px 30dvh}
+  .v2 .frame.first-view .first-view__question{font-size:min(20px,calc((100vw - 56px) / 15.4));letter-spacing:.1em}
+}
+.is-first-view .pager{visibility:hidden}
+.is-first-view .proposal-lang{border-color:transparent;background:transparent}
+@media print{
+  .v2 .frame.first-view{height:1200px;min-height:1200px;padding:0 0 312px 173px}
+  .v2 .frame.first-view .first-view__question{font-size:24px}
+}
