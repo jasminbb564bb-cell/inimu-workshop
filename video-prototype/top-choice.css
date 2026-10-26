@@ -59,12 +59,12 @@
 .skip-intro:hover::after,.skip-intro:focus-visible::after{transform:scaleX(1)}
 .skip-intro:focus-visible{outline:1px solid rgba(239,232,220,.4);outline-offset:2px}
 .skip-intro.is-hidden{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .8s ease,visibility 0s linear .8s}
-@media (orientation:portrait) and (max-width:600px){.skip-intro{font-size:10px;padding:14px 10px}.skip-intro::after{bottom:12px}}
+@media (orientation:portrait) and (max-width:600px){.skip-intro{font-size:10px;padding:14px 10px;top:max(12px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right))}.skip-intro::after{bottom:12px}}
 
-/* The language control is placed below SKIP INTRO so the two controls never overlap. */
+/* The language control stays quiet and separate from the shared intro control. */
 .top-language-switch{position:fixed;z-index:5;top:58px;right:max(14px,env(safe-area-inset-right));font:12px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;color:#fff}
 .top-language-switch a{color:inherit;text-decoration:none}
-@media (orientation:portrait) and (max-width:600px){.top-language-switch{top:62px;font-size:10px}}
+@media (orientation:portrait) and (max-width:600px){.top-language-switch{top:max(14px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));right:auto;font-size:10px;padding:8px 0;background:rgba(9,10,9,.22)}}
 
 /* PC refinement (everything except portrait phones): one centred group, lifted off the bottom edge,
    larger and brighter words, quieter rules, and a soft shade only behind the group */

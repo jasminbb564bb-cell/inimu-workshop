@@ -10,7 +10,9 @@
   try { localStorage.setItem('inimuLang', selected); } catch (error) { /* storage unavailable */ }
   const control = document.createElement('nav');
   control.className = 'top-language-switch';
-  control.style.cssText = 'position:fixed;top:58px;right:max(14px,env(safe-area-inset-right));z-index:100;display:block;visibility:visible;opacity:1;font:12px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;color:rgba(255,255,255,.9);pointer-events:auto;';
+  // Position is intentionally owned by CSS so the portrait media query can move
+  // this control to the left without being overridden by inline top/right values.
+  control.style.cssText = 'display:block;visibility:visible;opacity:1;pointer-events:auto;';
   control.setAttribute('aria-label', 'Language');
   ['ja','en'].forEach((language,index)=>{
     if(index) control.append(' / ');
@@ -60,30 +62,23 @@
   const FALLBACK=12000+SETTLE_DELAY+300;
   let shown=false,skipped=false,timer=null;
 
-  // Quietly retire SKIP INTRO: fade (CSS .is-hidden), then out of pointer, tap and keyboard reach
-  const hideSkip=()=>{
-    if(!skip||skip.classList.contains('is-hidden'))return;
-    skip.classList.add('is-hidden');
-    skip.setAttribute('tabindex','-1');
-    skip.setAttribute('aria-hidden','true');
-    if(document.activeElement===skip)skip.blur();
-  };
   const show=()=>{
     if(shown)return;
     shown=true;
     nav.removeAttribute('inert');
     layer.classList.add('has-choice');
     nav.classList.add('is-shown');
-    // Keep keyboard focus in the page when the skip control goes away
-    if(skip&&document.activeElement===skip)nav.querySelector('a')?.focus({preventScroll:true});
-    hideSkip();
+    // The intro is complete here, so the shared skip control can leave the tab order.
+    if(skip){
+      skip.classList.add('is-hidden');
+      skip.setAttribute('tabindex','-1');
+      skip.setAttribute('aria-hidden','true');
+      if(document.activeElement===skip)nav.querySelector('a')?.focus({preventScroll:true});
+    }
   };
   img.addEventListener('animationend',(e)=>{if(e.animationName==='atelier-dolly')window.setTimeout(show,SETTLE_DELAY);});
   // Fallback (and reduced-motion, where the zoom never runs): start counting once Scene 04 is on screen.
   // Scene 04 reached by normal playback: SKIP INTRO has done its job (it stays usable through Scenes 01–03).
-  new MutationObserver(()=>{
-    if(!skipped&&layer.classList.contains('is-visible'))hideSkip();
-  }).observe(layer,{attributes:true,attributeFilter:['class']});
   new MutationObserver(()=>{
     if(timer||!layer.classList.contains('is-visible'))return;
     const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
