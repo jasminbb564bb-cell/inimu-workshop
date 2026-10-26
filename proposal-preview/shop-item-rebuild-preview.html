@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>inimu SHOP / FIND BY ITEM — visual preview</title>
+  <style>
+    :root {
+      --paper: #f4f2ed;
+      --ink: #272623;
+      --muted: #77736b;
+      --line: rgba(39, 38, 35, .18);
+      --accent: #8a5f43;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      font-weight: 400;
+      letter-spacing: .04em;
+    }
+
+    .preview {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 72px 0 104px;
+    }
+
+    .eyebrow {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-family: Georgia, serif;
+      font-size: 11px;
+      letter-spacing: .2em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 52px);
+      font-weight: 400;
+      letter-spacing: .12em;
+    }
+
+    .reference {
+      display: grid;
+      gap: 24px;
+      align-items: start;
+      margin-top: 36px;
+      padding: 18px 0 20px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .reference img {
+      width: min(100%, 720px);
+      display: block;
+      border: 1px solid var(--line);
+    }
+
+    .reference__text {
+      max-width: 32em;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(240px, .65fr);
+      min-height: 500px;
+      margin-top: 54px;
+      background: #e9e5dc;
+    }
+
+    .intro__image {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .intro__copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 42px 38px 44px;
+    }
+
+    .intro__copy p { margin: 0; }
+    .intro__label {
+      color: var(--muted);
+      font-family: Georgia, serif;
+      font-size: 11px;
+      letter-spacing: .18em;
+    }
+
+    .intro__title {
+      margin-top: 20px !important;
+      font-size: 20px;
+      line-height: 1.8;
+      letter-spacing: .12em;
+    }
+
+    .intro__text {
+      max-width: 22em;
+      margin-top: 20px !important;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 2.1;
+    }
+
+    .items { margin-top: 112px; }
+    .items__heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+    }
+
+    .items__heading h2 {
+      margin: 0;
+      font-size: 23px;
+      font-weight: 400;
+      letter-spacing: .1em;
+    }
+
+    .items__heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 52px 28px;
+      align-items: start;
+    }
+
+    .category {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .category:nth-child(2) { margin-top: 56px; }
+    .category:nth-child(4) { margin-top: 56px; }
+
+    .category__image {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      background: #e5e1d8;
+    }
+
+    .category:nth-child(1) .category__image,
+    .category:nth-child(4) .category__image { aspect-ratio: 1.35 / 1; }
+    .category:nth-child(2) .category__image,
+    .category:nth-child(3) .category__image { aspect-ratio: 1 / 1.08; }
+
+    .category__meta {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: baseline;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .category__number {
+      color: var(--muted);
+      font-family: Georgia, serif;
+      font-size: 11px;
+      letter-spacing: .12em;
+    }
+
+    .category__name { font-size: 14px; letter-spacing: .14em; }
+    .category__jp { margin-top: 7px; color: var(--muted); font-size: 11px; }
+    .category__arrow { color: var(--accent); font-size: 18px; }
+
+    .all-items {
+      display: inline-flex;
+      gap: 18px;
+      align-items: center;
+      margin-top: 72px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--ink);
+      color: inherit;
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: .12em;
+    }
+
+    .note {
+      margin: 96px 0 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.9;
+    }
+
+    @media (max-width: 760px) {
+      .preview { width: min(100% - 32px, 600px); padding: 42px 0 72px; }
+      .reference { gap: 16px; }
+      .reference img { width: 100%; }
+      .intro { display: block; margin-top: 36px; }
+      .intro__image, .intro { min-height: 0; }
+      .intro__image { aspect-ratio: 1 / .78; }
+      .intro__copy { min-height: 270px; padding: 30px 24px 34px; }
+      .items { margin-top: 76px; }
+      .items__heading { display: block; }
+      .items__heading p { margin-top: 10px; }
+      .category-grid { grid-template-columns: 1fr 1fr; gap: 34px 14px; }
+      .category:nth-child(2), .category:nth-child(4) { margin-top: 28px; }
+      .category__meta { grid-template-columns: auto 1fr; gap: 8px 10px; padding-top: 11px; }
+      .category__arrow { display: none; }
+      .category__name { font-size: 11px; letter-spacing: .08em; }
+      .category__jp { grid-column: 2; margin-top: -4px; }
+      .all-items { margin-top: 50px; }
+    }
+
+    @media (max-width: 420px) {
+      .category-grid { gap: 28px 12px; }
+      .category__name { font-size: 10px; }
+      .category__jp { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="preview">
+    <p class="eyebrow">INIMU / FIND BY ITEM</p>
+    <h1>アイテムから探す</h1>
+
+    <section class="reference" aria-label="添付参考画像">
+      <div>
+        <p class="intro__label">REFERENCE / PROVIDED IMAGE</p>
+        <p class="reference__text">添付いただいた画像1を、4カテゴリーの主要なビジュアル案としてそのまま使用しています。下の導線は実際のSHOP絞り込み確認用です。</p>
+      </div>
+      <img src="assets/shop-reference-layout.png" alt="ユーザー提供の4カテゴリー構成の参考画像">
+    </section>
+
+    <section class="intro" aria-labelledby="intro-title">
+      <img class="intro__image" src="assets/shop-intro-spatial-bottle.png" alt="開口部の向こうに庭が見える空間と、手前の石台に置かれた香りのボトル">
+      <div class="intro__copy">
+        <p class="intro__label">A QUIET PLACE FOR SCENT</p>
+        <p id="intro-title" class="intro__title">空間の中で、<br>香りに出会う。</p>
+        <p class="intro__text">開口部から差し込む光、手前に残る影。<br>4つの入口から、探しているアイテムへ。</p>
+      </div>
+    </section>
+
+    <section class="items" aria-labelledby="items-title">
+      <div class="items__heading">
+        <h2 id="items-title">FIND BY ITEM</h2>
+        <p>カテゴリーを選択してください</p>
+      </div>
+
+      <div class="category-grid">
+        <a class="category" href="../shop/?item=home-fragrance">
+          <img class="category__image" src="../images/shop/items/home-fragrance.png" alt="室内に置かれたディフューザーとキャンドル">
+          <span class="category__meta"><span class="category__number">01</span><span><span class="category__name">HOME FRAGRANCE</span><span class="category__jp">ホームフレグランス</span></span><span class="category__arrow">→</span></span>
+        </a>
+        <a class="category" href="../shop/?item=body-care">
+          <img class="category__image" src="../images/shop/items/body-care.png" alt="洗面空間に置かれたボディケア用ポンプボトル">
+          <span class="category__meta"><span class="category__number">02</span><span><span class="category__name">BODY CARE</span><span class="category__jp">ボディケア</span></span><span class="category__arrow">→</span></span>
+        </a>
+        <a class="category" href="../shop/?item=fragrance">
+          <img class="category__image" src="../images/products/perfumers-fig-editorial.png" alt="空間の中に置かれたPERFUMERS Figの香水">
+          <span class="category__meta"><span class="category__number">03</span><span><span class="category__name">FRAGRANCE</span><span class="category__jp">フレグランス</span></span><span class="category__arrow">→</span></span>
+        </a>
+        <a class="category" href="../shop/?item=gift-set">
+          <img class="category__image" src="../images/products/hatenko-discovery-editorial.png" alt="HATENKOの香りを組み合わせたギフトセット">
+          <span class="category__meta"><span class="category__number">04</span><span><span class="category__name">GIFT SET</span><span class="category__jp">ギフトセット</span></span><span class="category__arrow">→</span></span>
+        </a>
+      </div>
+
+      <a class="all-items" href="../shop/?view=all#all-items">すべてのアイテムを見る <span aria-hidden="true">→</span></a>
+    </section>
+
+    <p class="note">比較用プレビュー。今回の追加素材は、ユーザー提供のローカル画像をコピーした導入ビジュアルです。カテゴリー画像はプロジェクト内の既存素材を使用しており、本番SHOPは変更していません。</p>
+  </main>
+</body>
+</html>
