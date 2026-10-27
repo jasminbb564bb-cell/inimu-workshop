@@ -507,16 +507,9 @@ body:has(.wayfinding) .way-card.is-leaving { opacity: 1; transform: scale(1.01);
 .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-provided-visuals img:first-child { object-fit: contain; object-position: left center; background: #f4f2ed; }
 .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-spatial-visual { margin: 0 0 24px; }
 .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-spatial-visual img { display: block; width: 100%; max-height: 420px; object-fit: cover; object-position: center; }
-.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-provided-map { position: relative; width: min(100%, 720px); margin: 0 auto 24px; }
-.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-provided-map > img { display: block; width: 100%; height: auto; }
-.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-map-link { position: absolute; width: 50%; height: 50%; display: block; }
-.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-map-link--1 { left: 0; top: 0; }
-.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-map-link--2 { right: 0; top: 0; }
-.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-map-link--3 { left: 0; bottom: 0; }
-.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-map-link--4 { right: 0; bottom: 0; }
-.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-text-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid rgba(0,0,0,.14); border-bottom: 1px solid rgba(0,0,0,.14); }
-.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-text-links a { padding: 14px 10px; color: inherit; text-decoration: none; font-size: .68rem; letter-spacing: .05em; border-right: 1px solid rgba(0,0,0,.14); }
-.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-text-links a:last-child { border-right: 0; }
+.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-links--items a { color: inherit; text-decoration: none; font-family: "Yu Gothic", YuGothic, "Noto Sans JP", sans-serif; }
+.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-links--items .shop-photo-link__image { height: auto; aspect-ratio: 1 / 1; overflow: hidden; background: #f7f6f2; }
+.shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-links--items .shop-photo-link__image img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-links a { flex: 0 0 190px; }
 .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-link__image { height: 112px; }
 .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-links span { margin-top: 10px; font-size: .75rem; }
@@ -525,7 +518,7 @@ body:has(.wayfinding) .way-card.is-leaving { opacity: 1; transform: scale(1.01);
 .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-all-link { display: block; width: fit-content; margin: 24px 0 0 auto; }
 .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-links--items a.is-selected span { color: #1a1a1a; border-bottom: 1px solid #1a1a1a; }
 .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-filter-status { margin: 14px 0 0; color: #77736c; font-size: .72rem; letter-spacing: .08em; }
-@media (max-width: 760px) { .shop-page .shop-discovery[aria-labelledby="item-title"] { width: min(100% - 36px, 1040px); margin-bottom: 58px; padding-top: 42px; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-spatial-visual img { max-height: 280px; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-text-links { grid-template-columns: repeat(2, minmax(0, 1fr)); } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-text-links a:nth-child(2) { border-right: 0; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-text-links a:nth-child(-n+2) { border-bottom: 1px solid rgba(0,0,0,.14); } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-provided-visuals { grid-template-columns: 1fr; gap: 12px; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-provided-visuals img { height: auto; max-height: 260px; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-links--items { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-links--items a { flex-basis: auto; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-link__image { height: auto; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-all-link { margin-top: 22px; } }
+@media (max-width: 760px) { .shop-page .shop-discovery[aria-labelledby="item-title"] { width: min(100% - 36px, 1040px); margin-bottom: 58px; padding-top: 42px; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-spatial-visual img { max-height: 280px; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-links--items { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-links--items a { flex-basis: auto; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-photo-link__image { height: auto; } .shop-page .shop-discovery[aria-labelledby="item-title"] .shop-item-all-link { margin-top: 22px; } }
 .story-page { background: #fbfaf7; color: #292824; }
 .story-main { width: min(100% - 48px, 1000px); margin: 0 auto; padding: 58px 0 120px; }
 .story-main h1 { margin: 18px 0 16px; font-size: clamp(2.4rem, 5vw, 4.6rem); font-weight: 400; letter-spacing: .1em; }
@@ -2467,7 +2460,9 @@ body:has(.wayfinding) .site-footer__inner{grid-template-columns:1fr auto;align-i
 .experience-info-grid dd small { color: #777; font-size: .72rem; line-height: 1.6; }
 @media (max-width: 767px) {
   .experience-info-grid, .workshop-flow { grid-template-columns: 1fr; }
-  .experience-info-grid div { grid-template-columns: 7.5rem 1fr; }
+  .experience-info-grid div { grid-template-columns: 1fr; gap: 6px; min-width: 0; }
+  .experience-info-grid dt,
+  .experience-info-grid dd { min-width: 0; font-family: "Yu Gothic", YuGothic, "Noto Sans JP", sans-serif; overflow-wrap: anywhere; }
   .reservation-summary { grid-template-columns: repeat(2, 1fr); }
   .reservation-summary div:nth-child(2) { border-right: 0; }
   .reservation-summary div:nth-child(-n+2) { border-bottom: 1px solid #c9c6ba; }

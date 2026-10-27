@@ -58,6 +58,7 @@ if (shopMain) {
   ].filter(Boolean);
   orderedSections.forEach((section) => shopMain.appendChild(section));
   const productKey = new URLSearchParams(window.location.search).get('product');
+  if (productKey) { window.location.replace(`product/detail-api.html?product=${encodeURIComponent(productKey)}`); }
   if (productKey && !shopMain.querySelector('.product-experience-bridge')) {
     const bridge = document.createElement('section');
     bridge.className = 'product-experience-bridge';
