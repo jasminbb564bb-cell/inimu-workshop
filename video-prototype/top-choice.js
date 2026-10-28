@@ -65,6 +65,7 @@
   const show=()=>{
     if(shown)return;
     shown=true;
+    if(!skipped) window.inimuAnalytics?.send('intro_complete');
     nav.removeAttribute('inert');
     layer.classList.add('has-choice');
     nav.classList.add('is-shown');

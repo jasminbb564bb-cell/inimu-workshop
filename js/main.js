@@ -1,3 +1,9 @@
+if (!document.querySelector('script[src$="analytics.js"]')) {
+  const analytics = document.createElement('script');
+  analytics.src = new URL('analytics.js', document.currentScript?.src || `${location.origin}/js/main.js`).href;
+  document.head.appendChild(analytics);
+}
+
 const shopPage = document.querySelector('.shop-page');
 const oldScentEntry = shopPage?.querySelector('.shop-discovery[aria-labelledby="scent-title"]');
 if (shopPage) {
