@@ -1,12 +1,12 @@
 {
-  "odoodoro": {"name": "おどろおどろ", "brand": "HATENKO / 破天荒", "category": "フレグランス", "size": "30ml", "price": "13,750円", "image": "images/products/hatenko-odoroodoro-editorial.png"},
-  "perfume-brown": {"name": "PERFUMERS EDT Brown Diamond", "brand": "PERFUMERS", "category": "フレグランス", "price": "4,400円", "image": "images/products/perfumers-brown-diamond-editorial.png"},
-  "hanabi": {"name": "HATENKO Eau De Parfum 花火", "brand": "HATENKO / 破天荒", "category": "フレグランス", "image": "images/products/hatenko-hanabi-editorial.png"},
-  "isonami": {"name": "HATENKO Eau De Parfum 磯波", "brand": "HATENKO / 破天荒", "category": "フレグランス", "size": "30ml", "price": "13,750円", "image": "images/products/hatenko-isonami-editorial.png"},
-  "wanowa-hiba": {"name": "WANOWA ルームスプレー 能登ひば", "brand": "WANOWA", "category": "ホームフレグランス", "size": "60ml", "price": "2,970円", "image": "images/products/wanowa-noto-hiba-editorial.png"},
-  "fig": {"name": "PERFUMERS ヘア＆ボディミスト フィグ", "brand": "PERFUMERS", "category": "ボディケア", "size": "50ml", "price": "1,760円", "image": "images/products/perfumers-fig-editorial.png"},
-  "kou": {"name": "kou 漢方生薬香", "brand": "kou", "category": "ホームフレグランス", "price": "1,480円", "image": "images/products/kou-kanpo-editorial.png"},
-  "room-spray-hinoki": {"name": "WANOWA ルームスプレー 加子母ひのき", "brand": "WANOWA", "category": "ホームフレグランス", "size": "60ml", "price": "2,970円", "image": "images/products/wanowa-hinoki-editorial.png"},
-  "aroma-brick": {"name": "aroma recolte Aroma Brick", "brand": "aroma recolte", "category": "ホームフレグランス", "price": "4,180円", "image": "images/products/aroma-recolte-brick-editorial.png"},
-  "discovery-set": {"name": "HATENKO Discovery Set", "brand": "HATENKO / 破天荒", "category": "ギフトセット", "price": "14,300円", "image": "images/products/hatenko-discovery-editorial.png"}
+  "odoodoro": {"name": "おどろおどろ", "brand": "HATENKO / 破天荒", "category": "フレグランス", "size": "30ml", "price": "13,750円", "image": "images/products/hatenko-odoroodoro-editorial.webp"},
+  "perfume-brown": {"name": "PERFUMERS EDT Brown Diamond", "brand": "PERFUMERS", "category": "フレグランス", "price": "4,400円", "image": "images/products/perfumers-brown-diamond-editorial.webp"},
+  "hanabi": {"name": "HATENKO Eau De Parfum 花火", "brand": "HATENKO / 破天荒", "category": "フレグランス", "image": "images/products/hatenko-hanabi-editorial.webp"},
+  "isonami": {"name": "HATENKO Eau De Parfum 磯波", "brand": "HATENKO / 破天荒", "category": "フレグランス", "size": "30ml", "price": "13,750円", "image": "images/products/hatenko-isonami-editorial.webp"},
+  "wanowa-hiba": {"name": "WANOWA ルームスプレー 能登ひば", "brand": "WANOWA", "category": "ホームフレグランス", "size": "60ml", "price": "2,970円", "image": "images/products/wanowa-noto-hiba-editorial.webp"},
+  "fig": {"name": "PERFUMERS ヘア＆ボディミスト フィグ", "brand": "PERFUMERS", "category": "ボディケア", "size": "50ml", "price": "1,760円", "image": "images/products/perfumers-fig-editorial.webp"},
+  "kou": {"name": "kou 漢方生薬香", "brand": "kou", "category": "ホームフレグランス", "price": "1,480円", "image": "images/products/kou-kanpo-editorial.webp"},
+  "room-spray-hinoki": {"name": "WANOWA ルームスプレー 加子母ひのき", "brand": "WANOWA", "category": "ホームフレグランス", "size": "60ml", "price": "2,970円", "image": "images/products/wanowa-hinoki-editorial.webp"},
+  "aroma-brick": {"name": "aroma recolte Aroma Brick", "brand": "aroma recolte", "category": "ホームフレグランス", "price": "4,180円", "image": "images/products/aroma-recolte-brick-editorial.webp"},
+  "discovery-set": {"name": "HATENKO Discovery Set", "brand": "HATENKO / 破天荒", "category": "ギフトセット", "price": "14,300円", "image": "images/products/hatenko-discovery-editorial.webp"}
 }

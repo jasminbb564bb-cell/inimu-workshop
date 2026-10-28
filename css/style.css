@@ -47,15 +47,15 @@ ol {
 
 /* ChatGPT生成の体験イメージ。実際の店舗・商品写真ではありません。 */
 .image--hero {
-  background-image: url('../images/hero-workshop.png');
+  background-image: url('../images/hero-workshop.webp');
 }
 
 .image--shop {
-  background-image: url('../images/2shop-door.png');
+  background-image: url('../images/2shop-door.webp');
 }
 
 .image--materials {
-  background-image: url('../images/materials-scent.png');
+  background-image: url('../images/materials-scent.webp');
 }
 
 .materials__intro-visual {
@@ -64,19 +64,19 @@ ol {
 }
 
 .image--experience {
-  background-image: url('../images/1shop-door.png');
+  background-image: url('../images/1shop-door.webp');
 }
 
 .image--hero-detail {
-  background-image: url('../images/hero-workshop.png');
+  background-image: url('../images/hero-workshop.webp');
 }
 
 .image--materials-detail {
-  background-image: url('../images/materials-scent.png');
+  background-image: url('../images/materials-scent.webp');
 }
 
 .image--access {
-  background-image: url('../images/access-image.png');
+  background-image: url('../images/access-image.webp');
 }
 
 @media (max-width: 767px) {
@@ -336,7 +336,7 @@ body:has(.wayfinding) .way-card.is-leaving { opacity: 1; transform: scale(1.01);
 .login-page .login-main { max-width: 1280px; }
 .login-page .login-hero { grid-template-columns: minmax(0, 1.05fr) minmax(360px, .85fr); gap: clamp(48px, 9vw, 140px); padding: 76px 56px 52px; border-bottom: 0; }
 .login-page .login-hero > div:first-child { position: relative; min-height: 520px; padding: 300px 34px 0; overflow: hidden; }
-.login-page .login-hero > div:first-child::before { position: absolute; inset: 0; z-index: 0; background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(31,34,30,.08)), url('../images/shop-intro-hero.png') center / cover; content: ''; filter: saturate(.55) contrast(.92); }
+.login-page .login-hero > div:first-child::before { position: absolute; inset: 0; z-index: 0; background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(31,34,30,.08)), url('../images/shop-intro-hero.webp') center / cover; content: ''; filter: saturate(.55) contrast(.92); }
 .login-page .login-hero > div:first-child > * { position: relative; z-index: 1; }
 .login-page .login-hero > div:first-child::after { position: absolute; right: 28px; bottom: 24px; left: 28px; height: 1px; background: rgba(255,255,255,.7); content: ''; }
 .login-page .login-hero h1 { margin: 0 0 12px; color: #fff; font-size: clamp(1.9rem, 3.2vw, 3.2rem); letter-spacing: .08em; text-shadow: 0 1px 14px rgba(0,0,0,.16); }
@@ -438,7 +438,7 @@ body:has(.wayfinding) .way-card.is-leaving { opacity: 1; transform: scale(1.01);
 .login-page .login-register .text-link:hover, .login-page .login-register .text-link:focus-visible { transform: translateX(4px); }
 .login-page .login-register__welcome { position: absolute; right: 20px; bottom: 8px; z-index: 0; width: 150px; height: 132px; overflow: hidden; pointer-events: none; }
 .login-page .login-register__welcome { display: none; }
-.login-page .login-register__welcome::before { position: absolute; right: -30px; bottom: -24px; width: 128px; height: 150px; background: url('../images/products/hatenko-odoroodoro-editorial.png') 74% 9% / 235px auto no-repeat; filter: saturate(.58) contrast(.94); opacity: 0; transform: translateX(22px); content: ''; transition: transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease; }
+.login-page .login-register__welcome::before { position: absolute; right: -30px; bottom: -24px; width: 128px; height: 150px; background: url('../images/products/hatenko-odoroodoro-editorial.webp') 74% 9% / 235px auto no-repeat; filter: saturate(.58) contrast(.94); opacity: 0; transform: translateX(22px); content: ''; transition: transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease; }
 .login-page .login-register__welcome span { position: absolute; right: 0; top: 4px; z-index: 1; color: #4f504b; font-size: .74rem; letter-spacing: .12em; opacity: 0; transform: translateY(5px); }
 .login-page .login-register__welcome i { position: absolute; right: 16px; bottom: 18px; width: 82px; border-bottom: 1px solid rgba(79,80,75,.5); opacity: 0; transform: translateX(12px); }
 .login-page .login-register.is-visible .login-register__welcome::before { animation: login-welcome-figure 1s .05s cubic-bezier(.22,.61,.36,1) forwards; }
@@ -1061,28 +1061,28 @@ body:has(.wayfinding) .way-card.is-leaving { opacity: 1; transform: scale(1.01);
 .scent-types__limited { margin-top: 96px; }
 .scent-card-grid--limited { margin-top: 24px; }
 
-.experience-hero-image { background-image: url('../images/experience/sections/hero.png'); }
-.experience-workshop-image { background-image: url('../images/experience/sections/workshop.png'); }
-.experience-materials-image { background-image: url('../images/experience/sections/materials.png'); }
-.experience-materials-detail-image { background-image: url('../images/experience/scents/scent-10-musk.jpg'); }
-.experience-access-image { background-image: url('../images/experience/sections/access.png'); }
+.experience-hero-image { background-image: url('../images/experience/sections/hero.webp'); }
+.experience-workshop-image { background-image: url('../images/experience/sections/workshop.webp'); }
+.experience-materials-image { background-image: url('../images/experience/sections/materials.webp'); }
+.experience-materials-detail-image { background-image: url('../images/experience/scents/scent-10-musk.webp'); }
+.experience-access-image { background-image: url('../images/experience/sections/access.webp'); }
 
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(1) .scent-card__image { background-image: url('../images/experience/scents/scent-01-bergamot.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(2) .scent-card__image { background-image: url('../images/experience/scents/scent-02-lemon.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(3) .scent-card__image { background-image: url('../images/experience/scents/scent-03-grapefruit.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(4) .scent-card__image { background-image: url('../images/experience/scents/scent-04-lavender.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(5) .scent-card__image { background-image: url('../images/experience/scents/scent-05-muguet.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(6) .scent-card__image { background-image: url('../images/experience/scents/scent-06-damask-rose.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(7) .scent-card__image { background-image: url('../images/experience/scents/scent-07-assam-tea.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(8) .scent-card__image { background-image: url('../images/experience/scents/scent-08-cassis.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(9) .scent-card__image { background-image: url('../images/experience/scents/scent-09-magnolia.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(10) .scent-card__image { background-image: url('../images/experience/scents/scent-10-musk.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(11) .scent-card__image { background-image: url('../images/experience/scents/scent-11-amber.jpg'); }
-.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(12) .scent-card__image { background-image: url('../images/experience/scents/scent-12-sandalwood.jpg'); }
-.scent-card-grid--limited > .scent-card:nth-child(1) .scent-card__image { background-image: url('../images/experience/scents/limited-09-squash.jpg'); }
-.scent-card-grid--limited > .scent-card:nth-child(2) .scent-card__image { background-image: url('../images/experience/scents/limited-10-sea-blue.jpg'); }
-.scent-card-grid--limited > .scent-card:nth-child(3) .scent-card__image { background-image: url('../images/experience/scents/limited-11-hibiscus.jpg'); }
-.scent-card-grid--limited > .scent-card:nth-child(4) .scent-card__image { background-image: url('../images/experience/scents/limited-12-coconut-rum.jpg'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(1) .scent-card__image { background-image: url('../images/experience/scents/scent-01-bergamot.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(2) .scent-card__image { background-image: url('../images/experience/scents/scent-02-lemon.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(3) .scent-card__image { background-image: url('../images/experience/scents/scent-03-grapefruit.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(4) .scent-card__image { background-image: url('../images/experience/scents/scent-04-lavender.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(5) .scent-card__image { background-image: url('../images/experience/scents/scent-05-muguet.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(6) .scent-card__image { background-image: url('../images/experience/scents/scent-06-damask-rose.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(7) .scent-card__image { background-image: url('../images/experience/scents/scent-07-assam-tea.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(8) .scent-card__image { background-image: url('../images/experience/scents/scent-08-cassis.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(9) .scent-card__image { background-image: url('../images/experience/scents/scent-09-magnolia.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(10) .scent-card__image { background-image: url('../images/experience/scents/scent-10-musk.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(11) .scent-card__image { background-image: url('../images/experience/scents/scent-11-amber.webp'); }
+.scent-card-grid:not(.scent-card-grid--limited) > .scent-card:nth-child(12) .scent-card__image { background-image: url('../images/experience/scents/scent-12-sandalwood.webp'); }
+.scent-card-grid--limited > .scent-card:nth-child(1) .scent-card__image { background-image: url('../images/experience/scents/limited-09-squash.webp'); }
+.scent-card-grid--limited > .scent-card:nth-child(2) .scent-card__image { background-image: url('../images/experience/scents/limited-10-sea-blue.webp'); }
+.scent-card-grid--limited > .scent-card:nth-child(3) .scent-card__image { background-image: url('../images/experience/scents/limited-11-hibiscus.webp'); }
+.scent-card-grid--limited > .scent-card:nth-child(4) .scent-card__image { background-image: url('../images/experience/scents/limited-12-coconut-rum.webp'); }
 
 @media (max-width: 1100px) and (min-width: 768px) {
   .scent-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2395,27 +2395,27 @@ body:has(.wayfinding) .site-footer__inner{grid-template-columns:1fr auto;align-i
 
 /* ChatGPT生成の体験イメージ。実際の店舗・商品写真ではありません。 */
 .image--hero {
-  background-image: url('../images/hero-workshop.png');
+  background-image: url('../images/hero-workshop.webp');
 }
 
 .image--materials {
-  background-image: url('../images/materials-scent.png');
+  background-image: url('../images/materials-scent.webp');
 }
 
 .image--experience {
-  background-image: url('../images/experience-workshop.png');
+  background-image: url('../images/experience-workshop.webp');
 }
 
 .image--hero-detail {
-  background-image: url('../images/hero-workshop.png');
+  background-image: url('../images/hero-workshop.webp');
 }
 
 .image--materials-detail {
-  background-image: url('../images/materials-scent.png');
+  background-image: url('../images/materials-scent.webp');
 }
 
 .image--access {
-  background-image: url('../images/access-image.png');
+  background-image: url('../images/access-image.webp');
 }
 
 @media (max-width: 767px) {
