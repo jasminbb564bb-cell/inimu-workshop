@@ -77,3 +77,5 @@
   .scene--04::after{inset:0;height:auto;
     background:radial-gradient(40vw 22svh at 50% 77svh,rgba(8,6,4,.42),rgba(8,6,4,.2) 55%,rgba(8,6,4,0) 100%)}
 }
+/* Consent banner styling for the intro page, which intentionally does not load css/style.css. */
+.analytics-consent{position:fixed;z-index:10000;right:1rem;bottom:1rem;max-width:30rem;display:flex;gap:1rem;align-items:flex-end;padding:1rem 1.1rem;background:#fff;color:#222;border:1px solid rgba(34,34,34,.18);box-shadow:0 8px 30px rgba(0,0,0,.18);font:14px/1.6 sans-serif;text-align:left}.analytics-consent__copy{max-width:30rem}.analytics-consent__copy strong{display:block;margin-bottom:.2rem}.analytics-consent__copy p{margin:0 0 .35rem}.analytics-consent__copy a{color:inherit}.analytics-consent__actions{display:flex;gap:.45rem;flex-shrink:0}.analytics-consent__actions button{border:1px solid #222;background:#fff;color:#222;padding:.55rem .8rem;cursor:pointer;font:inherit}.analytics-consent__actions button:last-child{background:#222;color:#fff}@media (max-width:640px){.analytics-consent{right:.7rem;bottom:.7rem;left:.7rem;display:block}.analytics-consent__actions{margin-top:.7rem;justify-content:flex-end}}

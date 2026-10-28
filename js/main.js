@@ -103,11 +103,12 @@ if (shopKeywordForm) {
 const navigation = document.querySelector('.site-nav');
 const mainScript = document.querySelector('script[src$="js/main.js"]');
 const siteRoot = mainScript ? new URL('./', new URL(mainScript.getAttribute('src'), window.location.href)).href : './';
+const privacyRoot = mainScript ? new URL('../privacy/', new URL(mainScript.getAttribute('src'), window.location.href)).href : 'privacy/';
 const isTopPage = Boolean(document.querySelector('.wayfinding'));
 if (!isTopPage) document.querySelectorAll('.site-footer').forEach((footer) => footer.remove());
 const footerBrand = isTopPage ? '<span class="site-footer__logo">inimu</span>' : `<a class="site-footer__logo" href="${siteRoot}">inimu</a>`;
 document.querySelectorAll('.site-footer').forEach((footer) => {
-  footer.innerHTML = `<div class="site-footer__inner"><div class="site-footer__brand"><span class="site-footer__logo">inimu</span><p>〒111-0032<br>東京都台東区浅草2丁目1-5</p></div><div class="site-footer__company"><a href="https://kyarainnovate.jp/company/" target="_blank" rel="noopener noreferrer">会社概要 ↗</a></div><p class="site-footer__copyright">© inimu</p></div>`;
+  footer.innerHTML = `<div class="site-footer__inner"><div class="site-footer__brand"><span class="site-footer__logo">inimu</span><p>〒111-0032<br>東京都台東区浅草2丁目1-5</p></div><div class="site-footer__company"><a href="https://kyarainnovate.jp/company/" target="_blank" rel="noopener noreferrer">会社概要 ↗</a><a href="${privacyRoot}">プライバシー</a></div><p class="site-footer__copyright">© inimu</p></div>`;
 });
 const loginRegister = null;
 if (loginRegister && !loginRegister.querySelector('.login-register__welcome')) {
